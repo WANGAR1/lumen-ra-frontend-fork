@@ -6,8 +6,8 @@ const Navigation = ()=> {
 <nav className="nav-links">
     <NavLink to = {routes.Home}>Home</NavLink>
     <NavLink to = {routes.About}>About</NavLink>
-    <NavLink to = {routes.Modules}>Modules</NavLink>
-    <NavLink to = {routes.Community}>Community</NavLink>
+    <NavLink to = {routes.Progress}>Progress</NavLink>
+    <NavLink to = {routes.Toolkit}>Toolkit</NavLink>
 </nav>
     )
 }
