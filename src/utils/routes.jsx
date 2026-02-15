@@ -1,8 +1,8 @@
 const routes = {
     Home: '/', 
     About: '/About',
-    Modules: '/Modules',
-    Community: '/Community',
+    Progress: '/Progress',
+    Toolkit: '/Toolkit',
 }
 
 export default routes;

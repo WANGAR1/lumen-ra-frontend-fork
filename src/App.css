@@ -1,0 +1,13 @@
+
+body {
+  margin: auto;
+  display: flex;
+  min-width: 320px;
+  min-height: 100vh;
+  font-size: large;
+}
+
+.nav-links{
+  display: flex;
+  gap: 20px;
+}

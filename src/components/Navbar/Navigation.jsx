@@ -1,9 +1,9 @@
 import { NavLink } from "react-router-dom"
-import routes from "../utils/routes"
+import routes from "../../utils/routes"
 
 const Navigation = ()=> {
     return (
-<nav>
+<nav className="nav-links">
     <NavLink to = {routes.Home}>Home</NavLink>
     <NavLink to = {routes.About}>About</NavLink>
     <NavLink to = {routes.Modules}>Modules</NavLink>
