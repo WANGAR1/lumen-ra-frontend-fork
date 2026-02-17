@@ -8,6 +8,8 @@ import Progress from "./pages/Progress/Progress"
 import Navigation from "./components/Navbar/Navigation"
 import Footer from "./components/Footer/Footer"
 import routes from './utils/routes'
+import Signup from './pages/Signup/Signup'
+import Login from './pages/Login/Login'
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
         <Route path = {routes.About} element = {<About/>}></Route>
         <Route path = {routes.Progress} element = {<Progress/>}></Route>
         <Route path = {routes.Toolkit} element = {<Toolkit/>}></Route>
+        <Route path = {routes.Signup} element = {<Signup/>}></Route>
+        <Route path = {routes.Login} element = {<Login/>}></Route>
       </Routes>
     <Footer/>
   

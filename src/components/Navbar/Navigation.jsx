@@ -8,6 +8,7 @@ const Navigation = ()=> {
     <NavLink to = {routes.About}>About</NavLink>
     <NavLink to = {routes.Modules}>Modules</NavLink>
     <NavLink to = {routes.Community}>Community</NavLink>
+    <NavLink to = {routes.Signup}>Signup</NavLink>
 </nav>
     )
 }
