@@ -1,13 +1,59 @@
+/* ====================================
+   GLOBAL RESET
+==================================== */
 
-body {
-  margin: auto;
-  display: flex;
-  min-width: 320px;
-  min-height: 100vh;
-  font-size: large;
+html, body, #root {
+  height: 100%;
+  margin: 0;
 }
 
-.nav-links{
+body {
+  min-width: 320px;
+  font-size: large;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ====================================
+   APP LAYOUT
+==================================== */
+
+.App {
+  min-height: 100%;
   display: flex;
-  gap: 20px;
+  flex-direction: column;
+}
+
+/* This is the key for centering pages */
+.App-content {
+  flex: 1;              /* Takes remaining space */
+  display: flex;
+  flex-direction: column;
+}
+
+/* ====================================
+   HEADER
+==================================== */
+
+.App-header {
+  background-color: #282c34;
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;          /* Adds spacing between children */
+  color: white;
+  padding: 0.5rem 1.5rem;
+}
+
+.App-header a {
+  color: #61dafb;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+/* If your nav links are inside a container */
+.nav-links {
+  display: flex;
+  gap: 1.25rem;
+  justify-content: center;
 }

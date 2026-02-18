@@ -1,0 +1,370 @@
+/* ============================================
+   MOBILE-FIRST RESPONSIVE DESIGN STRATEGY
+   ============================================
+   
+   1. BASE STYLES (Mobile - 320px and up)
+   2. TABLET STYLES (768px and up)
+   3. DESKTOP STYLES (1024px and up)
+   4. LARGE DESKTOP STYLES (1440px and up)
+   
+   ============================================ */
+
+/* ============================================
+   1. BASE STYLES - MOBILE FIRST (320px+)
+   ============================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding: 16px;
+  flex-direction: column;
+}
+
+.login-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 32px 20px;
+  width: 100%;
+  max-width: 100%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.logo-section {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+  color: #2c7a7b;
+  letter-spacing: 2px;
+  line-height: 1.2;
+}
+
+.welcome-heading {
+  font-size: 24px;
+  font-weight: 700;
+  color: #000000;
+  text-align: center;
+  margin: 0 0 8px 0;
+  line-height: 1.3;
+}
+
+.welcome-subtitle {
+  font-size: 13px;
+  color: #c7c7c7;
+  text-align: center;
+  margin: 0 0 24px 0;
+  line-height: 1.4;
+}
+
+.login-form {
+  margin-bottom: 16px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #000000;
+  margin-bottom: 6px;
+  letter-spacing: 0.3px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 11px 12px;
+  font-size: 14px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  color: #333333;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  font-family: inherit;
+}
+
+.form-group input::placeholder {
+  color: #b0b0b0;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #2c7a7b;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(44, 122, 123, 0.1);
+}
+
+.password-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-input-wrapper input {
+  width: 100%;
+  padding-right: 36px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
+}
+
+.signin-button {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #2c7a7b;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  font-family: inherit;
+}
+
+.signin-button:active {
+  background-color: #1f5a5b;
+  transform: scale(0.98);
+}
+
+.signin-button:disabled {
+  background-color: #96b3b4;
+  cursor: not-allowed;
+}
+
+.signup-link-section {
+  text-align: center;
+  font-size: 13px;
+  color: #666666;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.signup-link {
+  color: #f0b233;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.signup-link:active {
+  color: #d49b29;
+}
+
+/* ============================================
+   2. TABLET STYLES (768px and up)
+   ============================================ */
+
+@media (min-width: 768px) {
+  .login-container {
+    padding: 24px;
+  }
+
+  .login-card {
+    padding: 48px 36px;
+    max-width: 480px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  .logo-section {
+    margin-bottom: 32px;
+  }
+
+  .logo {
+    font-size: 24px;
+    letter-spacing: 3px;
+  }
+
+  .welcome-heading {
+    font-size: 28px;
+    margin: 0 0 10px 0;
+  }
+
+  .welcome-subtitle {
+    font-size: 14px;
+    margin: 0 0 32px 0;
+  }
+
+  .login-form {
+    margin-bottom: 20px;
+  }
+
+  .form-group {
+    margin-bottom: 22px;
+  }
+
+  .form-group label {
+    font-size: 15px;
+    margin-bottom: 7px;
+  }
+
+  .form-group input {
+    padding: 12px 14px;
+    font-size: 15px;
+  }
+
+  .signin-button {
+    padding: 13px 18px;
+    font-size: 16px;
+  }
+
+  .signin-button:hover {
+    background-color: #1f5a5b;
+  }
+
+  .signup-link-section {
+    font-size: 14px;
+  }
+}
+
+/* ============================================
+   3. DESKTOP STYLES (1024px and up)
+   ============================================ */
+
+@media (min-width: 1024px) {
+  .login-container {
+    padding: 32px;
+  }
+
+  .login-card {
+    padding: 60px 40px;
+    max-width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  .logo-section {
+    margin-bottom: 40px;
+  }
+
+  .logo {
+    font-size: 28px;
+  }
+
+  .welcome-heading {
+    font-size: 32px;
+    margin: 0 0 12px 0;
+  }
+
+  .welcome-subtitle {
+    font-size: 15px;
+    margin: 0 0 40px 0;
+  }
+
+  .login-form {
+    margin-bottom: 24px;
+  }
+
+  .form-group {
+    margin-bottom: 24px;
+  }
+
+  .form-group label {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  .form-group input {
+    padding: 12px 14px;
+    font-size: 14px;
+  }
+
+  .signin-button {
+    padding: 14px 20px;
+  }
+
+  .signin-button:hover {
+    background-color: #1f5a5b;
+  }
+
+  .signin-button:focus {
+    outline: 2px solid #2c7a7b;
+    outline-offset: 2px;
+  }
+
+  .signup-link-section {
+    font-size: 14px;
+  }
+
+  .signup-link:hover {
+    color: #d49b29;
+  }
+}
+
+/* ============================================
+   4. LARGE DESKTOP STYLES (1440px and up)
+   ============================================ */
+
+@media (min-width: 1440px) {
+  .login-container {
+    padding: 40px;
+  }
+
+  .login-card {
+    padding: 70px 50px;
+    max-width: 550px;
+  }
+
+  .logo {
+    font-size: 32px;
+  }
+
+  .welcome-heading {
+    font-size: 36px;
+  }
+
+  .welcome-subtitle {
+    font-size: 16px;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY & TOUCH OPTIMIZATIONS
+   ============================================ */
+
+@media (hover: none) and (pointer: coarse) {
+  /* Touch devices */
+  .form-group input,
+  .signin-button,
+  .signup-link {
+    min-height: 44px;
+    /* Ensures minimum touch target size */
+  }
+
+  .signin-button {
+    padding: 14px 16px;
+  }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
