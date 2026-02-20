@@ -1,3 +1,4 @@
+{/* ==================Start Learning Section================== */}
 import React from "react";
 import "./StartLearningSection.css";
 import Button from "../../components/Buttons/Button";
@@ -6,7 +7,8 @@ const StartLearningSection = () => {
   return (
     <section className="start-learning">
       <div className="start-learning-container">
-        {/* Top options */}
+
+        {/* ==================Top options================= */}
         <div className="options">
           <div className="option-card-1">
             <h3>For Individuals</h3>
@@ -22,7 +24,7 @@ const StartLearningSection = () => {
           </div>
         </div>
 
-        {/* Certificate section */}
+        {/*================ Certificate section============ */}
         <div className="certificate-section">
           <div className="certificate-left">
             <h2>Earn a Certificate of Completion</h2>

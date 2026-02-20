@@ -1,3 +1,4 @@
+/* =================Navigation Section================== */
 .navbar {
   background: rgba(222, 201, 197, 1);
   border: 0.5px solid rgba(162, 179, 186, 1);
@@ -32,7 +33,7 @@
   transform-origin: center;
   transform: rotate(25.08°)
 }
-
+/* =================Navlinks================== */
 .navbar .nav-links {
   display: flex;
   gap: 24px;

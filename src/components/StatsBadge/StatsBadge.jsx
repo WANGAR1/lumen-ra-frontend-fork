@@ -1,3 +1,4 @@
+{/* =================Stats Badge Section================== */}
 import React from "react";
 import "./StatsBadge.css";
 

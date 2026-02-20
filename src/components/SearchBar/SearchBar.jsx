@@ -1,3 +1,4 @@
+{/* =================Search Bar Section================== */}
 import React from "react";
 import "./SearchBar.css";
 import { useEffect, useState } from "react";
@@ -25,7 +26,7 @@ const SearchBar = () => {
       setLoading(false);
     }
     };
-
+    {/* =================Set error and timeout================== */}
     useEffect(() => {
   if (!error) return;
   const timer = setTimeout(() => {
@@ -52,7 +53,7 @@ const SearchBar = () => {
           {loading ? "Loading..." : "Search"}
         </button>
       </div>
-
+       
        {error && <div className="error-popup">{error}</div>}
 
       <div className="search-results">

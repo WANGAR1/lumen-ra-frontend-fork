@@ -1,3 +1,4 @@
+/* =================Search Bar Section================== */
 .search-bar-container {
   max-width: 600px;
   margin: 10px auto;
@@ -51,7 +52,6 @@
   cursor: not-allowed;
 }
 
-/* Error popup */
 .error-popup {
   max-width: 400px;
   margin: 10px auto 0;
@@ -63,7 +63,7 @@
   font-weight: bold;
 }
 
-/* Results */
+/* ================Results=============== */
 .search-results {
   margin-top: 20px;
 }
@@ -90,17 +90,17 @@
   margin: 0 0 6px;
 }
 
-/* ================= RESPONSIVE ================= */
+/* ================= Responsive ================= */
 @media (max-width: 768px) {
   .search-bar {
-    flex-direction: column; /* stack input + button */
+    flex-direction: column; 
     align-items: stretch;
     gap: 8px;
   }
 
   .search-bar input {
     width: 100%;
-    border-radius: 4px; /* full rounded when stacked */
+    border-radius: 4px; 
   }
 
   .search-bar button {

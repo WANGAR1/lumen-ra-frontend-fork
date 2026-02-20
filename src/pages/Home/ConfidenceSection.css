@@ -1,9 +1,10 @@
+/* ==================Confidence Section================== */
+
 .confidence {
   width: 100%;
   padding: 0 2rem;
   margin: auto;
   background: #fafaf9;
-   /* light background */
 }
 
 .confidence-container {
@@ -15,7 +16,6 @@
   gap: 60px;
 }
 
-/* Left side */
 .confidence-left {
   flex: 1;
 }
@@ -35,7 +35,6 @@
   margin-bottom: 32px;
 }
 
-/* Button variant styling */
 .button.quiz {
   background: rgba(31, 111, 120, 1);
   color: #fff;
@@ -51,7 +50,6 @@
   background: rgba(20, 80, 90, 1);
 }
 
-/* Right side */
 .confidence-right {
   flex: 1;
   position: relative;
@@ -66,7 +64,6 @@
   object-fit: cover;
 }
 
-/* Stats overlay */
 .confidence-stats {
   position: absolute;
   top: 20%;
@@ -106,7 +103,7 @@
   margin-top: 6px;
 }
 
-/* ================= RESPONSIVE ================= */
+/* ================= Responsive ================= */
 @media (max-width: 1024px) {
   .confidence-container {
     flex-direction: column;

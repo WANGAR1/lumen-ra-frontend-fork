@@ -1,5 +1,4 @@
-/* ------------------ Guides Section ------------------ */
-
+{/* ==================Guides Section================== */}
 import React from "react";
 import "./GuidesSection.css";
 import JoggingImage from "../../assets/GuidesImages/jogging.svg"; 
@@ -13,7 +12,8 @@ const GuidesSection = () => {
   return (
     <section className="guides">
       <div className="guides-container">
-        {/* Left Features */}
+        
+        {/* Left ==================Features===================== */}
         <div className="guides-left">
           <h2>Practical, Guided, Self-Paced</h2>
           <ul className="guides-list">
@@ -24,13 +24,13 @@ const GuidesSection = () => {
           </ul>
         </div>
 
-        {/* Right Image */}
+        {/*==================== Right Image ====================*/}
         <div className="guides-right">
           <img src={JoggingImage} alt="Two people jogging" />
         </div>
       </div>
 
-      {/* Tagline */}
+ 
       <div className="guides-tagline">
         <h3>Because Support can Shape Recovery.</h3>
         <p>
@@ -39,7 +39,7 @@ const GuidesSection = () => {
         </p>
       </div>
 
-      {/* Bottom Icons */}
+      {/* ===============Bottom Icons ===================*/}
       <div className="guides-bottom">
         <div className="guides-card">
           <img src={EqualityIcon}  alt="Safer Disclosures" />

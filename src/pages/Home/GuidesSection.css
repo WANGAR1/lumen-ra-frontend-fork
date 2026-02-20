@@ -1,11 +1,12 @@
+
+ /* ===============Guides Section=============== */
 .guides {
   width: 100%;
   padding: 50px 32px;
   display: flex;
   flex-direction: column;
   gap: 60px;
-       /* from Figma */
-  height: 1265px;      /* from Figma */
+  height: 1265px;     
   background: linear-gradient(
     180.13deg, 
     #13232E 7.52%, 
@@ -16,7 +17,7 @@
    color:rgba(31, 111, 120, 1);         
 }
 
-/* Top container */
+/* ===============Top container================ */
 .guides-container {
   display: flex;
   justify-content: space-between;
@@ -69,7 +70,7 @@
   object-fit: cover;
 }
 
-/* Tagline */
+/* ==================Tagline=================== */
 .guides-tagline {
   text-align: center;
   max-width: 800px;
@@ -89,7 +90,7 @@
   color:rgba(250, 250, 249, 1);
 }
 
-/* Bottom icons */
+/* ================Bottom icons================= */
 .guides-bottom {
   display: flex;
   justify-content: center;
@@ -117,7 +118,7 @@
   color: rgba(30, 30, 30, 1);
 }
 
-/* Responsive */
+/* =============Responsive=============== */
 @media (max-width: 1024px) {
 
    .guides {

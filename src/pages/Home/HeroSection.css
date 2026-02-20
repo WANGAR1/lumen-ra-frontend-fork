@@ -59,7 +59,7 @@
   flex: 1 1 500px;
   display: flex;
   justify-content: center;
-  position: relative; /* Anchor for overlay */
+  position: relative; 
 }
 
 .hero-right img {
@@ -72,7 +72,6 @@
   z-index: 1;
 }
 
-/* Overlay container covering the image */
 .stats-badge-container {
   position: absolute;
   inset: 0;
@@ -128,7 +127,6 @@
     align-items: center;
   }
 
-  /* On small screens remove absolute overlay */
   .stats-badge-container {
     position: static;
     margin-top: 20px;

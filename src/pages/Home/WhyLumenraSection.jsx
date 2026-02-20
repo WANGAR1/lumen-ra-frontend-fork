@@ -1,3 +1,4 @@
+{/* ==================Why Lumenra Section================== */}
 import React from 'react'
 import "./WhyLumenraSection.css"
 import FoundationImage from "../../assets/WhyLumenraImages/foundationimage.svg"

@@ -1,3 +1,4 @@
+{/* ==================Home Page================== */}
 import React from 'react'
 import "./Home.css"
 import SearchBar from "../../components/SearchBar/SearchBar";
@@ -19,7 +20,7 @@ const Home = () => {
       <StartLearningSection/>
       <TestingSection/>
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

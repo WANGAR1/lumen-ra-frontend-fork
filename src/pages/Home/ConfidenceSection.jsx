@@ -1,3 +1,5 @@
+ {/* ==================Confidence Section================== */}
+ 
 import React from "react";
 import "./ConfidenceSection.css";
 import StatsBadge from "../../components/StatsBadge/StatsBadge";

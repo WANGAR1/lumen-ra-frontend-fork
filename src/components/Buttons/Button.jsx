@@ -1,3 +1,4 @@
+{/* =================Button Component================== */}
 import React from 'react';
 import "./Button.css";
 
@@ -13,6 +14,7 @@ const Button = ({
 
   return (
   <>
+  {/* =================Variant Props================== */}
     <button className={`btn ${variant} ${customClass}`}
     styles={customStyles}
     onClick={onClick}
