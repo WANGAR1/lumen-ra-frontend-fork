@@ -6,14 +6,12 @@ import About from "./pages/About/About"
 import Toolkit from "./pages/Toolkit/Toolkit"
 import Progress from "./pages/Progress/Progress"
 import Navigation from "./components/Navbar/Navigation"
-import Footer from "./components/Footer/Footer"
 import routes from './utils/routes'
 
 function App() {
   return (
     <>
    <div className='App'>
-   
     <Navigation/>
       <Routes>
         <Route path = {routes.Home} element = {<Home/>}></Route>
@@ -21,8 +19,6 @@ function App() {
         <Route path = {routes.Progress} element = {<Progress/>}></Route>
         <Route path = {routes.Toolkit} element = {<Toolkit/>}></Route>
       </Routes>
-    <Footer/>
-  
    </div>
    </>
   )

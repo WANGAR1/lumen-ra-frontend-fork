@@ -24,7 +24,12 @@ const Navigation = ()=> {
     </ul>
    <div>
      <Button label="Login" variant="secondary" />
-     <Button label="Let’s Chat" variant="primary" />
+     <Button label="Let's Chat" variant="primary" />
+     {/*<Button label="Get Started" variant="started" />
+     <Button label="Personality Check" variant="check" />*/}
+     
+     
+
 
    </div> 
    </div>
