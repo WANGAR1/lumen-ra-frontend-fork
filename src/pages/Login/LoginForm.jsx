@@ -1,23 +1,42 @@
-import React, { useState } from 'react';
+// src/components/LoginForm.jsx
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LoginForm.css';
+import { AuthContext } from '../../context/AuthContext'; // import the context
 
 export default function LoginForm() {
+  const { login } = useContext(AuthContext); // get login function
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate();
+  const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log('Login with:', { email, password });
-    // Navigate to dashboard after login
-    navigate('/dashboard');
+    setIsSubmitting(true);
+    setError('');
+
+    try {
+      const res = await login(email, password); // call the AuthProvider login
+      if (res.ok) {
+        navigate('/dashboard'); // success → go to dashboard
+      } else {
+        setError(res.error || 'Login failed');
+      }
+    } catch (err) {
+      setError(err.message || 'Something went wrong');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <form className="login-form" onSubmit={handleSubmit}>
+      {error && <div className="form-error">{error}</div>}
+
       <div className="form-group">
         <label htmlFor="email">Email</label>
         <input
@@ -52,7 +71,9 @@ export default function LoginForm() {
         </div>
       </div>
 
-      <button type="submit" className="signin-button">Sign in</button>
+      <button type="submit" className="signin-button" disabled={isSubmitting}>
+        {isSubmitting ? 'Signing in...' : 'Sign in'}
+      </button>
     </form>
   );
 }

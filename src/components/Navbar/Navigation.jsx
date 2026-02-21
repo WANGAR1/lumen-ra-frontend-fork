@@ -1,21 +1,44 @@
-import { NavLink } from "react-router-dom"
-import routes from "../../utils/routes"
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import routes from '../../utils/routes';
+import './Navigation.css';
 
-const Navigation = ()=> {
-    return (
-<nav className="nav-links">
-    <NavLink to = {routes.Home}>Home</NavLink>
-    <NavLink to = {routes.About}>About</NavLink>
-<<<<<<< HEAD
-    <NavLink to = {routes.Modules}>Modules</NavLink>
-    <NavLink to = {routes.Community}>Community</NavLink>
-    <NavLink to = {routes.Signup}>Signup</NavLink>
-=======
-    <NavLink to = {routes.Progress}>Progress</NavLink>
-    <NavLink to = {routes.Toolkit}>Toolkit</NavLink>
->>>>>>> 322f03083b0529fcc0e8b1e3a7dea1481884de17
-</nav>
-    )
-}
+const Navigation = () => {
+  const location = useLocation();
+  
+  // Logic to check if we are on the Home page
+  const isHomePage = location.pathname === routes.Home || location.pathname === '/';
 
-export default Navigation
+  return (
+    <header className="nav-wrapper">
+      <nav className="navbar-main">
+        <div className="nav-container">
+          {/* Logo area left empty as requested */}
+          <div className="logo-placeholder"></div>
+
+          <ul className="nav-links">
+            <li><Link to={routes.Home} className={location.pathname === routes.Home ? 'active' : ''}>Home</Link></li>
+            <li><Link to={routes.About} className={location.pathname === routes.About ? 'active' : ''}>About</Link></li>
+            <li><Link to={routes.Toolkit} className={location.pathname === routes.Toolkit ? 'active' : ''}>Toolkit</Link></li>
+            <li><Link to={routes.Progress} className={location.pathname === routes.Progress ? 'active' : ''}>Progress</Link></li>
+          </ul>
+
+          <div className="nav-actions">
+            {isHomePage ? (
+              <Link to={routes.Login} className="btn-outline">Log in</Link>
+            ) : (
+              <button className="btn-outline" onClick={() => console.log("Logging out...")}>Log out</button>
+            )}
+            <button className="btn-solid">Let's Chat</button>
+          </div>
+        </div>
+      </nav>
+      
+      <div className="support-bar">
+        <p>This platform provides educational support. For immediate help, please contact <span>+234-799-SAFE</span></p>
+      </div>
+    </header>
+  );
+};
+
+export default Navigation;

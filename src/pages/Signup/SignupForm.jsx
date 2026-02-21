@@ -1,14 +1,20 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext'; // adjust path if needed
 
-const SignupForm = ({ onRegister }) => {
+const SignupForm = () => {
   const navigate = useNavigate();
+  const { register } = useContext(AuthContext); // get register from context
+
   const [formData, setFormData] = useState({
     username: '',
     email: '',
     password: ''
   });
+
   const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -17,26 +23,35 @@ const SignupForm = ({ onRegister }) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setErrorMessage('');
+    setSuccessMessage('');
 
-    // Call parent registration handler
-    onRegister(formData);
+    const res = await register(
+      formData.username,
+      formData.email,
+      formData.password
+    );
 
-    // Show success message
-    setSuccessMessage('Registration successful! 🎉');
+    setIsSubmitting(false);
 
-    // Clear form
-    setFormData({
-      username: '',
-      email: '',
-      password: ''
-    });
+    if (res.ok) {
+      setSuccessMessage('Registration successful! 🎉');
 
-    // Navigate after 2 seconds
-    setTimeout(() => {
-      navigate('/login');
-    }, 2000);
+      setFormData({
+        username: '',
+        email: '',
+        password: ''
+      });
+
+      setTimeout(() => {
+        navigate('/login');
+      }, 2000);
+    } else {
+      setErrorMessage(res.error || 'Registration failed');
+    }
   };
 
   return (
@@ -44,7 +59,7 @@ const SignupForm = ({ onRegister }) => {
       <h2>Sign Up</h2>
 
       <form onSubmit={handleSubmit} className="signup-form">
-        <label htmlFor="username">Username:</label>
+        <label htmlFor="username">FullName:</label>
         <input
           type="text"
           id="username"
@@ -74,7 +89,9 @@ const SignupForm = ({ onRegister }) => {
           required
         />
 
-        <button type="submit">Sign Up</button>
+        <button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? 'Signing up...' : 'Sign Up'}
+        </button>
       </form>
 
       {successMessage && (
@@ -82,8 +99,14 @@ const SignupForm = ({ onRegister }) => {
           {successMessage}
         </p>
       )}
+
+      {errorMessage && (
+        <p style={{ color: 'red', marginTop: '12px', textAlign: 'center' }}>
+          {errorMessage}
+        </p>
+      )}
     </div>
   );
 };
 
-export default SignupForm; 
+export default SignupForm;

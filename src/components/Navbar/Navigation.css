@@ -1,0 +1,84 @@
+.nav-wrapper {
+  width: 100%;
+  font-family: 'Inter', sans-serif;
+}
+
+.navbar-main {
+  background-color: #dfccc5; /* Beige/Sand from image */
+  padding: 6px 5%;
+}
+
+.nav-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo-placeholder {
+  width: 50px;
+  height: 45px;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #1a1a1a;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.nav-links a.active {
+  color: #1F6F78;
+}
+
+.nav-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Button Styles */
+.btn-outline, .btn-solid {
+  padding: 6px 18px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1.5px solid #1a1a1a;
+  color: #1a1a1a;
+}
+
+.btn-solid {
+  background-color: #1F6F78; /* Teal from image */
+  color: white;
+  border: none;
+}
+
+/* Bottom Support Bar */
+.support-bar {
+  background-color: #1F6F78;
+  color: white;
+  text-align: center;
+  padding: 5px 0;
+  font-size: 0.75rem;
+}
+
+.support-bar span {
+  text-decoration: underline;
+  font-weight: bold;
+}
