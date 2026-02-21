@@ -1,13 +1,14 @@
-import AIChatbot from "../components/Navbar/AIChatbot";
-
 const routes = {
     Home: '/', 
     About: '/About',
     Progress: '/Progress',
     Toolkit: '/Toolkit',
+    Signup: '/signup',
     Login: '/login',
-    Signup: '/Signup',
+    Contacts: '/contacts',
+    ForgotPassword: '/forgot-password',
     AIChatbot: '/AIChatbot'
+    
 }
 
 export default routes;

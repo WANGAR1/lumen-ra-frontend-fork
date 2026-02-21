@@ -1,23 +1,42 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
+import { useNavigate, Link } from 'react-router-dom'; // Added Link
 import './LoginForm.css';
+import { AuthContext } from '../../context/AuthContext';
+import routes from '../../utils/routes'; // Added routes import
 
 export default function LoginForm() {
+  const { login } = useContext(AuthContext);
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate();
+  const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log('Login with:', { email, password });
-    // Navigate to dashboard after login
-    navigate('/dashboard');
+    setIsSubmitting(true);
+    setError('');
+
+    try {
+      const res = await login(email, password);
+      if (res.ok) {
+        navigate('/dashboard'); 
+      } else {
+        setError(res.error || 'Login failed');
+      }
+    } catch (err) {
+      setError(err.message || 'Something went wrong');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <form className="login-form" onSubmit={handleSubmit}>
+      {error && <div className="form-error">{error}</div>}
+
       <div className="form-group">
         <label htmlFor="email">Email</label>
         <input
@@ -50,9 +69,18 @@ export default function LoginForm() {
             {showPassword ? '👁️' : '👁️‍🗨️'}
           </button>
         </div>
+        
+        {/* ADDED THIS SECTION */}
+        <div className="forgot-password-container">
+          <Link to={routes.ForgotPassword} className="forgot-password-link">
+            Forgot password?
+          </Link>
+        </div>
       </div>
 
-      <button type="submit" className="signin-button">Sign in</button>
+      <button type="submit" className="signin-button" disabled={isSubmitting}>
+        {isSubmitting ? 'Signing in...' : 'Sign in'}
+      </button>
     </form>
   );
 }
