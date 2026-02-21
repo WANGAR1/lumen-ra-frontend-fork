@@ -1,0 +1,127 @@
+
+/* ===============Testing Section=============*/
+.testing {
+  width: 100%;
+  padding:0 32px; 
+  background: #fafaf9;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-sizing: border-box;
+}
+
+.testing-container {
+  max-width: 1376px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+
+}
+
+/* =============Top heading description============*/
+.testing-top h2 {
+  font-size: 2.5rem;
+  font-weight: 400;
+  color: #000;
+  text-align: center;
+  gap: 10px;
+  width: 1103px;
+  font-weight: 700;
+  font-family: Arimo;
+  margin-bottom: 16px;
+}
+
+.testing-top p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  text-align: center;
+  justify-content: center;
+  color: #000;
+  max-height: 87px;
+  max-width: 1103px;
+}
+
+/* ================Circular icons=============== */
+.testing-icons {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.icon-circle {
+  width: 120px;
+  height: 120px;
+  background: #fcfcf2;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(128, 162, 175, 0.16);
+}
+
+.icon-circle img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
+
+/* =============Supporting image=========== */
+.testing-image {
+  display: flex;
+  justify-content: center;
+}
+
+.testing-image img {
+  width: 100%;
+  max-width: 800px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+/* ============= Responsive ============== */
+@media (max-width: 1024px) {
+  .testing-top h2 {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .testing-top p {
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .testing-icons {
+    gap: 24px;
+  }
+
+  .testing-image img {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .testing {
+    padding: 40px 20px;
+    gap: 40px;
+  }
+
+  .testing-top h2 {
+    font-size: 1.8rem;
+  }
+
+  .testing-top p {
+    font-size: 1rem;
+  }
+
+  .icon-circle {
+    width: 90px;
+    height: 90px;
+  }
+
+  .icon-circle img {
+    width: 40px;
+    height: 40px;
+  }
+}

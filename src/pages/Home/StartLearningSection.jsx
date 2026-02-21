@@ -1,0 +1,46 @@
+{/* ==================Start Learning Section================== */}
+import React from "react";
+import "./StartLearningSection.css";
+import Button from "../../components/Buttons/Button";
+import CertificateImage from "../../assets/HomeImages/certificate.svg"; 
+const StartLearningSection = () => {
+  return (
+    <section className="start-learning">
+      <div className="start-learning-container">
+
+        {/* ==================Top options================= */}
+        <div className="options">
+          <div className="option-card-1">
+            <h3>For Individuals</h3>
+            <p>
+              Start your journey to become an ally with clarity and care.
+            </p>
+          </div>
+          <div className="option-card-2">
+            <h3>For Organisations</h3>
+            <p>
+              Partner with us to bring allyship training to schools or workplaces.
+            </p>
+          </div>
+        </div>
+
+        {/*================ Certificate section============ */}
+        <div className="certificate-section">
+          <div className="certificate-left">
+            <h2>Earn a Certificate of Completion</h2>
+            <p>
+              Track your progress and receive a digital certificate to recognise
+              your commitment to informed allyship.
+            </p>
+            <Button label="Start Learning" variant="primary"/>
+          </div>
+          <div className="certificate-right">
+            <img src={CertificateImage} alt="Certificate of Completion" />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default StartLearningSection;
