@@ -10,6 +10,8 @@ import Footer from "./components/Footer/Footer";
 import routes from './utils/routes';
 import Signup from './pages/Signup/Signup';
 import Login from './pages/Login/Login';
+import Contacts from './pages/Contacts/contacts';
+import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
 
 function App() {
   const toolkitData = [
@@ -33,6 +35,8 @@ function App() {
         <Route path={routes.Toolkit} element={<Toolkit />} />
         <Route path={routes.Signup} element={<Signup />} />
         <Route path={routes.Login} element={<Login />} />
+        <Route path={routes.Contacts} element={<Contacts />} />
+        <Route path={routes.ForgotPassword} element={<ForgotPassword />} />
       </Routes>
       <Footer />
     </div>

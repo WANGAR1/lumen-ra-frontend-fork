@@ -1,11 +1,11 @@
-// src/components/LoginForm.jsx
 import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom'; // Added Link
 import './LoginForm.css';
-import { AuthContext } from '../../context/AuthContext'; // import the context
+import { AuthContext } from '../../context/AuthContext';
+import routes from '../../utils/routes'; // Added routes import
 
 export default function LoginForm() {
-  const { login } = useContext(AuthContext); // get login function
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
@@ -20,9 +20,9 @@ export default function LoginForm() {
     setError('');
 
     try {
-      const res = await login(email, password); // call the AuthProvider login
+      const res = await login(email, password);
       if (res.ok) {
-        navigate('/dashboard'); // success → go to dashboard
+        navigate('/dashboard'); 
       } else {
         setError(res.error || 'Login failed');
       }
@@ -68,6 +68,13 @@ export default function LoginForm() {
           >
             {showPassword ? '👁️' : '👁️‍🗨️'}
           </button>
+        </div>
+        
+        {/* ADDED THIS SECTION */}
+        <div className="forgot-password-container">
+          <Link to={routes.ForgotPassword} className="forgot-password-link">
+            Forgot password?
+          </Link>
         </div>
       </div>
 

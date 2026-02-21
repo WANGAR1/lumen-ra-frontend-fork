@@ -1,172 +1,132 @@
-/* Footer Styles */
-.footer {
-  background-color: #5a8b96;
+/* Footer.css */
+
+.footer-container {
+  background-color: #517281; /* Matches the slate blue in your image */
   color: #ffffff;
-  padding: 40px 20px 20px;
-  margin-top: 60px;
+  padding: 30px 30px 20px 30px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  
+  /* Gap between content and footer */
+  margin-top: 20px; 
 }
 
 .footer-content {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  flex-wrap: wrap;
   gap: 40px;
-  margin-bottom: 30px;
 }
 
-.footer-left,
-.footer-center,
-.footer-right {
-  display: flex;
-  flex-direction: column;
-}
-
-.footer-left {
-  flex: 0 0 auto;
-}
-
-.footer-center {
+.footer-section {
   flex: 1;
-  justify-content: center;
-  align-items: center;
+  min-width: 200px;
 }
 
-.footer-right {
-  flex: 0 0 auto;
-  align-items: flex-end;
+.footer-brand h2 {
+  font-size: 1.4rem;
+  letter-spacing: 3px;
+  margin-bottom: 24px;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
-.footer-links,
-.footer-policies {
+.footer-brand p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  opacity: 0.85;
+  max-width: 240px;
+}
+
+.footer-section h3 {
+  font-size: 1.1rem;
+  margin-bottom: 24px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.footer-links {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
 .footer-links li {
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
+/* Styling for the React Router Link components */
 .footer-links a {
   color: #ffffff;
   text-decoration: none;
-  font-size: 14px;
-  transition: opacity 0.3s ease;
+  font-size: 0.9rem;
+  opacity: 0.8;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  display: inline-block;
 }
 
 .footer-links a:hover {
-  opacity: 0.8;
+  opacity: 1;
+  transform: translateX(3px); /* Subtle slide effect on hover */
 }
 
-.footer-policies {
-  display: flex;
-  gap: 30px;
-  margin: 0;
-}
-
-.footer-policies li {
-  margin: 0;
-}
-
-.footer-policies a {
-  color: #ffffff;
-  text-decoration: none;
-  font-size: 14px;
-  transition: opacity 0.3s ease;
-}
-
-.footer-policies a:hover {
-  opacity: 0.8;
-}
-
-.footer-social {
-  display: flex;
-  gap: 15px;
-  margin-bottom: 15px;
-  justify-content: flex-end;
-}
-
-.social-icon {
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-  font-size: 16px;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
-}
-
-.social-icon:hover {
-  background-color: rgba(255, 255, 255, 0.4);
-}
-
-.footer-cta {
-  color: #ffffff;
-  font-size: 14px;
-  font-weight: 500;
-}
-
+/* Bottom Copyright Bar */
 .footer-bottom {
-  max-width: 1200px;
-  margin: 0 auto;
+  max-width: 1280px;
+  margin: 60px auto 0 auto;
+  padding-top: 25px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.8rem;
+  opacity: 0.75;
 }
 
-.footer-copyright {
-  flex: 0 0 auto;
-}
-
-.footer-design {
+.bottom-left, .bottom-center {
   flex: 1;
+}
+
+.bottom-center {
   text-align: center;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .footer-content {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 30px;
-  }
+.social-icons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+  flex: 1;
+}
 
-  .footer-center {
-    align-items: flex-start;
-  }
+.social-icons a {
+  color: white;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
 
-  .footer-policies {
-    flex-direction: column;
-    gap: 10px;
-  }
+.social-icons a:hover {
+  transform: scale(1.1);
+  color: #e2e8f0;
+}
 
-  .footer-right {
-    align-items: flex-start;
-    width: 100%;
-  }
-
-  .footer-social {
-    justify-content: flex-start;
-  }
-
+/* Responsive Tablet/Mobile view */
+@media (max-width: 900px) {
   .footer-bottom {
     flex-direction: column;
-    gap: 10px;
     text-align: center;
+    gap: 20px;
+  }
+  
+  .bottom-center {
+    order: 2;
   }
 
-  .footer-design {
-    text-align: center;
-    flex: none;
+  .social-icons {
+    justify-content: center;
+    order: 1;
+  }
+
+  .bottom-left {
+    order: 3;
   }
 }
