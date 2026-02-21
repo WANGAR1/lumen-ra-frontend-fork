@@ -2,6 +2,7 @@ import React from "react";
 import "./HeroSection.css";
 import StatsBadge from "../../components/StatsBadge/StatsBadge";
 import Button from "../../components/Buttons/Button";
+import { Link } from "react-router-dom"; 
 import HeroImage from "../../assets/WhyLumenraImages/heroimage.svg";
 
 const HeroSection = () => {
@@ -19,13 +20,16 @@ const HeroSection = () => {
             recovery following disclosures of gender-based violence (GBV).
           </p>
           <div className="hero-buttons">
+            <Link to= '/Signup'>
             <Button label="Get Started" variant="started" />
+            </Link>
+
             <Button label="Personality Check" variant="check" />
           </div>
-        </div>
+          </div>
 
-        {/*==================== Right column with image============= */}
-        <div className="hero-right">
+          {/*==================== Right column with image============= */}
+          <div className="hero-right">
           <img src={HeroImage} alt="Hero illustration" />
           <div className="stats-badge-container">
             <StatsBadge />

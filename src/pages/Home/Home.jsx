@@ -6,8 +6,9 @@ import HeroSection from "../../pages/Home/HeroSection";
 import WhyLumenraSection from "../../pages/Home/WhyLumenraSection"
 import GuidesSection from "../../pages/Home/GuidesSection"
 import ConfidenceSection from "../../pages/Home/ConfidenceSection"
+import CommunitySection from "../../pages/Home/CommunitySection"
 import StartLearningSection from "../../pages/Home/StartLearningSection"
-import TestingSection from "../../pages/Home/TestingSection"
+
 
 const Home = () => {
   return (
@@ -17,8 +18,9 @@ const Home = () => {
       <WhyLumenraSection/>
       <GuidesSection/>
       <ConfidenceSection/>
+      <CommunitySection/>
       <StartLearningSection/>
-      <TestingSection/>
+   
     </>
   );
 };

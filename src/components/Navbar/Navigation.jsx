@@ -1,8 +1,9 @@
 {/* =================Navigation and Routing================== */}
-import { NavLink } from "react-router-dom"
+import { NavLink } from "react-router-dom";
 import "./Navigation.css"
 import Button from "../Buttons/Button";
-import routes from "../../utils/routes"
+import routes from "../../utils/routes";
+import AIChatbot from "../../components/Navbar/AIChatbot"
 
 const Navigation = ()=> {
     return (
@@ -22,14 +23,20 @@ const Navigation = ()=> {
         
       <li><NavLink to = {routes.Toolkit} className={({ isActive }) => 
         (isActive ? "active-link" : "")}>Toolkit</NavLink></li>
-    </ul>
-   <div>
+     </ul>
+     <div>
+     <NavLink to="/Login">
      <Button label="Login" variant="secondary" />
+    </NavLink>
+
+    <NavLink to="/AIChatbot">
      <Button label="Let's Chat" variant="primary" />
+    </NavLink>
+
    </div> 
    </div>
 </nav>
-    )
+)
 };
 
 export default Navigation;
