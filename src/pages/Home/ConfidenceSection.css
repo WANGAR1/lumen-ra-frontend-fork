@@ -2,9 +2,10 @@
 
 .confidence {
   width: 100%;
-  padding: 0 2rem;
-  margin: auto;
+  padding: 0 3rem;
+  margin-top: 0;
   background: #fafaf9;
+  height: 100%;
 }
 
 .confidence-container {
