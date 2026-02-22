@@ -70,7 +70,7 @@
   color: rgba(30, 30, 30, 1);
 }
 
-/* Responsive */
+/* ============Responsive =============*/
 @media (max-width: 1024px) {
   .vision-container h2 {
     font-size: 2rem;

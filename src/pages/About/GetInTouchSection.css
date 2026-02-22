@@ -24,7 +24,7 @@
 .underline {
   width: 80px;
   height: 4px;
-  background: #f97316; /* orange */
+  background: #f97316; 
   margin: 0 auto;
 }
 
@@ -33,7 +33,7 @@
   font-weight: 400;
 }
 
-/* Responsive */
+/* =============Responsiveness=========== */
 @media (max-width: 1024px) {
   .contact-container h2 {
     font-size: 2rem;

@@ -1,3 +1,4 @@
+/*==========What You Get Styles======*/
 .what-you-get {
   width: 100%;
   padding: 60px 32px;
@@ -62,7 +63,7 @@
   margin: 0;
   line-height: 1.5;
 }
-
+/*===========Responsiveness=========*/
 /* Tablet */
 @media (max-width: 1024px) {
   .what-container {

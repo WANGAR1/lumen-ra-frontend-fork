@@ -11,7 +11,7 @@
 }
 
 .faq {
-  padding: 4rem 0rem; /* Vertical padding */
+  padding: 4rem 0rem; 
   color: #222;
   max-width: 900px;
   margin: auto;
@@ -29,7 +29,7 @@
 .faq-underline {
   width: 40px;
   height: 2px;
-  background-color: #408080; /* Teal from screenshot */
+  background-color: #408080; 
   margin: 0 auto 1.5rem;
 }
 
@@ -47,7 +47,7 @@
 }
 
 .faq-item {
-  border: 1px solid #eee; /* Light border from screenshot */
+  border: 1px solid #eee; 
   border-radius: 10px;
   overflow: hidden;
   background: #fff;
@@ -92,14 +92,14 @@
 
 .faq-answer p {
   font-size: 1rem;
-  color: #777; /* Muted text for the answer */
+  color: #777; 
   line-height: 1.6;
 }
 
 /* Tablet */
 @media (max-width: 900px) {
   .faq-outer-wrapper {
-    padding: 0 2rem; /* Slightly less on tablet */
+    padding: 0 2rem; 
   }
   .faq-header h2 {
     font-size: 1.8rem;
@@ -109,7 +109,7 @@
 /* Phone */
 @media (max-width: 600px) {
   .faq-outer-wrapper {
-    padding: 0 1.5rem; /* Better fit for small screens */
+    padding: 0 1.5rem;
   }
   .faq-question {
     padding: 1.2rem;
