@@ -9,6 +9,9 @@ const routes = {
     Quiz: "/quiz",
     PersonalityCheck: "/personalityCheck",
     Signup: '/signup',
+    About: '/About',
+    Progress: '/Progress',
+    Toolkit: '/Toolkit',
     Login: '/login',
 }
 
