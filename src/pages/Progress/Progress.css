@@ -1,0 +1,159 @@
+.progress-container {
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #fcfdfd;
+  color: #2d3436;
+}
+
+/* Header Styles */
+.progress-header h1 { color: #3a7d86; font-size: 2rem; margin-bottom: 0.5rem; }
+.progress-header p { color: #636e72; margin-bottom: 2rem; }
+
+/* Grid for Top Cards */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+
+.main-stat { background-color: #3a7d86; color: white; }
+.stat-value { font-size: 2.2rem; font-weight: 800; margin: 0.5rem 0; }
+.stat-desc { font-size: 0.85rem; opacity: 0.8; }
+
+.progress-bar-bg { background: rgba(255,255,255,0.2); height: 8px; border-radius: 4px; margin-top: 1rem; }
+.progress-bar-fill { background: #ffffff; height: 100%; border-radius: 4px; transition: width 0.5s ease; }
+
+/* Timeline UI */
+.journey-section {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid #edf2f7;
+}
+
+.timeline-item {
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  padding-bottom: 2rem;
+  padding-left: 2.5rem;
+}
+
+/* The vertical line connecting dots */
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: 15px;
+  top: 30px;
+  bottom: 0;
+  width: 2px;
+  background: #edf2f7;
+}
+
+.timeline-item:last-child::before { display: none; }
+
+.timeline-dot {
+  position: absolute;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #f1f3f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  z-index: 2;
+}
+
+.timeline-item.completed .timeline-dot { background: #3a7d86; color: white; }
+.timeline-item.in-progress .timeline-dot { background: #e68a49; color: white; }
+
+.timeline-content { flex: 1; margin-top: 4px; }
+.timeline-content h4 { margin: 0; font-size: 1rem; }
+.timeline-content p { color: #636e72; font-size: 0.85rem; margin: 4px 0; }
+
+.status-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  text-transform: capitalize;
+}
+
+.status-tag.completed { background: #3a7d86; color: white; }
+.status-tag.in-progress { background: #e68a49; color: white; }
+.status-tag.upcoming { background: #f1f3f5; color: #adb5bd; }
+
+/* Quiz Results Section */
+.results-card {
+  margin-top: 2rem;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+}
+
+.result-row {
+  display: flex;
+  align-items: center;
+  background: #f8fafb;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 0.75rem;
+}
+
+.score-badge {
+  background: #3a7d86;
+  color: white;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-weight: 700;
+  margin-right: 1rem;
+}
+
+.result-info { flex: 1; display: flex; flex-direction: column; }
+.result-info span { font-size: 0.75rem; color: #636e72; }
+.check-icon { color: #3a7d86; font-weight: bold; }
+
+/* Certificate Footer */
+.certificate-footer {
+  margin-top: 3rem;
+  background: #f2e9e7; /* Muted peach tone */
+  padding: 3rem;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.cert-preview-placeholder {
+  background: white;
+  border: 2px dashed #d1cccb;
+  padding: 3rem;
+  margin: 1.5rem 0;
+  color: #a49e9d;
+  border-radius: 8px;
+}
+
+.preview-btn {
+  background: #3a7d86;
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.preview-btn:disabled { background: #95a5a6; cursor: not-allowed; }

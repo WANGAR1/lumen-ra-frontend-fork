@@ -14,8 +14,22 @@ import AIChatbot from './components/Navbar/AIChatbot'
 import routes from './utils/routes'
 import Signup from './pages/Signup/Signup'
 import Login from './pages/Login/Login'
+import Contacts from './pages/Contacts/contacts';
+import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
+
 
 function App() {
+  const toolkitData = [
+    { id: 1, title: 'Pre-Assessment Completed', status: 'completed', description: 'Established your baseline knowledge' },
+    { id: 2, title: 'Understanding GBV Module', status: 'completed', description: 'Learned fundamentals', score: 92, completedDate: 'Feb 15, 2026' },
+    { id: 3, title: 'Trauma Awareness Module', status: 'completed', description: 'Care training', score: 88, completedDate: 'Feb 17, 2026' },
+    { id: 4, title: 'Active Listening Skills', status: 'in-progress', description: 'Techniques' },
+    { id: 5, title: 'Boundaries & Referrals', status: 'upcoming', description: 'Professional boundaries' },
+    { id: 6, title: 'Self-Care for Allies', status: 'upcoming', description: 'Managing trauma' },
+    { id: 7, title: 'Final Assessment', status: 'upcoming', description: 'Knowledge demo' },
+    { id: 8, title: 'Certificate Earned', status: 'upcoming', description: 'Certification' },
+  ];
+
   return (
     
    <div className='App'>
@@ -23,7 +37,7 @@ function App() {
       <Routes>
         <Route path = {routes.Home} element = {<Home/>}></Route>
         <Route path = {routes.About} element = {<About/>}></Route>
-        <Route path = {routes.Progress} element = {<Progress/>}></Route>
+        <Route path={routes.Progress} element={<Progress toolkitModules={toolkitData} />} />
         <Route path = {routes.Toolkit} element = {<Toolkit/>}></Route>
         <Route path={routes.Dashboard} element={<Dashboard />} />
         <Route path={routes.Dashboard} element={<Quiz />} />
@@ -31,6 +45,8 @@ function App() {
         <Route path = {routes.Signup} element = {<Signup/>}></Route>
         <Route path = {routes.Login} element = {<Login/>}></Route>
         <Route path = {routes.AIChatbot} element = {<AIChatbot/>}></Route>
+        <Route path={routes.Contacts} element={<Contacts />} />
+        <Route path={routes.ForgotPassword} element={<ForgotPassword />} />
       </Routes>
       <Footer/>
    </div>
@@ -38,4 +54,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

@@ -7,8 +7,10 @@ const routes = {
     Quiz: "/quiz",
     PersonalityCheck: "/personalityCheck",
     Signup: '/signup',
-    Login: "/Login",
-    AIChatbot: '/AIChatbot'
+    Login: '/login',
+    Contacts: '/contacts',
+    ForgotPassword: '/forgot-password',
+    AIChatbot: '/AIChatbot', 
 }
 
 export default routes;
