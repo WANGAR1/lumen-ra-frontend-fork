@@ -1,0 +1,83 @@
+/* SupportSection.css */
+
+.support-container {
+  /* Exact teal background from the design */
+  background-color: #2D6A6A; 
+  padding: 4rem 3rem; /* Matching your 3rem horizontal requirement */
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.support-content {
+  max-width: 600px;
+  width: 100%;
+}
+
+.support-content h2 {
+  color: #ffffff;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  letter-spacing: 0.5px;
+}
+
+.support-content p {
+  color: #e0f2f2; /* Light tinted white for better readability */
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  font-weight: 400;
+}
+
+.support-btn {
+  background-color: #F28C48; /* Exact orange from screenshot */
+  color: #ffffff;
+  border: none;
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 12px; /* Smooth rounded corners from Figma */
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.support-btn:hover {
+  background-color: #e67e3a;
+  transform: translateY(-2px);
+}
+
+.support-btn:active {
+  transform: translateY(0);
+}
+
+/* Responsiveness */
+
+/* Tablet */
+@media (max-width: 900px) {
+  .support-container {
+    padding: 3.5rem 2rem;
+  }
+  .support-content h2 {
+    font-size: 1.75rem;
+  }
+}
+
+/* Phone */
+@media (max-width: 600px) {
+  .support-container {
+    padding: 3rem 1.5rem;
+  }
+  .support-content h2 {
+    font-size: 1.5rem;
+  }
+  .support-content p {
+    font-size: 1rem;
+  }
+  .support-btn {
+    width: 100%; /* Full width button on small mobile */
+    padding: 1rem;
+  }
+}

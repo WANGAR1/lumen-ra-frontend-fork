@@ -24,7 +24,9 @@ const HeroSection = () => {
             <Button label="Get Started" variant="started" />
             </Link>
 
+             <Link to= '/PersonalityCheck'>
             <Button label="Personality Check" variant="check" />
+            </Link>
           </div>
           </div>
 

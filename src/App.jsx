@@ -5,6 +5,7 @@ import Home from "./pages/Home/Home"
 import About from "./pages/About/About"
 import Toolkit from "./pages/Toolkit/Toolkit"
 import Progress from "./pages/Progress/Progress"
+import PersonalityCheck from "./pages/PersonalityCheck"
 import Navigation from "./components/Navbar/Navigation"
 import Footer from "./components/Footer/Footer"
 import AIChatbot from './components/Navbar/AIChatbot'
@@ -25,6 +26,9 @@ function App() {
         <Route path = {routes.Signup} element = {<Signup/>}></Route>
         <Route path = {routes.Login} element = {<Login/>}></Route>
         <Route path = {routes.AIChatbot} element = {<AIChatbot/>}></Route>
+        <Route path = {routes.PersonalityCheck} element = {<PersonalityCheck/>}></Route>
+        
+
       </Routes>
       <Footer/>
    </div>

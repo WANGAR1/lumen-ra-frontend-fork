@@ -7,7 +7,8 @@ const routes = {
     Toolkit: '/Toolkit',
     Login: '/login',
     Signup: '/Signup',
-    AIChatbot: '/AIChatbot'
+    AIChatbot: '/AIChatbot',
+    PersonalitCheck: '/PersonalityCheck',
 }
 
 export default routes;
