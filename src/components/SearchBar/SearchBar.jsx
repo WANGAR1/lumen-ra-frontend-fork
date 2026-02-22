@@ -13,17 +13,16 @@ const SearchBar = () => {
     if (!query.trim()) return;
     setLoading(true);
     setResults([]);
-    setError(""); // Clear previous errors
+    setError(""); 
 
     try {
-      // Note: Ensure your API URL is correct. 
-      // Changed to a template that assumes a full domain.
       const response = await fetch(`https://api.example.com/search?q=${query}`);
       if (!response.ok) throw new Error("Network response was not ok");
       
       const data = await response.json();
       setResults(data.results || []);
     } catch (err) {
+        console.error(err);
       setError("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
@@ -42,7 +41,7 @@ const SearchBar = () => {
     <div className="search-bar-container">
       <div className="search-bar">
         <div className="input-wrapper">
-          {/* FIX: Changed from <SearchIcon /> to <img> */}
+        
           <img src={SearchIcon} alt="Search" className="search-icon" />
 
           <input
@@ -50,7 +49,7 @@ const SearchBar = () => {
             placeholder="Search..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && handleSearch()} // Bonus: search on Enter key
+            onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
           />
         </div>
 
