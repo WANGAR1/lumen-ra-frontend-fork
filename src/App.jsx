@@ -1,19 +1,25 @@
-import React from 'react';
-import { Routes, Route } from "react-router-dom";
-import './App.css';
-import Home from "./pages/Home/Home";
-import About from "./pages/About/About";
-import Toolkit from "./pages/Toolkit/Toolkit";
-import Progress from "./pages/Progress/Progress"; 
-import Navigation from "./components/Navbar/Navigation";
-import Footer from "./components/Footer/Footer";
-import routes from './utils/routes';
-import Signup from './pages/Signup/Signup';
-import Login from './pages/Login/Login';
+
+import './App.css'
+import { Routes, Route } from "react-router-dom"
+import Home from "./pages/Home/Home"
+import About from "./pages/About/About"
+import Toolkit from "./pages/Toolkit/Toolkit"
+import Progress from "./pages/Progress/Progress"
+import Dashboard from "./pages/Dashboard/Dashboard"
+import Quiz from "./pages/Quiz/QuizSection"
+import PersonalityCheck from "./pages/PersonalityCheck/PersonalityCheck"
+import Navigation from "./components/Navbar/Navigation"
+import Footer from "./components/Footer/Footer"
+import AIChatbot from './components/Navbar/AIChatbot'
+import routes from './utils/routes'
+import Signup from './pages/Signup/Signup'
+import Login from './pages/Login/Login'
 import Contacts from './pages/Contacts/contacts';
 import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
 import OTPVerification from './pages/OTP Verification/OTPVerification';
 import ResetPassword from './pages/Reset-Password/ResetPassword';
+
+
 function App() {
   const toolkitData = [
     { id: 1, title: 'Pre-Assessment Completed', status: 'completed', description: 'Established your baseline knowledge' },
@@ -27,23 +33,32 @@ function App() {
   ];
 
   return (
-    <div className='App'>
-      <Navigation />
+    
+   <div className='App'>
+    <Navigation/>
       <Routes>
-        <Route path={routes.Home} element={<Home />} />
-        <Route path={routes.About} element={<About />} />
+        <Route path = {routes.Home} element = {<Home/>}></Route>
+        <Route path = {routes.About} element = {<About/>}></Route>
         <Route path={routes.Progress} element={<Progress toolkitModules={toolkitData} />} />
-        <Route path={routes.Toolkit} element={<Toolkit />} />
-        <Route path={routes.Signup} element={<Signup />} />
-        <Route path={routes.Login} element={<Login />} />
+        <Route path = {routes.Toolkit} element = {<Toolkit/>}></Route>
+        <Route path={routes.Dashboard} element={<Dashboard />} />
+        <Route path={routes.Dashboard} element={<Quiz />} />
+        <Route path={routes.Dashboard} element={<PersonalityCheck />} />
+        <Route path = {routes.Signup} element = {<Signup/>}></Route>
+        <Route path = {routes.Login} element = {<Login/>}></Route>
+        <Route path = {routes.AIChatbot} element = {<AIChatbot/>}></Route>
         <Route path={routes.Contacts} element={<Contacts />} />
         <Route path={routes.ForgotPassword} element={<ForgotPassword />} />
         <Route path={routes.OTPVerification} element={<OTPVerification />} />
         <Route path={routes.ResetPassword} element={<ResetPassword />} />
+        <Route path = {routes.PersonalityCheck} element = {<PersonalityCheck/>}></Route>
+        
+
       </Routes>
-      <Footer />
-    </div>
-  );
+      <Footer/>
+   </div>
+   
+  )
 }
 
 export default App;

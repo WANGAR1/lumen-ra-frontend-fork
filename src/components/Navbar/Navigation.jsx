@@ -1,44 +1,42 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import routes from '../../utils/routes';
-import './Navigation.css';
+{/* =================Navigation and Routing================== */}
+import { NavLink } from "react-router-dom";
+import "./Navigation.css"
+import Button from "../Buttons/Button";
+import routes from "../../utils/routes";
+import AIChatbot from "../../components/Navbar/AIChatbot"
 
-const Navigation = () => {
-  const location = useLocation();
-  
-  // Logic to check if we are on the Home page
-  const isHomePage = location.pathname === routes.Home || location.pathname === '/';
+const Navigation = ()=> {
+    return (
+<nav className="navbar">
+  <div className="container">
+  <div className=" logo"><span>LUMEN-RA</span></div>
 
-  return (
-    <header className="nav-wrapper">
-      <nav className="navbar-main">
-        <div className="nav-container">
-          {/* Logo area left empty as requested */}
-          <div className="logo-placeholder"></div>
+    <ul className="nav-links">
+      <li><NavLink to = {routes.Home} className={({ isActive }) => 
+        (isActive ? "active-link" : "")}>Home</NavLink></li>
 
-          <ul className="nav-links">
-            <li><Link to={routes.Home} className={location.pathname === routes.Home ? 'active' : ''}>Home</Link></li>
-            <li><Link to={routes.About} className={location.pathname === routes.About ? 'active' : ''}>About</Link></li>
-            <li><Link to={routes.Toolkit} className={location.pathname === routes.Toolkit ? 'active' : ''}>Toolkit</Link></li>
-            <li><Link to={routes.Progress} className={location.pathname === routes.Progress ? 'active' : ''}>Progress</Link></li>
-          </ul>
+      <li><NavLink to = {routes.About} className={({ isActive }) => 
+        (isActive ? "active-link" : "")}>About</NavLink></li>
 
-          <div className="nav-actions">
-            {isHomePage ? (
-              <Link to={routes.Login} className="btn-outline">Log in</Link>
-            ) : (
-              <button className="btn-outline" onClick={() => console.log("Logging out...")}>Log out</button>
-            )}
-            <button className="btn-solid">Let's Chat</button>
-          </div>
-        </div>
-      </nav>
-      
-      <div className="support-bar">
-        <p>This platform provides educational support. For immediate help, please contact <span>+234-799-SAFE</span></p>
-      </div>
-    </header>
-  );
+      <li><NavLink to = {routes.Progress} className={({ isActive }) => 
+        (isActive ? "active-link" : "")}>Progress</NavLink></li>
+        
+      <li><NavLink to = {routes.Toolkit} className={({ isActive }) => 
+        (isActive ? "active-link" : "")}>Toolkit</NavLink></li>
+     </ul>
+     <div>
+     <NavLink to="/Login">
+     <Button label="Login" variant="secondary" />
+    </NavLink>
+
+    <NavLink to="/AIChatbot">
+     <Button label="Let's Chat" variant="primary" />
+    </NavLink>
+
+   </div> 
+   </div>
+</nav>
+)
 };
 
 export default Navigation;

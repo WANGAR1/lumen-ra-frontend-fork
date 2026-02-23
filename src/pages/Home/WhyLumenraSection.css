@@ -1,0 +1,178 @@
+/* =================Why Lumera Section================== */
+.why-lumera {
+  width: 100%;
+  gap: 10px;
+  background: rgba(250, 250, 249, 1);
+}
+
+/* ================= CONTAINER ================= */
+
+.why-lumera .container {
+  max-width: 1376px;
+  padding: 0 20px;
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 60px;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ================= Top section ================= */
+
+.lumera-top {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  color: rgba(30, 30, 30, 1)
+}
+
+.lumera-top h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: rgba(30, 30, 30, 1);
+  margin-bottom: 24px;
+  margin-top: -50px;
+  font-family: Arimo;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 30px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+}
+
+.lumera-top p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: rgba(30, 30, 30, 1);
+}
+
+/* ================= Middle card ================= */
+
+.lumera-middle {
+  background: rgba(252, 252, 242, 1);
+  border-radius: 8px;
+  border: 0.5px solid rgba(128, 162, 175, 0.16);
+  padding: 60px 40px;
+  text-align: center;
+  width: 100%;
+  margin: 0 auto;
+  box-shadow: 0 4px 12px rgba(128, 162, 175, 0.16);
+}
+
+.lumera-middle h3 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: rgba(30, 30, 30, 1);
+  margin-bottom: 24px;
+}
+
+.lumera-middle p {
+  font-size: 1.2rem;
+  line-height: 1.7;
+  color: rgba(30, 30, 30, 1);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* =============== Bottom section =============== */
+
+.lumera-bottom {
+  text-align: center;
+}
+
+.lumera-bottom h3 {
+  font-size: 2rem;
+  font-weight: 700;
+  color:  rgba(30, 30, 30, 1);
+  margin-bottom: 60px;
+}
+
+/* ================= Grids ================= */
+
+.lumera-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* ================= Grid cards ================= */
+
+.grid-card {
+  background: rgba(252, 252, 242, 1);
+  border-radius: 10px;
+  padding: 50px 30px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(128, 162, 175, 0.16);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.grid-card img {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 24px;
+}
+
+.grid-card h4 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-style: bold;
+  line-height: 100%;
+  color: rgba(0, 0, 0, 1);
+  margin-bottom: 16px;
+}
+
+.grid-card p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(0, 0, 0, 1);
+  max-width: 300px;
+}
+
+.grid-simulation {
+  grid-column: 1 / span 2;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* ================= Responsive ================= */
+
+@media (max-width: 1024px) {
+  .lumera-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-simulation {
+    grid-column: auto;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .why-lumera {
+    padding: 60px 0;
+  }
+
+  .lumera-top h2,
+  .lumera-middle h3,
+  .lumera-bottom h3 {
+    font-size: 1.8rem;
+  }
+
+  .lumera-grid {
+    gap: 24px;
+  }
+
+  .lumera-middle {
+    padding: 40px 20px;
+  }
+
+  .grid-card {
+    padding: 40px 20px;
+  }
+}

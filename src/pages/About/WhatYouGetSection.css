@@ -1,0 +1,105 @@
+/*==========What You Get Styles======*/
+.what-you-get {
+  width: 100%;
+  padding: 60px 32px;
+  background: #f5f5f5;
+  box-sizing: border-box;
+}
+
+.what-container {
+  max-width: 1150px;
+  margin: 0 auto;
+  background: #356b6e;
+  border-radius: 12px;
+  padding: 60px 70px;
+  box-sizing: border-box;
+}
+
+.what-title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 50px;
+}
+
+.what-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px 80px;
+}
+
+.what-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.check-icon {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 50%;
+  background: #2e8b8f;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.what-item h4 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 6px 0;
+}
+
+.what-item p {
+  font-size: 14px;
+  font-weight: 400;
+  color: #d9e7e8;
+  margin: 0;
+  line-height: 1.5;
+}
+/*===========Responsiveness=========*/
+/* Tablet */
+@media (max-width: 1024px) {
+  .what-container {
+    padding: 50px 40px;
+  }
+
+  .what-grid {
+    gap: 30px 50px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .what-you-get {
+    padding: 40px 16px;
+  }
+
+  .what-container {
+    padding: 40px 25px;
+  }
+
+  .what-title {
+    font-size: 24px;
+    margin-bottom: 35px;
+  }
+
+  .what-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .what-item h4 {
+    font-size: 16px;
+  }
+
+  .what-item p {
+    font-size: 13px;
+  }
+}

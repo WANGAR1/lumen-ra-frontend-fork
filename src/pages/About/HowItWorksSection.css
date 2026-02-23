@@ -1,0 +1,144 @@
+.how-it-works {
+  background: #f4f4f4;
+  padding: 20px 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.how-container {
+  margin-top: 20px;
+  max-width: 1376px;
+  margin: 0 auto;
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 10px 2rem 0 2rem;
+}
+
+.how-title {
+  font-size: 36px;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 10px;
+}
+
+.how-underline {
+  width: 60px;
+  height: 4px;
+  background: #2e6f73;
+  margin: 0 auto 15px auto;
+  border-radius: 4px;
+}
+
+.how-subtitle {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 50px;
+}
+
+.how-cards {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: wrap;
+}
+
+.how-card {
+  background: #ffffff;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  max-width: 340px;
+  max-height: 367;
+  gap: 24px;
+
+opacity: 1;
+padding-top: 32px;
+padding-right: 32px;
+padding-left: 32px;
+border-radius: 16px;
+column-span: 1;
+
+
+  transition: transform 0.3s ease;
+}
+
+.how-card:hover {
+  transform: translateY(-6px);
+}
+
+.featured {
+  background: #e9e5dc;
+}
+
+.icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px auto;
+  font-size: 24px;
+  color: #fff;
+}
+
+.teal {
+  background: #2e6f73;
+}
+
+.orange {
+  background: #f28c38;
+}
+
+.how-card h3 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #222;
+}
+
+.how-card p {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* Tablet */
+@media (max-width: 992px) {
+  .how-title {
+    font-size: 30px;
+  }
+
+  .how-cards {
+    gap: 20px;
+  }
+
+  .how-card {
+    width: 300px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .how-it-works {
+    padding: 60px 15px;
+  }
+
+  .how-title {
+    font-size: 26px;
+  }
+
+  .how-subtitle {
+    font-size: 14px;
+  }
+
+  .how-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .how-card {
+    width: 100%;
+    max-width: 350px;
+  }
+}

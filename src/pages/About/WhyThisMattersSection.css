@@ -1,0 +1,100 @@
+
+.why-matters {
+  background-color: #ffffff;
+  padding: 0 3rem;
+}
+
+.why-matters-container {
+  background-color: #2F6668;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.where-box {
+  background-color: #CBB7B1;
+  padding: 30px 20px;
+  border-radius: 12px;
+  max-width: 900px;
+  margin: 0 auto 60px auto;
+}
+
+.where-box h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+.where-box p {
+  font-size: 15px;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* ===========Why This Matters Content=========== */
+.matters-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.matters-content h2 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.matters-content p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #e6f0f0;
+}
+
+/* Highlighted text */
+.highlight {
+  color: #F28C38;
+  font-weight: 600;
+}
+
+.bold {
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .why-matters {
+    padding: 0 2rem;
+  }
+
+  .matters-content h2 {
+    font-size: 24px;
+  }
+
+  .matters-content p {
+    font-size: 15px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .why-matters {
+    padding: 0 1rem;
+  }
+
+  .why-matters-container {
+    padding: 60px 16px;
+  }
+
+  .where-box {
+    padding: 20px 16px;
+  }
+
+  .matters-content h2 {
+    font-size: 22px;
+  }
+
+  .matters-content p {
+    font-size: 14px;
+  }
+}

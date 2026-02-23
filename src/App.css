@@ -4,13 +4,15 @@
 
 html, body, #root {
   height: 100%;
+  padding: 0;
   margin: 0;
 }
 
 body {
   min-width: 320px;
   font-size: large;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: #FAFAF9;
+  font-family: system-ui, Arimo, Roboto, apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 /* ====================================
@@ -23,9 +25,8 @@ body {
   flex-direction: column;
 }
 
-/* This is the key for centering pages */
 .App-content {
-  flex: 1;              /* Takes remaining space */
+  flex: 1;              
   display: flex;
   flex-direction: column;
 }
@@ -35,25 +36,37 @@ body {
 ==================================== */
 
 .App-header {
-  background-color: #282c34;
+  background-color:rgba(222, 201, 197, 1);
   min-height: 70px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.5rem;          /* Adds spacing between children */
-  color: white;
+  gap: 1.5rem;          
   padding: 0.5rem 1.5rem;
 }
 
 .App-header a {
-  color: #61dafb;
+  color:rgba(31, 111, 120, 1);
   text-decoration: none;
   font-size: 1.2rem;
 }
 
-/* If your nav links are inside a container */
 .nav-links {
   display: flex;
   gap: 1.25rem;
   justify-content: center;
 }
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+

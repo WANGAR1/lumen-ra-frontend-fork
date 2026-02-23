@@ -1,0 +1,122 @@
+ /* ================Community Section============== */
+.community {
+  width: 100%;
+  padding: 60px 32px;
+  background: #fafaf9;
+}
+
+.community-container {
+  max-width: 1376px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+/* =============Top heading============ */
+.community-top {
+  text-align: center;
+}
+
+.community-top h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 12px;
+}
+
+.community-top p {
+  font-size: 1.2rem;
+  color: rgba(31, 111, 120, 1);
+}
+
+/* =============Testimonials============ */
+.community-testimonials {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.testimonial-card {
+  background: #fcfcf2;
+  border-radius: 12px;
+  padding: 24px;
+  width: 320px;
+  box-shadow: 0 4px 12px rgba(128, 162, 175, 0.16);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.testimonial-photo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 16px;
+}
+
+.testimonial-card h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 4px;
+}
+
+.testimonial-role {
+  font-size: 0.95rem;
+  color: rgba(31, 111, 120, 1);
+  margin-bottom: 12px;
+}
+
+.testimonial-stars {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 16px;
+}
+
+.testimonial-stars img {
+  width: 20px;
+  height: 20px;
+}
+
+.testimonial-quote {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #000;
+  font-style: italic;
+}
+
+/* ================= Responsive ================= */
+@media (max-width: 1024px) {
+  .community-top h2 {
+    font-size: 2rem;
+  }
+
+  .community-top p {
+    font-size: 1rem;
+  }
+
+  .testimonial-card {
+    width: 280px;
+  }
+}
+
+@media (max-width: 768px) {
+  .community {
+    padding: 40px 20px;
+  }
+
+  .community-testimonials {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .testimonial-card {
+    width: 100%;
+    max-width: 320px;
+  }
+}

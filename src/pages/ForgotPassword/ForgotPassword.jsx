@@ -5,6 +5,10 @@ import { AuthContext } from '../../context/AuthContext';
 import routes from '../../utils/routes';
 import './ForgotPassword.css';
 
+// Import your assets
+import logoSvg from '../../assets/LOGO.svg'; // Ensure the filename matches exactly
+import illustration from '../../assets/undraw_forgot-password_nttj 1 (1).svg'
+
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const { forgotPassword, loading } = useContext(AuthContext);

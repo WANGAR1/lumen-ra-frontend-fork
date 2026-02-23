@@ -1,8 +1,11 @@
 const routes = {
     Home: '/', 
-    About: '/About',
-    Progress: '/Progress',
-    Toolkit: '/Toolkit',
+    About: '/about',
+    Progress: '/progress',
+    Toolkit: '/toolkit',
+    Dashboard: "/dashboard",
+    Quiz: "/quiz",
+    PersonalityCheck: "/personalityCheck",
     Signup: '/signup',
     Login: '/login',
     Contacts: '/contacts',
@@ -13,6 +16,8 @@ const routes = {
     
     
     
+    AIChatbot: '/AIChatbot', 
+
 }
 
 export default routes;

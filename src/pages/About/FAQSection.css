@@ -1,0 +1,118 @@
+/* FAQSection.css */
+
+/* Wrapper to handle the 3rem horizontal spacing */
+.faq-outer-wrapper {
+  padding: 0 3rem; 
+  background: linear-gradient(
+  180deg, 
+  #F5F5F5 0%, 
+  #FAFAF9 100%);
+
+}
+
+.faq {
+  padding: 4rem 0rem; 
+  color: #222;
+  max-width: 900px;
+  margin: auto;
+  font-family: 'Inter', sans-serif;
+}
+
+.faq-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  color: #111;
+}
+
+.faq-underline {
+  width: 40px;
+  height: 2px;
+  background-color: #408080; 
+  margin: 0 auto 1.5rem;
+}
+
+.faq-header p {
+  font-size: 1.1rem;
+  color: #666;
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.faq-item {
+  border: 1px solid #eee; 
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.faq-question {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  padding: 1.5rem 2rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.faq-toggle {
+  color: #408080;
+  transition: transform 0.3s ease;
+}
+
+/* Rotation logic for the chevron */
+.faq-item.active .faq-toggle {
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out;
+  padding: 0 2rem;
+}
+
+.faq-item.active .faq-answer {
+  max-height: 200px;
+  padding-bottom: 1.5rem;
+}
+
+.faq-answer p {
+  font-size: 1rem;
+  color: #777; 
+  line-height: 1.6;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .faq-outer-wrapper {
+    padding: 0 2rem; 
+  }
+  .faq-header h2 {
+    font-size: 1.8rem;
+  }
+}
+
+/* Phone */
+@media (max-width: 600px) {
+  .faq-outer-wrapper {
+    padding: 0 1.5rem;
+  }
+  .faq-question {
+    padding: 1.2rem;
+    font-size: 1rem;
+  }
+}
