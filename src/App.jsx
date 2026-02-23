@@ -47,6 +47,9 @@ function App() {
         <Route path = {routes.AIChatbot} element = {<AIChatbot/>}></Route>
         <Route path={routes.Contacts} element={<Contacts />} />
         <Route path={routes.ForgotPassword} element={<ForgotPassword />} />
+        <Route path = {routes.PersonalityCheck} element = {<PersonalityCheck/>}></Route>
+        
+
       </Routes>
       <Footer/>
    </div>

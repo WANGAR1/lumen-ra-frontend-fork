@@ -11,6 +11,7 @@ const routes = {
     Contacts: '/contacts',
     ForgotPassword: '/forgot-password',
     AIChatbot: '/AIChatbot', 
+
 }
 
 export default routes;
