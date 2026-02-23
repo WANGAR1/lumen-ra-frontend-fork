@@ -1,6 +1,6 @@
 :root {
   --primary-teal: #1F6F78;
-  --bg-cream: #FAF9F3;
+  --bg-cream: rgba(250, 250, 249, 1);
   --input-bg: #D9DEE3;
   --text-main: #1A1A1A;
 }

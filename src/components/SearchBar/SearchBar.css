@@ -1,170 +1,137 @@
-/* =================Search Bar Section================== */
-.search-bar-container {
+.search-wrapper-main {
+  width: 100%;
   max-width: 600px;
-  margin: 10px auto;
-  padding: 0 32px;
+  margin: 40px auto;
+  padding: 0 20px;
 }
 
-.search-bar {
-  display: flex;
-  justify-content: center;
-  align-items: stretch; /* Forces input and button to match heights */
-  margin:0;
-  gap: 0;
-  flex-wrap: nowrap;
-}
-
-/* New Wrapper to hold Icon + Input */
-.input-wrapper {
-  flex: 1;
+.search-pill {
   display: flex;
   align-items: center;
-  background: white;
-  border: 1px solid rgba(31, 111, 120, 1);
-  border-right: none; /* Merges with button */
-  border-radius: 4px 0 0 4px;
-  padding: 0 15px;
-  height: 50px;
-  box-sizing: border-box;
+  background: #ffffff;
+  border: 1px solid #f2f2f2;
+  border-radius: 100px; /* Perfect Pill Shape */
+  padding: 6px 18px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+  transition: all 0.2s ease-in-out;
 }
 
-.search-icon {
-  width: 18px;
-  height: 18px;
-  margin-right: 10px;
-  opacity: 0.6;
+.search-pill:focus-within {
+  border-color: #e0e0e0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
 }
 
-.input-wrapper input {
+.active-glow {
+  border-color: #cbd5e0;
+  box-shadow: 0 0 0 3px rgba(203, 213, 224, 0.2);
+}
+
+.icon-search-left {
+  width: 16px;
+  height: 16px;
+  opacity: 0.25;
+  margin-right: 12px;
+}
+
+.search-input-field {
   flex: 1;
   border: none;
   outline: none;
-  height: 100%;
-  font-size: 1rem;
   background: transparent;
-  min-width: 0;
+  font-size: 1.05rem;
+  color: #2d3748;
+  padding: 10px 0;
 }
 
-.search-button {
-  box-sizing: border-box;
+.search-input-field::placeholder {
+  color: #cbd5e0;
+  font-weight: 400;
+}
+
+.utility-icons-right {
   display: flex;
   align-items: center;
-  justify-content: center;
-  height: 50px;
-  padding: 0px 20px;
-  width: 100px;
-  background: rgb(221, 211, 211);
-  color: black;
-  appearance: none;
-  border: 1px solid rgba(31, 111, 120, 1); /* Added border to match input */
-  border-radius: 0 4px 4px 0;
+  gap: 14px;
+  padding-left: 10px;
+}
+
+.icon-btn-util {
+  background: none;
+  border: none;
+  color: #cbd5e0;
   cursor: pointer;
-  font-size: 0.95rem;
-  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  padding: 2px;
+  transition: color 0.2s;
 }
 
-.search-button:hover {
-  background: rgba(31, 111, 120, 1);
-  color: white;
+.icon-btn-util:hover {
+  color: #a0aec0;
 }
 
-.search-button:disabled {
-  background: #f0f0f0;
-  cursor: not-allowed;
-  color: #999;
+.is-mic-listening {
+  color: #4a90e2;
+  animation: pulse-voice 1.5s infinite;
 }
 
-/* ================ Spinner ================ */
-.spinner {
-  width: 18px;
-  height: 18px;
-  border: 2px solid rgba(0, 0, 0, 0.1);
-  border-top-color: rgba(31, 111, 120, 1);
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
+@keyframes pulse-voice {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.15); opacity: 0.7; }
+  100% { transform: scale(1); opacity: 1; }
 }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
+/* Loading & Results */
+.loading-indicator {
+  height: 2px;
+  width: 60%;
+  margin: 15px auto;
+  background: linear-gradient(90deg, #f3f3f3, #cbd5e0, #f3f3f3);
+  background-size: 200% 100%;
+  animation: loading-shimmer 1.5s infinite linear;
 }
 
-/* ================ Error Popup ================ */
-.error-popup {
-  max-width: 400px;
-  margin: 15px auto 0;
-  background: rgba(131, 165, 167, 0.85);
-  color: white;
-  padding: 10px 15px;
-  border-radius: 4px;
+@keyframes loading-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.error-toast {
   text-align: center;
-  font-weight: bold;
-  animation: fadeIn 0.3s ease;
+  color: #e53e3e;
+  font-size: 0.85rem;
+  margin-top: 10px;
 }
 
-/* ================ AI Result Card ================ */
 .ai-result-card {
-  position: relative;
-  background: #ffffff;
-  padding: 25px;
   margin-top: 20px;
-  border-radius: 8px;
-  border-left: 5px solid rgba(31, 111, 120, 1);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  animation: slideUp 0.4s ease-out;
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid #edf2f7;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  position: relative;
 }
 
-.close-results-btn {
+.close-card-btn {
   position: absolute;
   top: 10px;
   right: 15px;
   background: none;
   border: none;
-  font-size: 24px;
-  line-height: 1;
+  font-size: 22px;
+  color: #cbd5e0;
   cursor: pointer;
-  color: #999;
-  transition: color 0.2s;
 }
 
-.close-results-btn:hover {
-  color: #d9534f; /* Subtle red on hover */
-}
-
-.result-title {
-  margin: 0 0 10px 0;
-  color: rgba(31, 111, 120, 1);
+.result-header {
+  margin-top: 0;
   font-size: 1.1rem;
+  color: #2d3748;
 }
 
-.result-text {
-  white-space: pre-wrap; /* This fixes the "chunked" text issue */
+.result-body {
+  color: #4a5568;
   line-height: 1.6;
-  color: #444;
-  margin: 0;
-}
-
-/* ================= Animations ================= */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ================= Responsive ================= */
-@media (max-width: 768px) {
-  .search-bar {
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .input-wrapper, 
-  .search-button {
-    width: 100%;
-    border-radius: 4px;
-    border-right: 1px solid rgba(31, 111, 120, 1);
-  }
+  white-space: pre-wrap;
 }
