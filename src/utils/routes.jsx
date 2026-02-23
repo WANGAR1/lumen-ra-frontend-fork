@@ -6,7 +6,12 @@ const routes = {
     Signup: '/signup',
     Login: '/login',
     Contacts: '/contacts',
-    ForgotPassword: '/forgot-password'
+    ForgotPassword: '/forgot-password',
+    OTPVerification: '/otp-verification',
+    ResetPassword: '/reset-password'
+    
+    
+    
     
 }
 

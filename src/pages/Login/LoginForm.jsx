@@ -1,86 +1,47 @@
-import React, { useState, useContext } from 'react';
-import { useNavigate, Link } from 'react-router-dom'; // Added Link
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import routes from '../../utils/routes';
 import './LoginForm.css';
-import { AuthContext } from '../../context/AuthContext';
-import routes from '../../utils/routes'; // Added routes import
 
-export default function LoginForm() {
-  const { login } = useContext(AuthContext);
-  const navigate = useNavigate();
-
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setError('');
-
-    try {
-      const res = await login(email, password);
-      if (res.ok) {
-        navigate('/dashboard'); 
-      } else {
-        setError(res.error || 'Login failed');
-      }
-    } catch (err) {
-      setError(err.message || 'Something went wrong');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
 
   return (
-    <form className="login-form" onSubmit={handleSubmit}>
-      {error && <div className="form-error">{error}</div>}
-
+    <form className="login-form">
       <div className="form-group">
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          id="email"
-          placeholder="Enter your email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
+        <label>Email</label>
+        <div className="input-field-wrapper">
+          <span className="input-icon-left"></span>
+          <input type="email" placeholder="Enter your email" />
+        </div>
       </div>
 
       <div className="form-group">
-        <label htmlFor="password">Password</label>
-        <div className="password-input-wrapper">
-          <input
-            type={showPassword ? 'text' : 'password'}
-            id="password"
-            placeholder="Enter your password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
+        <label>Password</label>
+        <div className="input-field-wrapper">
+          <span className="input-icon-left"></span>
+          <input 
+            type={showPassword ? "text" : "password"} 
+            placeholder="Enter your password" 
           />
-          <button
-            type="button"
-            className="toggle-password"
+          <span 
+            className="input-icon-right" 
             onClick={() => setShowPassword(!showPassword)}
-            aria-label="Toggle password visibility"
           >
-            {showPassword ? '👁️' : '👁️‍🗨️'}
-          </button>
+            {showPassword ? "👁️" : "👁️‍🗨️"}
+          </span>
         </div>
-        
-        {/* ADDED THIS SECTION */}
-        <div className="forgot-password-container">
-          <Link to={routes.ForgotPassword} className="forgot-password-link">
-            Forgot password?
-          </Link>
-        </div>
+       {/* inside LoginForm.jsx */}
+<div className="forgot-password-box">
+  <Link to={routes.ForgotPassword} className="forgot-password-link">
+    Forgotten your password?
+  </Link>
+</div>
       </div>
 
-      <button type="submit" className="signin-button" disabled={isSubmitting}>
-        {isSubmitting ? 'Signing in...' : 'Sign in'}
-      </button>
+      <button type="submit" className="btn-sign-in">Sign in</button>
     </form>
   );
-}
+};
+
+export default LoginForm;

@@ -12,7 +12,8 @@ import Signup from './pages/Signup/Signup';
 import Login from './pages/Login/Login';
 import Contacts from './pages/Contacts/contacts';
 import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
-
+import OTPVerification from './pages/OTP Verification/OTPVerification';
+import ResetPassword from './pages/Reset-Password/ResetPassword';
 function App() {
   const toolkitData = [
     { id: 1, title: 'Pre-Assessment Completed', status: 'completed', description: 'Established your baseline knowledge' },
@@ -37,6 +38,8 @@ function App() {
         <Route path={routes.Login} element={<Login />} />
         <Route path={routes.Contacts} element={<Contacts />} />
         <Route path={routes.ForgotPassword} element={<ForgotPassword />} />
+        <Route path={routes.OTPVerification} element={<OTPVerification />} />
+        <Route path={routes.ResetPassword} element={<ResetPassword />} />
       </Routes>
       <Footer />
     </div>
