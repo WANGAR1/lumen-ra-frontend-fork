@@ -16,6 +16,8 @@ import Signup from './pages/Signup/Signup'
 import Login from './pages/Login/Login'
 import Contacts from './pages/Contacts/contacts';
 import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
+import OTPVerification from './pages/OTP Verification/OTPVerification';
+import ResetPassword from './pages/Reset-Password/ResetPassword';
 
 
 function App() {
@@ -47,6 +49,8 @@ function App() {
         <Route path = {routes.AIChatbot} element = {<AIChatbot/>}></Route>
         <Route path={routes.Contacts} element={<Contacts />} />
         <Route path={routes.ForgotPassword} element={<ForgotPassword />} />
+        <Route path={routes.OTPVerification} element={<OTPVerification />} />
+        <Route path={routes.ResetPassword} element={<ResetPassword />} />
         <Route path = {routes.PersonalityCheck} element = {<PersonalityCheck/>}></Route>
         
 

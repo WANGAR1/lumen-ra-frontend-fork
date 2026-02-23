@@ -1,62 +1,57 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './ForgotPassword.css';
+import { ChevronLeft, Mail } from 'lucide-react';
+import { AuthContext } from '../../context/AuthContext';
 import routes from '../../utils/routes';
+import './ForgotPassword.css';
 
 // Import your assets
 import logoSvg from '../../assets/LOGO.svg'; // Ensure the filename matches exactly
 import illustration from '../../assets/undraw_forgot-password_nttj 1 (1).svg'
 
 const ForgotPassword = () => {
-  const routerNavigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const { forgotPassword, loading } = useContext(AuthContext);
+  const [status, setStatus] = useState({ type: '', msg: '' });
+  const navigate = useNavigate();
 
-  const handleReset = () => {
-    // Integration point for Xano password reset API
-    console.log("Reset requested");
-    routerNavigate(routes.Login);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus({ type: '', msg: '' });
+
+    const result = await forgotPassword(email);
+    if (result.ok) {
+      setStatus({ type: 'success', msg: result.data.message });
+      // Delay navigation to allow user to read the success message
+      setTimeout(() => {
+        navigate(routes.OTPVerification, { state: { email } });
+      }, 1500);
+    } else {
+      setStatus({ type: 'error', msg: result.error });
+    }
   };
 
   return (
-    <div className="forgot-page-container">
-      <div className="forgot-content-card">
-        
-        {/* Logo Section using your SVG */}
-        <div className="logo-section">
-           <img 
-             src={logoSvg} 
-             alt="LUMEN-RA Logo" 
-             className="brand-logo-svg" 
-           />
-        </div>
-
-        {/* Illustration Section */}
-        <div className="illustration-section">
-           <img 
-             src={illustration} 
-             alt="Forgot Password Illustration" 
-             className="main-graphic" 
-           />
-        </div>
-
-        {/* Text Messaging */}
-        <div className="message-section">
-          <h1 className="forgot-title">Forgot Password?</h1>
-          <p className="forgot-subtitle">We have you covered.</p>
-        </div>
-
-        {/* Action Button */}
-        <div className="button-section">
-          <button 
-            className="reset-email-btn" 
-            onClick={handleReset}
-          >
-            Reset via email
+    <div className="forgot-password-container">
+      <div className="forgot-password-card">
+        <button className="back-button" onClick={() => navigate(-1)}><ChevronLeft size={24} /></button>
+        <div className="logo-section"><div className="lumen-ra-logo">LUMEN-RA</div></div>
+        <h2 className="page-title">Enter Email Address</h2>
+        {status.msg && <div className={`status-message ${status.type}`}>{status.msg}</div>}
+        <form onSubmit={handleSubmit} className="forgot-form">
+          <div className="input-group">
+            <label>Email</label>
+            <div className="input-wrapper">
+              {/* <Mail className="input-icon" size={20} /> */}
+              <input type="email" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+            </div>
+          </div>
+          <button type="submit" className="submit-button" disabled={loading}>
+            {loading ? "Sending..." : "Send"}
           </button>
-        </div>
-        
+        </form>
       </div>
     </div>
   );
 };
-
 export default ForgotPassword;

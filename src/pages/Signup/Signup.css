@@ -344,3 +344,27 @@
 .signup-form p a:hover {
   color: #d49b29;
 }
+
+.social-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  width: 100%;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.social-btn {
+  flex: 1 1 0;
+  padding: 12px;
+  background: white;
+  border: 1px solid #2c7a7b;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  max-width: 120px;
+}

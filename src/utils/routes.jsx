@@ -10,6 +10,12 @@ const routes = {
     Login: '/login',
     Contacts: '/contacts',
     ForgotPassword: '/forgot-password',
+    OTPVerification: '/otp-verification',
+    ResetPassword: '/reset-password'
+    
+    
+    
+    
     AIChatbot: '/AIChatbot', 
 
 }
