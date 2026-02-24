@@ -1,10 +1,19 @@
 import React from 'react'
+import AllyshipToolkitSection from './AllyshipToolkit'
+import SkillBuilding from './SkillBuilding'
+import GuidedJourney from './GuidedJourney'
+import AdditionalResources from './AdditionalResources'
+import CallToAction from './CallToAction'
 
 const Toolkit = () => {
   return (
-    <div>
-      <h1>I am your toolkit</h1>
-    </div>
+    <>
+    <AllyshipToolkitSection/>
+    <SkillBuilding/>
+    <GuidedJourney/>
+    <AdditionalResources/>
+    <CallToAction/>
+    </>
   )
 }
 
