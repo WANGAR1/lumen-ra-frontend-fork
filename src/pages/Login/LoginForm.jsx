@@ -28,7 +28,6 @@ const LoginForm = () => {
             className="input-icon-right" 
             onClick={() => setShowPassword(!showPassword)}
           >
-            {showPassword ? "👁️" : "👁️‍🗨️"}
           </span>
         </div>
        {/* inside LoginForm.jsx */}

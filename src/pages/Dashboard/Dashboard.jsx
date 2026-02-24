@@ -1,109 +1,126 @@
 import React from "react";
-import QuizSection from "../Quiz/QuizSection";
-import "./dashboard.css";
-
-
-
-const Button = ({ children, onClick, className }) => {
-  return (
-    <button className={`btn ${className}`} onClick={onClick}>
-      {children}
-    </button>
-  );
-};
-
-const StatusCard = ({ title, value }) => {
-  return (
-    <div className="status-card">
-      <div>
-        <p className="status-title">{title}</p>
-        <h3 className="status-value">{value}</h3>
-      </div>
-      <div className="status-icon" />
-    </div>
-  );
-};
-
-const FooterLink = ({ text }) => <a href="#">{text}</a>;
-
-
+import "./Dashboard.css";
 
 const Dashboard = () => {
   return (
     <div className="dashboard">
-
-    
-      <nav className="navbar">
-        <div className="logo">LUMEN-RA</div>
-
-        <div className="nav-links">
-          <a href="#">Home</a>
-          <a href="#">About</a>
-          <a href="#">Toolkit</a>
-          <a href="#">Progress</a>
-        </div>
-
-        <div className="nav-actions">
-          <Button className="outline-btn">Log out</Button>
-          <Button className="primary-btn">Let’s Chat</Button>
-        </div>
-      </nav>
-
-      
-      <section className="welcome">
+      {/* Header */}
+      <div className="welcome-card">
         <h1>Welcome back, Ibrahim!</h1>
-        <p>Ready to be a safe person women can talk to</p>
-      </section>
+        <p>Continue your journey toward becoming a better ally</p>
 
-      
-      <section className="status-section">
-        <StatusCard title="Account status" value="Free" />
-        <StatusCard title="Assessment" value="Pending" />
-        <StatusCard title="Daily Motivation" value="Pending" />
-      </section>
-
-      
-      <section className="daily-tip">
-        <h3>Daily Tip</h3>
-        <p>Focus on respecting her physical boundary</p>
-      </section>
-
-     
-      <div className="start-btn-wrapper">
-        <Button className="start-btn">Start Personality Check</Button>
+        <div className="continue-card">
+          <span>Continue where you left off</span>
+          <h3>Module 2: Trauma Awareness</h3>
+          <button>Resume Learning →</button>
+        </div>
       </div>
 
-       <section> 
-        <QuizSection />
-       </section>
-      
-      <section className="personality-check">
-        <h2>Personality Check</h2>
-        <p className="subtitle">
-          Let’s understand your goal so as to create a personalized roadmap
-        </p>
+      {/* Stats Row */}
+      <div className="stats-row">
+        <div className="card">
+          <h4>Overall Completion</h4>
+          <h2>70%</h2>
+          <div className="progress-circle">
+            <span>70%</span>
+          </div>
+          <p>7 of 10 modules completed</p>
+        </div>
 
-        <div className="progress">
-          <span>Step 1 of 4</span>
-          <div className="progress-bar">
-            <div className="progress-fill" />
+        <div className="card">
+          <h4>Confidence Score</h4>
+          <h2>4.2/5</h2>
+          <div className="bar">
+            <div className="bar-fill" style={{ width: "84%" }}></div>
+          </div>
+          <p>+50% growth since start</p>
+        </div>
+
+        <div className="card">
+          <h4>Active Badges</h4>
+          <h2>8</h2>
+          <div className="badges">
+            <span>Active Listener</span>
+            <span>Safe Responder</span>
+            <span>Cultural Ally</span>
+            <span>Trauma Aware</span>
+            <span>Reflective</span>
           </div>
         </div>
+      </div>
 
-        <div className="question">
-          <label>How familiar are you with gender-based violence (GBV)?</label>
-          <input
-            type="text"
-            placeholder="Type your response here"
+      {/* Knowledge Growth */}
+      <div className="knowledge-card">
+        <h2>Knowledge Growth</h2>
+        <p>Compare your pre-assessment with current performance</p>
+
+        <div className="donut"></div>
+      </div>
+
+      {/* Recent Modules */}
+      <div className="recent">
+        <div className="recent-header">
+          <h2>Recent Modules</h2>
+          <span>View All</span>
+        </div>
+
+        <div className="module-grid">
+          <ModuleCard
+            title="Introduction to Allyship"
+            desc="Understanding the fundamentals of being an effective ally"
+            time="45 min"
+            lessons="5 lessons"
+            progress={100}
+            status="Completed"
+          />
+
+          <ModuleCard
+            title="Trauma Awareness"
+            desc="Recognizing and responding to trauma with sensitivity"
+            time="60 min"
+            lessons="6 lessons"
+            progress={60}
+            status="In Progress"
+          />
+
+          <ModuleCard
+            title="Cultural Competency"
+            desc="Building awareness and skills for cross-cultural engagement"
+            time="50 min"
+            lessons="7 lessons"
+            progress={30}
+            status="In Progress"
           />
         </div>
+      </div>
+    </div>
+  );
+};
 
-        <div className="next-btn-wrapper">
-          <Button className="primary-btn">Next</Button>
-        </div>
-      </section>
+const ModuleCard = ({ title, desc, time, lessons, progress, status }) => {
+  return (
+    <div className="module-card">
+      <div className="module-top">
+        <span className={`status ${status === "Completed" ? "done" : ""}`}>
+          {status}
+        </span>
+      </div>
 
-      
+      <h3>{title}</h3>
+      <p>{desc}</p>
+
+      <div className="module-meta">
+        <span>{time}</span>
+        <span>{lessons}</span>
+      </div>
+
+      <div className="module-progress">
+        <div
+          className="module-progress-fill"
+          style={{ width: `${progress}%` }}
+        ></div>
+      </div>
+      <span className="percent">{progress}%</span>
     </div>
   );
 };

@@ -1,10 +1,11 @@
-// src/context/AuthProvider.jsx
 import React, { useState, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
 
-const LOGIN_URL = "https://lumenra.onrender.com/api/auth/login";
-const FORGOT_PASSWORD_URL = "https://lumenra.onrender.com/api/auth/forgot-password";
-const RESET_PASSWORD_URL = "https://lumenra.onrender.com/api/auth/reset-password";
+const BASE_URL = "https://lumenra.onrender.com/api/auth";
+const LOGIN_URL = `${BASE_URL}/login`;
+const FORGOT_PASSWORD_URL = `${BASE_URL}/forgot-password`;
+const VERIFY_OTP_URL = `${BASE_URL}/verify-otp`;
+const RESET_PASSWORD_URL = `${BASE_URL}/reset-password`;
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
@@ -23,13 +24,36 @@ export function AuthProvider({ children }) {
   const forgotPassword = async (email) => {
     setLoading(true);
     try {
-      const res = await fetch(FORGOT_PASSWORD_URL, {
+      // Added timestamp to URL and no-cache headers to kill the '304' error
+      const res = await fetch(`${FORGOT_PASSWORD_URL}?t=${Date.now()}`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        headers: { 
+          "Content-Type": "application/json",
+          "Cache-Control": "no-cache",
+          "Pragma": "no-cache"
+        },
+        body: JSON.stringify({ email: email.trim() }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Failed to send reset link");
+      return { ok: true, data };
+    } catch (err) {
+      return { ok: false, error: err.message };
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const verifyOTP = async (email, otp) => {
+    setLoading(true);
+    try {
+      const res = await fetch(VERIFY_OTP_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, otp }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || "Invalid OTP");
       return { ok: true, data };
     } catch (err) {
       return { ok: false, error: err.message };
@@ -62,7 +86,7 @@ export function AuthProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, loading, logout, forgotPassword, resetPassword }}>
+    <AuthContext.Provider value={{ user, token, loading, logout, forgotPassword, verifyOTP, resetPassword }}>
       {children}
     </AuthContext.Provider>
   );
