@@ -1,0 +1,135 @@
+/* Outer wrapper to provide the white side gutters seen in Figma */
+.resources-outer-wrapper {
+  background-color: rgba(250, 250, 249, 1);
+  width: 100%;
+  padding: 60px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.resources-section {
+  width: 90%;
+  max-width: 1376px;
+  margin-top: -60px;
+  background-color: #FAFBF6; 
+  padding: 40px 20px 60px 20px;
+  box-sizing: border-box;
+}
+
+.resources-main-title {
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #1A1A1A;
+  margin-bottom: 40px;
+}
+
+.resources-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.resource-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card-image-container {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #1A1A1A;
+  margin: 0 0 16px 0;
+}
+
+.card-description {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #4A4A4A;
+  margin: 0 0 24px 0;
+  min-height: 45px; /* Ensures buttons align if text lengths vary */
+}
+
+/* Button Styling */
+.card-btn {
+  border: none;
+  border-radius: 6px;
+  padding: 10px 20px;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.btn-teal {
+  background-color: #2D7A7F; 
+}
+
+.btn-orange {
+  background-color: #F28C43; 
+}
+
+/* Bottom Progress Button */
+.footer-action {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.track-progress-btn {
+  background-color: #E0E0E0;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #616161;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .resources-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .resources-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .resources-main-title {
+    font-size: 22px;
+  }
+
+  .resources-section {
+    width: 100%;
+    padding: 30px 15px;
+  }
+}
