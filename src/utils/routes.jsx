@@ -13,6 +13,7 @@ const routes = {
     OTPVerification: '/otp-verification',
     ResetPassword: '/reset-password',
     AIChatbot: '/AIChatbot', 
+    ModulesPage: '/modules',
 
 }
 

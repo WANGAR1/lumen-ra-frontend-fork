@@ -18,6 +18,7 @@ import Contacts from './pages/Contacts/contacts';
 import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
 import OTPVerification from './pages/OTP Verification/OTPVerification';
 import ResetPassword from './pages/Reset-Password/ResetPassword';
+import ModulesPage from './pages/Modules/Modulespage'
 
 
 function App() {
@@ -52,6 +53,8 @@ function App() {
         <Route path={routes.OTPVerification} element={<OTPVerification />} />
         <Route path={routes.ResetPassword} element={<ResetPassword />} />
         <Route path = {routes.PersonalityCheck} element = {<PersonalityCheck/>}></Route>
+        <Route path = {routes.ModulesPage} element = {<ModulesPage/>}></Route>
+        
         
 
       </Routes>
