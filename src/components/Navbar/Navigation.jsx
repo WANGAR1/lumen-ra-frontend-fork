@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import "./Navigation.css"
 import Button from "../Buttons/Button";
 import routes from "../../utils/routes";
-import AIChatbot from "../../components/Navbar/AIChatbot"
 
 const Navigation = ()=> {
     return (

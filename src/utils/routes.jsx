@@ -12,11 +12,7 @@ const routes = {
     ForgotPassword: '/forgot-password',
     OTPVerification: '/otp-verification',
     ResetPassword: '/reset-password',
-    Modules: '/modules'
-    
-    
-    
-    
+    Modules: '/modules',
     
 
 }

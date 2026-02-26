@@ -1,0 +1,97 @@
+/* This creates the 'white space' on the left and right */
+.page-wrapper {
+  background-color: rgba(250, 250, 249, 1);
+  padding:0 3rem; 
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.journey-card {
+  background: linear-gradient(180deg, #4A6572 0%, #607D8B 100%);
+  width: 90%;            
+  max-width: 1376px;    
+  padding: 60px 40px;
+  border-radius: 0px;   
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.journey-title {
+  color: #FFFFFF;
+  font-family: 'Inter', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 50px;
+  letter-spacing: -0.01em;
+}
+
+.steps-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.step-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.icon-holder {
+  background-color: #FFFFFF;
+  width: 68px;
+  height: 68px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+}
+
+.custom-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.step-label {
+  color: #CFD8DC;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  line-height: 1.4;
+  margin: 0;
+  max-width: 130px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .journey-card {
+    width: 95%; 
+    padding: 50px 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .steps-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+  
+  .page-wrapper {
+    padding: 20px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .steps-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .journey-title {
+    font-size: 22px;
+  }
+}
