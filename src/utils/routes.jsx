@@ -11,7 +11,9 @@ const routes = {
     Contacts: '/contacts',
     ForgotPassword: '/forgot-password',
     OTPVerification: '/otp-verification',
-    ResetPassword: '/reset-password'
+    ResetPassword: '/reset-password',
+    Modules: '/modules'
+    
     
     
     
