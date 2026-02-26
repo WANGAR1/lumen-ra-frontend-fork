@@ -1,56 +1,76 @@
-.contact-banner {
+/* GetInTouch.css */
+
+.banner-container {
   width: 100%;
-  background: rgba(44, 95, 103, 1); /* teal */
-  padding: 80px 32px;
+  padding: 20px; /* Outer spacing so it doesn't touch screen edges */
   display: flex;
-  border-radius: 8px;
   justify-content: center;
-  align-items: center;
 }
 
-.contact-container {
-  text-align: center;
-  color: #fff;
+.banner-inner {
+  /* Exact deep teal from your image */
+  background-color: #2d5a5e; 
+  
+  /* Forcing the wide look: width is large, padding-top/bottom is small */
+  width: 100%;
+  max-width: 1200px;
+  padding: 50px 20px; 
+  
+  border-radius: 4px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
-.contact-container h2 {
-  font-size: 2.5rem;
-  font-weight: 700;
+.banner-title {
+  color: #ffffff;
+  font-family: sans-serif; /* Use Inter or Roboto if you have them */
+  font-size: 38px;
+  font-weight: 600;
+  margin: 0;
 }
 
-.underline {
-  width: 80px;
-  height: 4px;
-  background: #f97316; 
-  margin: 0 auto;
+.banner-divider {
+  /* The short, chunky orange line */
+  width: 50px;
+  height: 3px;
+  background-color: #d87d4a;
+  margin: 15px 0;
+  display: block;
 }
 
-.contact-container p {
-  font-size: 1.2rem;
+.banner-text {
+  color: #d1dadd; /* Softer white to match the screenshot */
+  font-family: sans-serif;
+  font-size: 14px;
+  margin: 0;
   font-weight: 400;
 }
 
-/* =============Responsiveness=========== */
-@media (max-width: 1024px) {
-  .contact-container h2 {
-    font-size: 2rem;
+/* Responsive Breakpoints */
+
+/* Tablets */
+@media (max-width: 768px) {
+  .banner-inner {
+    padding: 40px 15px;
   }
-  .contact-container p {
-    font-size: 1rem;
+  .banner-title {
+    font-size: 32px;
   }
 }
 
-@media (max-width: 768px) {
-  .contact-banner {
-    padding: 60px 20px;
+/* Phones */
+@media (max-width: 480px) {
+  .banner-inner {
+    padding: 30px 10px;
   }
-  .contact-container h2 {
-    font-size: 1.8rem;
+  .banner-title {
+    font-size: 24px;
   }
-  .contact-container p {
-    font-size: 0.95rem;
+  .banner-divider {
+    margin: 10px 0;
+    width: 40px;
   }
 }
