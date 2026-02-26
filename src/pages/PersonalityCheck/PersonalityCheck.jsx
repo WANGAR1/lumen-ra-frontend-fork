@@ -1,4 +1,5 @@
 import React, { useReducer } from 'react';
+import { Link } from 'react-router-dom'; // for linking to Signup/Login
 import './PersonalityCheck.css';
 
 const initialState = {
@@ -9,6 +10,7 @@ const initialState = {
   isFinished: false
 };
 
+// Reducer to handle form state
 function reducer(state, action) {
   switch (action.type) {
     case 'SET_RESPONSE':
@@ -18,7 +20,7 @@ function reducer(state, action) {
         ...state,
         currentStep: state.currentStep + 1,
         formData: { ...state.formData, [`question_${state.currentStep}`]: state.response },
-        response: "" // Reset input for next question
+        response: "" // reset input for next question
       };
     case 'START_SUBMIT':
       return { 
@@ -45,33 +47,45 @@ const PersonalityCheck = () => {
     "How do you prefer to receive support and information?"
   ];
 
+  // Handles moving to next step or submitting final responses
   const handleAction = async () => {
     if (state.currentStep < totalSteps) {
       dispatch({ type: 'NEXT_STEP' });
     } else {
-      // Final Step Submission
       dispatch({ type: 'START_SUBMIT' });
-      
-      // We use the updated data including the last response
+
+      // Prepare final submission including last answer
       const finalData = { ...state.formData, [`question_${state.currentStep}`]: state.response };
-      
+
       try {
-        const res = await fetch('https://lumenra.onrender.com/api/personality/submit', {
+        const res = await fetch('/api/auth/personality-check', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(finalData),
+          body: JSON.stringify({ answers: finalData }),
         });
+
         if (res.ok) dispatch({ type: 'SUBMIT_SUCCESS' });
+        else dispatch({ type: 'SUBMIT_ERROR' });
       } catch (err) {
-        console.log(err)
+        console.error(err);
         dispatch({ type: 'SUBMIT_ERROR' });
-        alert("Server error. Is the backend person online?");
+        alert("Server error. Please try again later.");
       }
     }
   };
 
+  // Final message after completing all steps
   if (state.isFinished) {
-    return <div className="personality-card"><h1>All done! Your roadmap is ready.</h1></div>;
+    return (
+      <div className="personality-card finished-card">
+        <h1>All done! Your personalized roadmap is ready.</h1>
+        <p>
+          To access all learning modules and start your journey, please{' '}
+          <Link to="/signup"><strong>Sign Up</strong></Link> or{' '}
+          <Link to="/login"><strong>Log In</strong></Link>.
+        </p>
+      </div>
+    );
   }
 
   const progressWidth = (state.currentStep / totalSteps) * 100;
@@ -81,11 +95,11 @@ const PersonalityCheck = () => {
       <div className="personality-card">
         <header className="card-header">
           <h1>Personality Check</h1>
-          <p>Let's understand your goal so as to create a personalised roadmap</p>
+          <p>Let's understand your goal so we can create a personalised roadmap</p>
         </header>
 
         <div className="step-indicator">
-          <span className="step-text">Step {state.currentStep} Of {totalSteps}</span>
+          <span className="step-text">Step {state.currentStep} of {totalSteps}</span>
           <div className="progress-track">
             <div className="progress-fill" style={{ width: `${progressWidth}%` }}></div>
           </div>
@@ -93,8 +107,8 @@ const PersonalityCheck = () => {
 
         <div className="question-section">
           <label className="question-label">{questions[state.currentStep - 1]}</label>
-          <input 
-            type="text" 
+          <input
+            type="text"
             className="response-input"
             placeholder="Type your response here"
             value={state.response}
@@ -103,8 +117,8 @@ const PersonalityCheck = () => {
         </div>
 
         <footer className="card-footer">
-          <button 
-            className="next-btn" 
+          <button
+            className="next-btn"
             onClick={handleAction}
             disabled={!state.response.trim() || state.loading}
           >
