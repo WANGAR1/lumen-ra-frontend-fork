@@ -16,7 +16,6 @@ const routes = {
     
     
     
-    AIChatbot: '/AIChatbot', 
 
 }
 
