@@ -3,6 +3,7 @@ import { AuthContext } from "../context/AuthContext";
 
 const BASE_URL = "https://lumenra.onrender.com/api/auth";
 const LOGIN_URL = `${BASE_URL}/login`;
+const REGISTER_URL = `${BASE_URL}/register`; // Added register endpoint
 const FORGOT_PASSWORD_URL = `${BASE_URL}/forgot-password`;
 const VERIFY_OTP_URL = `${BASE_URL}/verify-otp`;
 const RESET_PASSWORD_URL = `${BASE_URL}/reset-password`;
@@ -12,6 +13,7 @@ export function AuthProvider({ children }) {
   const [token, setToken] = useState(() => localStorage.getItem("auth_token"));
   const [loading, setLoading] = useState(false);
 
+  // Sync token with LocalStorage
   useEffect(() => {
     if (token) {
       localStorage.setItem("auth_token", token);
@@ -21,16 +23,62 @@ export function AuthProvider({ children }) {
     }
   }, [token]);
 
+  // --- 1. SIGNUP / REGISTER FUNCTION ---
+  const register = async (userData) => {
+    setLoading(true);
+    try {
+      const res = await fetch(REGISTER_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userData),
+      });
+      const data = await res.json();
+      
+      if (!res.ok) throw new Error(data.message || "Registration failed");
+
+      // Log the user in automatically after successful signup
+      setToken(data.token);
+      setUser(data.user);
+      return { ok: true, data };
+    } catch (err) {
+      return { ok: false, error: err.message };
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // --- 2. LOGIN FUNCTION ---
+  const login = async (email, password) => {
+    setLoading(true);
+    try {
+      const res = await fetch(LOGIN_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await res.json();
+      
+      if (!res.ok) throw new Error(data.message || "Login failed");
+
+      setToken(data.token);
+      setUser(data.user);
+      return { ok: true, data };
+    } catch (err) {
+      return { ok: false, error: err.message };
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // --- 3. FORGOT PASSWORD ---
   const forgotPassword = async (email) => {
     setLoading(true);
     try {
-      // Added timestamp to URL and no-cache headers to kill the '304' error
       const res = await fetch(`${FORGOT_PASSWORD_URL}?t=${Date.now()}`, {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",
-          "Cache-Control": "no-cache",
-          "Pragma": "no-cache"
+          "Cache-Control": "no-cache"
         },
         body: JSON.stringify({ email: email.trim() }),
       });
@@ -44,6 +92,7 @@ export function AuthProvider({ children }) {
     }
   };
 
+  // --- 4. VERIFY OTP ---
   const verifyOTP = async (email, otp) => {
     setLoading(true);
     try {
@@ -62,6 +111,7 @@ export function AuthProvider({ children }) {
     }
   };
 
+  // --- 5. RESET PASSWORD ---
   const resetPassword = async (email, otp, newPassword) => {
     setLoading(true);
     try {
@@ -86,7 +136,19 @@ export function AuthProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, loading, logout, forgotPassword, verifyOTP, resetPassword }}>
+    <AuthContext.Provider 
+      value={{ 
+        user, 
+        token, 
+        loading, 
+        login, 
+        register, // Shared with SignupForm
+        logout, 
+        forgotPassword, 
+        verifyOTP, 
+        resetPassword 
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

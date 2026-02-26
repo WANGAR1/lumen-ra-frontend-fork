@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useContext } from "react"; // Added useContext
+import { AuthContext } from "../../context/AuthContext"; // Import your context
 import "./Dashboard.css";
 
 const Dashboard = () => {
+  // 1. Access the user details from the AuthProvider
+  const { user } = useContext(AuthContext);
+
   return (
     <div className="dashboard">
       {/* Header */}
       <div className="welcome-card">
-        <h1>Welcome back, Ibrahim!</h1>
+        {/* 2. Replaced 'Ibrahim' with dynamic name from login */}
+        <h1>Welcome back, {user?.fullName || user?.name || "Explorer"}!</h1>
         <p>Continue your journey toward becoming a better ally</p>
 
         <div className="continue-card">
