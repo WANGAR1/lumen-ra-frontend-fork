@@ -60,7 +60,7 @@ const PersonalityCheck = () => {
       };
 
       try {
-        const res = await fetch(`https://lumenra.onrender.com/api/`, {
+        const res = await fetch("https://lumenra.onrender.com/api/auth/personality-check", {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(finalData),
