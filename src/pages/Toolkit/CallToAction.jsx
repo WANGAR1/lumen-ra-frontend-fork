@@ -1,5 +1,6 @@
 import React from 'react';
 import './CallToAction.css';
+import { Link } from 'react-router-dom';
 
 const CallToAction = () => {
   return (
@@ -12,13 +13,18 @@ const CallToAction = () => {
         </p>
 
         <div className="cta-button-group">
+
+           <Link to= "/Signup">
           <button className="btn-get-started">
             Get Started
           </button>
-          
+          </Link>
+
+          <Link to= "/PersonalityCheck">
           <button className="btn-confidence-check">
             Take Confidence Check
           </button>
+           </Link>
         </div>
       </section>
     </div>

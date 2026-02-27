@@ -3,6 +3,7 @@ import React from "react";
 import "./StartLearningSection.css";
 import Button from "../../components/Buttons/Button";
 import CertificateImage from "../../assets/HomeImages/certificate.svg"; 
+import { Link } from "react-router-dom";
 const StartLearningSection = () => {
   return (
     <section className="start-learning">
@@ -32,7 +33,11 @@ const StartLearningSection = () => {
               Track your progress and receive a digital certificate to recognise
               your commitment to informed allyship.
             </p>
+
+          <Link to="/Modules">
             <Button label="Start Learning" variant="primary"/>
+          </Link>
+
           </div>
           <div className="certificate-right">
             <img src={CertificateImage} alt="Certificate of Completion" />
