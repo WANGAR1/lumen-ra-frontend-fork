@@ -12,6 +12,7 @@ const initialState = {
   ],
   input: '',
   isTyping: false,
+  sessionId: null, // Track session for the backend
 };
 
 function chatReducer(state, action) {
@@ -19,12 +20,13 @@ function chatReducer(state, action) {
     case 'UPDATE_INPUT': return { ...state, input: action.payload };
     case 'SEND_MESSAGE': return { ...state, messages: [...state.messages, action.payload], input: '' };
     case 'TOGGLE_TYPING': return { ...state, isTyping: action.payload };
+    case 'SET_SESSION': return { ...state, sessionId: action.payload };
     case 'RESET_CHAT': return { ...initialState };
     default: return state;
   }
 }
 
-const AIChatbot = ({ user = { name: "Lumen Ra" } }) => {
+const AIChatbot = ({ user = { name: "Lumen Ra", id: "user_123" } }) => {
   const [state, dispatch] = useReducer(chatReducer, initialState);
   const { token } = useContext(AuthContext); 
   const scrollRef = useRef(null);
@@ -44,7 +46,7 @@ const AIChatbot = ({ user = { name: "Lumen Ra" } }) => {
     const messageToSend = customText || state.input;
     if (!messageToSend.trim()) return;
 
-    // 1. UI: Add User Message
+    // 1. UI: Add User Message immediately
     dispatch({ 
       type: 'SEND_MESSAGE', 
       payload: { id: Date.now(), text: messageToSend, sender: 'user' } 
@@ -52,6 +54,7 @@ const AIChatbot = ({ user = { name: "Lumen Ra" } }) => {
     
     dispatch({ type: 'TOGGLE_TYPING', payload: true });
 
+<<<<<<< HEAD
     // 2. HARDENED TOKEN LOOKUP
     // We check context first, then localStorage as a backup
     const activeToken = token || localStorage.getItem("auth_token");
@@ -102,6 +105,42 @@ const AIChatbot = ({ user = { name: "Lumen Ra" } }) => {
       dispatch({ 
         type: 'SEND_MESSAGE', 
         payload: { id: Date.now() + 1, text: errorMessage, sender: 'bot' } 
+=======
+    try {
+      // 2. Fetch API with the required userId and sessionId
+      const response = await fetch('/api/ai/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          message: messageToSend,
+          userId: user.id, // REQUIRED BY YOUR BACKEND
+          sessionId: state.sessionId 
+        })
+      });
+      
+      const data = await response.json();
+      
+      if (response.ok) {
+        // 3. UI: Add Bot Response from API
+        dispatch({ 
+          type: 'SEND_MESSAGE', 
+          payload: { id: Date.now() + 1, text: data.reply || data.message, sender: 'bot' } 
+        });
+
+        // 4. Update session ID if the backend provides one
+        if (data.sessionId) {
+          dispatch({ type: 'SET_SESSION', payload: data.sessionId });
+        }
+      } else {
+        throw new Error(data.error || "Failed to get response");
+      }
+
+    } catch (err) {
+      console.error("API Error:", err);
+      dispatch({ 
+        type: 'SEND_MESSAGE', 
+        payload: { id: Date.now() + 1, text: "I'm having trouble connecting right now. Please try again later.", sender: 'bot' } 
+>>>>>>> dev
       });
     } finally {
       dispatch({ type: 'TOGGLE_TYPING', payload: false });
@@ -148,12 +187,18 @@ const AIChatbot = ({ user = { name: "Lumen Ra" } }) => {
 
         <footer className="chat-controls">
           <div className="suggestion-pills">
+<<<<<<< HEAD
             <button onClick={(e) => onSend(e, "How do I start a conversation?")}>
               How do I start a conversation?
             </button>
             <button onClick={(e) => onSend(e, "What are common GBV warning signs?")}>
               What are common GBV warning signs?
             </button>
+=======
+            <button onClick={() => onSend(null, "How do I start a conversation?")}>How do I start a conversation?</button>
+            <button onClick={() => onSend(null, "What are common GBV warning signs?")}>What are common GBV warning signs?</button>
+            <button onClick={() => onSend(null, "I'm worried about saying the wrong thing.")}>I'm worried about saying the wrong thing.</button>
+>>>>>>> dev
           </div>
 
           <form className="input-field" onSubmit={onSend}>

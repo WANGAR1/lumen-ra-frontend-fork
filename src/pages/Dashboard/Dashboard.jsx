@@ -1,46 +1,17 @@
-import React, { useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
+import React, { useContext } from "react"; // Added useContext
+import { AuthContext } from "../../context/AuthContext"; // Import your context
 import "./Dashboard.css";
 
-// ModuleCard component
-const ModuleCard = ({ title, desc, time, lessons, progress, status }) => {
-  return (
-    <div className="module-card">
-      <div className="module-top">
-        <span className={`status ${status === "Completed" ? "done" : ""}`}>
-          {status}
-        </span>
-      </div>
-
-      <h3>{title}</h3>
-      <p>{desc}</p>
-
-      <div className="module-meta">
-        <span>{time}</span>
-        <span>{lessons}</span>
-      </div>
-
-      <div className="module-progress">
-        <div
-          className="module-progress-fill"
-          style={{ width: `${progress}%` }}
-        ></div>
-      </div>
-
-      <span className="percent">{progress}%</span>
-    </div>
-  );
-};
-
 const Dashboard = () => {
+  // 1. Access the user details from the AuthProvider
   const { user } = useContext(AuthContext);
 
   return (
     <div className="dashboard">
+      {/* Header */}
       <div className="welcome-card">
-        <h1>
-          Welcome back, {user?.fullName || user?.name || "Explorer"}!
-        </h1>
+        {/* 2. Replaced 'Ibrahim' with dynamic name from login */}
+        <h1>Welcome back, {user?.fullName || user?.name || "Explorer"}!</h1>
         <p>Continue your journey toward becoming a better ally</p>
 
         <div className="continue-card">
@@ -50,6 +21,7 @@ const Dashboard = () => {
         </div>
       </div>
 
+      {/* Stats Row */}
       <div className="stats-row">
         <div className="card">
           <h4>Overall Completion</h4>
@@ -82,12 +54,15 @@ const Dashboard = () => {
         </div>
       </div>
 
+      {/* Knowledge Growth */}
       <div className="knowledge-card">
         <h2>Knowledge Growth</h2>
         <p>Compare your pre-assessment with current performance</p>
+
         <div className="donut"></div>
       </div>
 
+      {/* Recent Modules */}
       <div className="recent">
         <div className="recent-header">
           <h2>Recent Modules</h2>
@@ -123,6 +98,34 @@ const Dashboard = () => {
           />
         </div>
       </div>
+    </div>
+  );
+};
+
+const ModuleCard = ({ title, desc, time, lessons, progress, status }) => {
+  return (
+    <div className="module-card">
+      <div className="module-top">
+        <span className={`status ${status === "Completed" ? "done" : ""}`}>
+          {status}
+        </span>
+      </div>
+
+      <h3>{title}</h3>
+      <p>{desc}</p>
+
+      <div className="module-meta">
+        <span>{time}</span>
+        <span>{lessons}</span>
+      </div>
+
+      <div className="module-progress">
+        <div
+          className="module-progress-fill"
+          style={{ width: `${progress}%` }}
+        ></div>
+      </div>
+      <span className="percent">{progress}%</span>
     </div>
   );
 };

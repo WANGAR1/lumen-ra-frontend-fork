@@ -1,7 +1,9 @@
-import React, { useReducer } from 'react';
-import { Link } from 'react-router-dom'; // for linking to Signup/Login
+import React, { useReducer, useContext } from 'react';
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext"; // Adjust path if needed
 import './PersonalityCheck.css';
 
+// 1. Initial State for the multi-step form
 const initialState = {
   currentStep: 1,
   response: "",
@@ -38,7 +40,11 @@ function reducer(state, action) {
 }
 
 const PersonalityCheck = () => {
+  // 3. Hooks (MUST be inside the component body)
   const [state, dispatch] = useReducer(reducer, initialState);
+  const { token } = useContext(AuthContext); 
+  const navigate = useNavigate();
+
   const totalSteps = 4;
   const questions = [
     "How familiar are you with gender-based violence (GBV)?",
@@ -61,6 +67,7 @@ const PersonalityCheck = () => {
         const res = await fetch('/api/auth/personality-check', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
+          Authorization: `Bearer ${token}` ,
           body: JSON.stringify({ answers: finalData }),
         });
 
@@ -74,16 +81,23 @@ const PersonalityCheck = () => {
     }
   };
 
-  // Final message after completing all steps
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" && state.response.trim() && !state.loading) {
+      handleAction();
+    }
+  };
+
+  // SUCCESS SCREEN
   if (state.isFinished) {
     return (
-      <div className="personality-card finished-card">
-        <h1>All done! Your personalized roadmap is ready.</h1>
-        <p>
-          To access all learning modules and start your journey, please{' '}
-          <Link to="/signup"><strong>Sign Up</strong></Link> or{' '}
-          <Link to="/login"><strong>Log In</strong></Link>.
-        </p>
+      <div className="personality-container">
+        <div className="personality-card finished-card">
+          <h1>All done! Your roadmap is ready.</h1>
+          <p>Your profile has been saved successfully.</p>
+          <div className="card-footer">
+            <button className="next-btn" onClick={() => navigate("/dashboard")}>Go to Dashboard</button>
+          </div>
+        </div>
       </div>
     );
   }
@@ -95,14 +109,11 @@ const PersonalityCheck = () => {
       <div className="personality-card">
         <header className="card-header">
           <h1>Personality Check</h1>
-          <p>Let's understand your goal so we can create a personalised roadmap</p>
+          <p>Step {state.currentStep} of {totalSteps}</p>
         </header>
 
-        <div className="step-indicator">
-          <span className="step-text">Step {state.currentStep} of {totalSteps}</span>
-          <div className="progress-track">
-            <div className="progress-fill" style={{ width: `${progressWidth}%` }}></div>
-          </div>
+        <div className="progress-track">
+          <div className="progress-fill" style={{ width: `${progressWidth}%` }}></div>
         </div>
 
         <div className="question-section">
@@ -110,9 +121,11 @@ const PersonalityCheck = () => {
           <input
             type="text"
             className="response-input"
-            placeholder="Type your response here"
+            placeholder="Type your response here..."
             value={state.response}
             onChange={(e) => dispatch({ type: 'SET_RESPONSE', payload: e.target.value })}
+            onKeyDown={handleKeyDown}
+            autoFocus
           />
         </div>
 
