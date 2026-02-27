@@ -1,7 +1,7 @@
-# LumenRA Frontend
+# Lumen-Ra Frontend
 
 ## About the Project
-LumenRA is a team project aimed at helping and guiding men to support women better in their lives. The frontend is built with **React.js** and **Vite** to provide a fast, responsive, and interactive user experience. I structured the app using **reusable components**, making it easy to maintain and extend as we add more features.
+Lumen-Ra is a team project aimed at helping and guiding men to support women better in their lives. The frontend is built with **React.js** and **Vite** to provide a fast, responsive, and interactive user experience. I structured the app using **reusable components**, making it easy to maintain and extend as we add more features.
 
 ---
 
