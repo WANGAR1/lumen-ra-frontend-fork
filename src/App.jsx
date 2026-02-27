@@ -20,6 +20,7 @@ import OTPVerification from './pages/OTP Verification/OTPVerification';
 import ResetPassword from './pages/Reset-Password/ResetPassword';
 import ModulesPage from './pages/Modules/Modulespage'
 
+
 function App() {
   const toolkitData = [
     { id: 1, title: 'Pre-Assessment Completed', status: 'completed', description: 'Established your baseline knowledge' },
@@ -54,6 +55,8 @@ function App() {
         <Route path = {routes.PersonalityCheck} element = {<PersonalityCheck/>}></Route>
         <Route path = {routes.Quiz} element = {<Quiz/>}></Route>
         <Route path = {routes.Modules} element = {<ModulesPage/>}></Route>
+        <Route path = {routes.ModulesPage} element = {<ModulesPage/>}></Route>
+        
         
 
       </Routes>

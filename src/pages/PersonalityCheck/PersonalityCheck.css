@@ -1,28 +1,40 @@
-:root {
-  --primary-teal: #1F6F78;
-  --bg-cream: rgba(250, 250, 249, 1);
-  --input-bg: #D9DEE3;
-  --text-main: #1A1A1A;
-}
-
+/* Page Container */
 .personality-container {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f0f0f0; /* Page background */
+  background-color: #f4f6f6;
   padding: 20px;
 }
 
+/* Card */
 .personality-card {
-  background-color: var(--bg-cream);
+  background-color: rgba(250, 250, 249, 1);
   width: 100%;
   max-width: 700px;
   padding: 40px;
   border-radius: 15px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease;
 }
 
+.personality-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Finished Card */
+.finished-card {
+  text-align: center;
+}
+
+.finished-card p {
+  margin: 20px 0;
+  color: #1A1A1A;
+  font-size: 1rem;
+}
+
+/* Header */
 .card-header {
   text-align: center;
   margin-bottom: 40px;
@@ -31,72 +43,83 @@
 .card-header h1 {
   font-size: 2.2rem;
   margin-bottom: 8px;
-  color: var(--text-main);
+  color: #1A1A1A;
 }
 
 .card-header p {
-  color: #ccc; /* Faint subtitle text */
-  font-size: 0.9rem;
+  color: #888;
+  font-size: 0.95rem;
 }
 
-/* Progress Bar Styles */
+/* Progress Section */
 .step-indicator {
   margin-bottom: 30px;
 }
 
 .step-text {
   display: block;
-  font-weight: bold;
+  font-weight: 600;
   margin-bottom: 10px;
   font-size: 0.9rem;
+  color: #1A1A1A;
 }
 
 .progress-track {
   width: 100%;
   height: 14px;
-  background-color: #fdfdfd;
+  background-color: #e8ecef;
   border-radius: 20px;
   overflow: hidden;
 }
 
 .progress-fill {
   height: 100%;
-  background-color: var(--primary-teal);
+  background-color: #1F6F78;
   transition: width 0.4s ease;
   border-radius: 20px;
 }
 
-/* Input Styles */
+/* Question Section */
 .question-section {
   margin-bottom: 40px;
 }
 
 .question-label {
   display: block;
-  font-weight: bold;
+  font-weight: 600;
   margin-bottom: 15px;
   font-size: 1rem;
+  color: #1A1A1A;
 }
 
 .response-input {
   width: 100%;
   height: 50px;
-  background-color: var(--input-bg);
-  border: none;
+  background-color: #D9DEE3;
+  border: 2px solid transparent;
   border-radius: 8px;
   padding: 0 15px;
   font-size: 1rem;
   box-sizing: border-box;
+  transition: all 0.2s ease;
 }
 
-/* Footer / Button */
+.response-input:focus {
+  outline: none;
+  border-color: #1F6F78;
+  background-color: #ffffff;
+}
+
+/* Footer */
 .card-footer {
   display: flex;
   justify-content: flex-end;
+  gap: 12px;
 }
 
+/* Primary Button */
 .next-btn {
-  background-color: var(--primary-teal);
+  background-color: #1F6F78;
   color: white;
   border: none;
   padding: 12px 35px;
@@ -104,7 +127,12 @@
   font-weight: bold;
   cursor: pointer;
   font-size: 1rem;
-  transition: opacity 0.2s;
+  transition: all 0.2s ease;
+}
+
+.next-btn:hover:not(:disabled) {
+  opacity: 0.9;
+  transform: translateY(-1px);
 }
 
 .next-btn:disabled {
@@ -112,13 +140,30 @@
   cursor: not-allowed;
 }
 
-/* RESPONSIVE QUERIES */
+/* Secondary Button (Login / Signup) */
+.secondary-btn {
+  background-color: transparent;
+  border: 2px solid #1F6F78;
+  color: #1F6F78;
+  padding: 12px 35px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.secondary-btn:hover {
+  background-color: #1F6F78;
+  color: white;
+}
 
 /* Tablet */
 @media (max-width: 768px) {
   .personality-card {
     padding: 30px;
   }
+
   .card-header h1 {
     font-size: 1.8rem;
   }
@@ -130,10 +175,17 @@
     padding: 20px;
     border-radius: 10px;
   }
+
   .card-header h1 {
     font-size: 1.5rem;
   }
-  .next-btn {
-    width: 100%; /* Full width button on small phones */
+
+  .next-btn,
+  .secondary-btn {
+    width: 100%;
+  }
+
+  .card-footer {
+    flex-direction: column;
   }
 }

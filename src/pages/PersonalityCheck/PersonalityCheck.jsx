@@ -1,6 +1,9 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useContext } from 'react';
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext"; // Adjust path if needed
 import './PersonalityCheck.css';
 
+// 1. Initial State for the multi-step form
 const initialState = {
   currentStep: 1,
   response: "",
@@ -9,6 +12,7 @@ const initialState = {
   isFinished: false
 };
 
+// 2. Reducer to manage form transitions
 function reducer(state, action) {
   switch (action.type) {
     case 'SET_RESPONSE':
@@ -18,7 +22,7 @@ function reducer(state, action) {
         ...state,
         currentStep: state.currentStep + 1,
         formData: { ...state.formData, [`question_${state.currentStep}`]: state.response },
-        response: "" // Reset input for next question
+        response: "" 
       };
     case 'START_SUBMIT':
       return { 
@@ -36,7 +40,11 @@ function reducer(state, action) {
 }
 
 const PersonalityCheck = () => {
+  // 3. Hooks (MUST be inside the component body)
   const [state, dispatch] = useReducer(reducer, initialState);
+  const { token } = useContext(AuthContext); 
+  const navigate = useNavigate();
+
   const totalSteps = 4;
   const questions = [
     "How familiar are you with gender-based violence (GBV)?",
@@ -49,29 +57,64 @@ const PersonalityCheck = () => {
     if (state.currentStep < totalSteps) {
       dispatch({ type: 'NEXT_STEP' });
     } else {
-      // Final Step Submission
+      // FINAL STEP: Submit to server
       dispatch({ type: 'START_SUBMIT' });
-      
-      // We use the updated data including the last response
-      const finalData = { ...state.formData, [`question_${state.currentStep}`]: state.response };
-      
+
+      const finalData = { 
+        answers: { 
+          ...state.formData, 
+          [`question_${state.currentStep}`]: state.response 
+        } 
+      };
+
       try {
-        const res = await fetch('https://lumenra.onrender.com/api/personality/submit', {
+        const res = await fetch("https://lumenra.onrender.com/api/auth/personality-check", {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 
+            'Content-Type': 'application/json',
+            // This Authorization header fixes the 401 error
+            'Authorization': `Bearer ${token || localStorage.getItem("auth_token")}`
+          },
           body: JSON.stringify(finalData),
         });
-        if (res.ok) dispatch({ type: 'SUBMIT_SUCCESS' });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          dispatch({ type: 'SUBMIT_SUCCESS' });
+        } else {
+          dispatch({ type: 'SUBMIT_ERROR' });
+          // This alert creates the "Submission failed" popup
+          alert(data.message || "Submission failed. Please check your login status.");
+        }
+
       } catch (err) {
-        console.log(err)
+        console.error("Submission error:", err);
         dispatch({ type: 'SUBMIT_ERROR' });
-        alert("Server error. Is the backend person online?");
+        alert("Server error. Please try again later.");
       }
     }
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" && state.response.trim() && !state.loading) {
+      handleAction();
+    }
+  };
+
+  // SUCCESS SCREEN
   if (state.isFinished) {
-    return <div className="personality-card"><h1>All done! Your roadmap is ready.</h1></div>;
+    return (
+      <div className="personality-container">
+        <div className="personality-card finished-card">
+          <h1>All done! Your roadmap is ready.</h1>
+          <p>Your profile has been saved successfully.</p>
+          <div className="card-footer">
+            <button className="next-btn" onClick={() => navigate("/dashboard")}>Go to Dashboard</button>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   const progressWidth = (state.currentStep / totalSteps) * 100;
@@ -81,14 +124,11 @@ const PersonalityCheck = () => {
       <div className="personality-card">
         <header className="card-header">
           <h1>Personality Check</h1>
-          <p>Let's understand your goal so as to create a personalised roadmap</p>
+          <p>Step {state.currentStep} of {totalSteps}</p>
         </header>
 
-        <div className="step-indicator">
-          <span className="step-text">Step {state.currentStep} Of {totalSteps}</span>
-          <div className="progress-track">
-            <div className="progress-fill" style={{ width: `${progressWidth}%` }}></div>
-          </div>
+        <div className="progress-track">
+          <div className="progress-fill" style={{ width: `${progressWidth}%` }}></div>
         </div>
 
         <div className="question-section">
@@ -96,9 +136,11 @@ const PersonalityCheck = () => {
           <input 
             type="text" 
             className="response-input"
-            placeholder="Type your response here"
+            placeholder="Type your response here..."
             value={state.response}
             onChange={(e) => dispatch({ type: 'SET_RESPONSE', payload: e.target.value })}
+            onKeyDown={handleKeyDown}
+            autoFocus
           />
         </div>
 
