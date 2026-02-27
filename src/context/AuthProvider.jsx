@@ -60,6 +60,34 @@ export function AuthProvider({ children }) {
       });
 
       const data = await res.json();
+      
+      if (!res.ok) throw new Error(data.message || "Registration failed");
+
+      // Log the user in automatically after successful signup
+      setToken(data.token);
+      setUser(data.user);
+      return { ok: true, data };
+    } catch (err) {
+      return { ok: false, error: err.message };
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // --- 3. FORGOT PASSWORD ---
+  const forgotPassword = async (email) => {
+    setLoading(true);
+    try {
+      const res = await fetch(`${FORGOT_PASSWORD_URL}?t=${Date.now()}`, {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json",
+          "Cache-Control": "no-cache"
+        },
+        body: JSON.stringify({ email: email.trim() }),
+      });
+
+      const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Registration failed");
 
       return { ok: true, data };
@@ -70,28 +98,9 @@ export function AuthProvider({ children }) {
     }
   };
 
-  // ---------------- FORGOT PASSWORD ----------------
-  const forgotPassword = async (email) => {
-    setLoading(true);
-    try {
-      const res = await fetch(FORGOT_PASSWORD_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
-
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Failed to send reset link");
-
-      return { ok: true };
-    } catch (err) {
-      return { ok: false, error: err.message };
-    } finally {
-      setLoading(false);
-    }
-  };
-
+ 
   // ---------------- VERIFY OTP ----------------
+  // --- 4. VERIFY OTP ---
   const verifyOTP = async (email, otp) => {
     setLoading(true);
     try {

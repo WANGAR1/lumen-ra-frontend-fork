@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react';
-import { Link } from 'react-router-dom'; // for linking to Signup/Login
+import { useNavigate } from "react-router-dom";
 import './PersonalityCheck.css';
 
 const initialState = {
@@ -39,6 +39,8 @@ function reducer(state, action) {
 
 const PersonalityCheck = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const navigate = useNavigate();
+
   const totalSteps = 4;
   const questions = [
     "How familiar are you with gender-based violence (GBV)?",
@@ -52,38 +54,54 @@ const PersonalityCheck = () => {
     if (state.currentStep < totalSteps) {
       dispatch({ type: 'NEXT_STEP' });
     } else {
+      // Final submission
       dispatch({ type: 'START_SUBMIT' });
 
-      // Prepare final submission including last answer
-      const finalData = { ...state.formData, [`question_${state.currentStep}`]: state.response };
+      const finalData = { 
+        answers: { ...state.formData, [`question_${state.currentStep}`]: state.response } 
+      };
 
       try {
-        const res = await fetch('/api/auth/personality-check', {
+        const res = await fetch("https://lumenra.onrender.com/api/auth/personality-check", {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ answers: finalData }),
         });
 
-        if (res.ok) dispatch({ type: 'SUBMIT_SUCCESS' });
-        else dispatch({ type: 'SUBMIT_ERROR' });
+        const data = await res.json();
+
+        if (res.ok && data.message === "Personality profile saved") {
+          dispatch({ type: 'SUBMIT_SUCCESS' });
+        } else {
+          dispatch({ type: 'SUBMIT_ERROR' });
+          alert(data.message || "Submission failed");
+        }
+
       } catch (err) {
-        console.error(err);
+        console.log(err);
         dispatch({ type: 'SUBMIT_ERROR' });
         alert("Server error. Please try again later.");
       }
     }
   };
 
-  // Final message after completing all steps
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" && state.response.trim() && !state.loading) {
+      handleAction();
+    }
+  };
+
   if (state.isFinished) {
     return (
-      <div className="personality-card finished-card">
-        <h1>All done! Your personalized roadmap is ready.</h1>
-        <p>
-          To access all learning modules and start your journey, please{' '}
-          <Link to="/signup"><strong>Sign Up</strong></Link> or{' '}
-          <Link to="/login"><strong>Log In</strong></Link>.
-        </p>
+      <div className="personality-container">
+        <div className="personality-card finished-card">
+          <h1>All done! Your roadmap is ready.</h1>
+          <p>Sign up or log in to continue and access your personalized roadmap.</p>
+          <div className="card-footer">
+            <button className="secondary-btn" onClick={() => navigate("/login")}>Login</button>
+            <button className="next-btn" onClick={() => navigate("/signup")}>Sign Up</button>
+          </div>
+        </div>
       </div>
     );
   }
@@ -95,7 +113,7 @@ const PersonalityCheck = () => {
       <div className="personality-card">
         <header className="card-header">
           <h1>Personality Check</h1>
-          <p>Let's understand your goal so we can create a personalised roadmap</p>
+          <p>Let's understand your goals to create a personalized roadmap</p>
         </header>
 
         <div className="step-indicator">
@@ -113,6 +131,7 @@ const PersonalityCheck = () => {
             placeholder="Type your response here"
             value={state.response}
             onChange={(e) => dispatch({ type: 'SET_RESPONSE', payload: e.target.value })}
+            onKeyDown={handleKeyDown}
           />
         </div>
 

@@ -11,6 +11,7 @@ const initialState = {
   ],
   input: '',
   isTyping: false,
+  sessionId: null, // Track session for the backend
 };
 
 function chatReducer(state, action) {
@@ -18,12 +19,13 @@ function chatReducer(state, action) {
     case 'UPDATE_INPUT': return { ...state, input: action.payload };
     case 'SEND_MESSAGE': return { ...state, messages: [...state.messages, action.payload], input: '' };
     case 'TOGGLE_TYPING': return { ...state, isTyping: action.payload };
+    case 'SET_SESSION': return { ...state, sessionId: action.payload };
     case 'RESET_CHAT': return { ...initialState };
     default: return state;
   }
 }
 
-const AIChatbot = ({ user = { name: "Lumen Ra" } }) => {
+const AIChatbot = ({ user = { name: "Lumen Ra", id: "user_123" } }) => {
   const [state, dispatch] = useReducer(chatReducer, initialState);
   const scrollRef = useRef(null);
 
@@ -41,45 +43,50 @@ const AIChatbot = ({ user = { name: "Lumen Ra" } }) => {
     const messageToSend = customText || state.input;
     if (!messageToSend.trim()) return;
 
-    // 1. UI: Add User Message
+    // 1. UI: Add User Message immediately
     dispatch({ 
       type: 'SEND_MESSAGE', 
       payload: { id: Date.now(), text: messageToSend, sender: 'user' } 
     });
     
-    // 2. UI: Show Typing indicator
     dispatch({ type: 'TOGGLE_TYPING', payload: true });
 
-    // --- FETCH API SPACE ---
     try {
-      const response = await fetch('https://your-api-endpoint.com/chat', {
+      // 2. Fetch API with the required userId and sessionId
+      const response = await fetch('/api/ai/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: messageToSend })
+        body: JSON.stringify({ 
+          message: messageToSend,
+          userId: user.id, // REQUIRED BY YOUR BACKEND
+          sessionId: state.sessionId 
+        })
       });
+      
       const data = await response.json();
       
-      dispatch({ 
-        type: 'SEND_MESSAGE', 
-        payload: { id: Date.now() + 1, text: data.reply, sender: 'bot' } 
-      });
-      
-
-      // Mocking the delay for now
-      setTimeout(() => {
+      if (response.ok) {
+        // 3. UI: Add Bot Response from API
         dispatch({ 
           type: 'SEND_MESSAGE', 
-          payload: { 
-            id: Date.now() + 1, 
-            text: "I hear you. As an ally, it's important to focus on active listening and asking how you can best support the person.", 
-            sender: 'bot' 
-          } 
+          payload: { id: Date.now() + 1, text: data.reply || data.message, sender: 'bot' } 
         });
-        dispatch({ type: 'TOGGLE_TYPING', payload: false });
-      }, 1200);
+
+        // 4. Update session ID if the backend provides one
+        if (data.sessionId) {
+          dispatch({ type: 'SET_SESSION', payload: data.sessionId });
+        }
+      } else {
+        throw new Error(data.error || "Failed to get response");
+      }
 
     } catch (err) {
       console.error("API Error:", err);
+      dispatch({ 
+        type: 'SEND_MESSAGE', 
+        payload: { id: Date.now() + 1, text: "I'm having trouble connecting right now. Please try again later.", sender: 'bot' } 
+      });
+    } finally {
       dispatch({ type: 'TOGGLE_TYPING', payload: false });
     }
   };
@@ -125,15 +132,9 @@ const AIChatbot = ({ user = { name: "Lumen Ra" } }) => {
 
         <footer className="chat-controls">
           <div className="suggestion-pills">
-            <button onClick={() => onSend(null, "How do I start a conversation?")}>
-              How do I start a conversation?
-            </button>
-            <button onClick={() => onSend(null, "What are common GBV warning signs?")}>
-              What are common GBV warning signs?
-            </button>
-            <button onClick={() => onSend(null, "I'm worried about saying the wrong thing.")}>
-              I'm worried about saying the wrong thing.
-            </button>
+            <button onClick={() => onSend(null, "How do I start a conversation?")}>How do I start a conversation?</button>
+            <button onClick={() => onSend(null, "What are common GBV warning signs?")}>What are common GBV warning signs?</button>
+            <button onClick={() => onSend(null, "I'm worried about saying the wrong thing.")}>I'm worried about saying the wrong thing.</button>
           </div>
 
           <form className="input-field" onSubmit={onSend}>
