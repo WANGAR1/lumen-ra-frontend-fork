@@ -7,12 +7,11 @@ const REGISTER_URL = `${BASE_URL}/register`;
 const FORGOT_PASSWORD_URL = `${BASE_URL}/forgot-password`;
 const VERIFY_OTP_URL = `${BASE_URL}/verify-otp`;
 const RESET_PASSWORD_URL = `${BASE_URL}/reset-password`;
+const PERSONALITY_CHECK_URL = `${BASE_URL}/personality-check`;
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [token, setToken] = useState(() =>
-    localStorage.getItem("auth_token")
-  );
+  const [token, setToken] = useState(() => localStorage.getItem("auth_token"));
   const [loading, setLoading] = useState(false);
 
   // Sync token with localStorage
@@ -40,7 +39,6 @@ export function AuthProvider({ children }) {
 
       setToken(data.token);
       setUser(data.user);
-
       return { ok: true };
     } catch (err) {
       return { ok: false, error: err.message };
@@ -58,9 +56,44 @@ export function AuthProvider({ children }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(userData),
       });
+      const data = await res.json();
+      
+      if (!res.ok) throw new Error(data.message || "Registration failed");
+
+      setToken(data.token);
+      setUser(data.user);
+      return { ok: true, data };
+    } catch (err) {
+      return { ok: false, error: err.message };
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // ---------------- PERSONALITY CHECK ----------------
+  const personalityCheck = async (personalityData) => {
+    if (!token) return { ok: false, error: "No authentication token found" };
+    
+    setLoading(true);
+    try {
+      const res = await fetch(PERSONALITY_CHECK_URL, {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json",
+          // This Header fixes the 401 Unauthorized error
+          "Authorization": `Bearer ${token}` 
+        },
+        body: JSON.stringify(personalityData),
+      });
 
       const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Registration failed");
+
+      if (res.status === 401) {
+        logout(); // Token likely expired
+        throw new Error("Session expired. Please login again.");
+      }
+
+      if (!res.ok) throw new Error(data.message || "Personality check failed");
 
       return { ok: true, data };
     } catch (err) {
@@ -74,16 +107,19 @@ export function AuthProvider({ children }) {
   const forgotPassword = async (email) => {
     setLoading(true);
     try {
-      const res = await fetch(FORGOT_PASSWORD_URL, {
+      const res = await fetch(`${FORGOT_PASSWORD_URL}?t=${Date.now()}`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        headers: { 
+          "Content-Type": "application/json",
+          "Cache-Control": "no-cache"
+        },
+        body: JSON.stringify({ email: email.trim() }),
       });
 
       const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Failed to send reset link");
+      if (!res.ok) throw new Error(data.message || "Request failed");
 
-      return { ok: true };
+      return { ok: true, data };
     } catch (err) {
       return { ok: false, error: err.message };
     } finally {
@@ -133,9 +169,11 @@ export function AuthProvider({ children }) {
     }
   };
 
+  // ---------------- LOGOUT ----------------
   const logout = () => {
     setToken(null);
     setUser(null);
+    localStorage.removeItem("auth_token");
   };
 
   return (
@@ -150,6 +188,7 @@ export function AuthProvider({ children }) {
         forgotPassword,
         verifyOTP,
         resetPassword,
+        personalityCheck,
       }}
     >
       {children}
