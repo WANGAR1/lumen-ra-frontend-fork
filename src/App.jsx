@@ -53,6 +53,8 @@ function App() {
         <Route path={routes.OTPVerification} element={<OTPVerification />} />
         <Route path={routes.ResetPassword} element={<ResetPassword />} />
         <Route path = {routes.PersonalityCheck} element = {<PersonalityCheck/>}></Route>
+        <Route path = {routes.Quiz} element = {<Quiz/>}></Route>
+        <Route path = {routes.Modules} element = {<ModulesPage/>}></Route>
         <Route path = {routes.ModulesPage} element = {<ModulesPage/>}></Route>
         
         
