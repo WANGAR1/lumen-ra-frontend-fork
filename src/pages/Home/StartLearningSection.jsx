@@ -32,6 +32,7 @@ const StartLearningSection = () => {
               Track your progress and receive a digital certificate to recognise
               your commitment to informed allyship.
             </p>
+            
             <Button label="Start Learning" variant="primary"/>
           </div>
           <div className="certificate-right">
