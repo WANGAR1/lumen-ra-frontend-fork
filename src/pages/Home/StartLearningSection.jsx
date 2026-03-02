@@ -2,6 +2,7 @@
 import React from "react";
 import "./StartLearningSection.css";
 import Button from "../../components/Buttons/Button";
+import { Link } from "lucide";
 import CertificateImage from "../../assets/HomeImages/certificate.svg"; 
 const StartLearningSection = () => {
   return (
@@ -33,7 +34,9 @@ const StartLearningSection = () => {
               your commitment to informed allyship.
             </p>
             
+            <Link to= "/Modules Page">
             <Button label="Start Learning" variant="primary"/>
+            </Link>
           </div>
           <div className="certificate-right">
             <img src={CertificateImage} alt="Certificate of Completion" />

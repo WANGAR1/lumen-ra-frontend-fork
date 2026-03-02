@@ -38,26 +38,24 @@ function App() {
    <div className='App'>
     <Navigation/>
       <Routes>
+
         <Route path = {routes.Home} element = {<Home/>}></Route>
         <Route path = {routes.About} element = {<About/>}></Route>
-        <Route path={routes.Progress} element={<Progress toolkitModules={toolkitData} />} />
+        <Route path = {routes.Progress} element = {<Progress toolkitModules={toolkitData} />}></Route>
         <Route path = {routes.Toolkit} element = {<Toolkit/>}></Route>
-        <Route path={routes.Dashboard} element={<Dashboard />} />
-        <Route path={routes.Dashboard} element={<Quiz />} />
-        <Route path={routes.Dashboard} element={<PersonalityCheck />} />
+        <Route path = {routes.Dashboard} element = {<Dashboard />}></Route>
+        <Route path = {routes.Dashboard} element = {<Quiz />}></Route>
+        <Route path = {routes.Dashboard} element = {<PersonalityCheck />}></Route>
         <Route path = {routes.Signup} element = {<Signup/>}></Route>
         <Route path = {routes.Login} element = {<Login/>}></Route>
         <Route path = {routes.AIChatbot} element = {<AIChatbot/>}></Route>
-        <Route path={routes.Contacts} element={<Contacts />} />
-        <Route path={routes.ForgotPassword} element={<ForgotPassword />} />
-        <Route path={routes.OTPVerification} element={<OTPVerification />} />
-        <Route path={routes.ResetPassword} element={<ResetPassword />} />
+        <Route path = {routes.Contacts} element = {<Contacts />}></Route>
+        <Route path = {routes.ForgotPassword} element = {<ForgotPassword />}></Route>
+        <Route path = {routes.OTPVerification} element = {<OTPVerification />}></Route>
+        <Route path = {routes.ResetPassword} element = {<ResetPassword />}></Route>
         <Route path = {routes.PersonalityCheck} element = {<PersonalityCheck/>}></Route>
         <Route path = {routes.Quiz} element = {<Quiz/>}></Route>
-        <Route path = {routes.Modules} element = {<ModulesPage/>}></Route>
         <Route path = {routes.ModulesPage} element = {<ModulesPage/>}></Route>
-        
-        
 
       </Routes>
       <Footer/>
