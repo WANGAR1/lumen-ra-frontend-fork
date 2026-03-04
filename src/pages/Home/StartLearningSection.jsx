@@ -2,7 +2,7 @@
 import React from "react";
 import "./StartLearningSection.css";
 import Button from "../../components/Buttons/Button";
-import { Link } from "lucide";
+import { Link } from "react-router-dom";
 import CertificateImage from "../../assets/HomeImages/certificate.svg"; 
 const StartLearningSection = () => {
   return (

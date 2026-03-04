@@ -44,8 +44,7 @@ function App() {
         <Route path = {routes.Progress} element = {<Progress toolkitModules={toolkitData} />}></Route>
         <Route path = {routes.Toolkit} element = {<Toolkit/>}></Route>
         <Route path = {routes.Dashboard} element = {<Dashboard />}></Route>
-        <Route path = {routes.Dashboard} element = {<Quiz />}></Route>
-        <Route path = {routes.Dashboard} element = {<PersonalityCheck />}></Route>
+        <Route path = {routes.PersonalityCheck} element = {<PersonalityCheck />}></Route>
         <Route path = {routes.Signup} element = {<Signup/>}></Route>
         <Route path = {routes.Login} element = {<Login/>}></Route>
         <Route path = {routes.AIChatbot} element = {<AIChatbot/>}></Route>
@@ -53,7 +52,6 @@ function App() {
         <Route path = {routes.ForgotPassword} element = {<ForgotPassword />}></Route>
         <Route path = {routes.OTPVerification} element = {<OTPVerification />}></Route>
         <Route path = {routes.ResetPassword} element = {<ResetPassword />}></Route>
-        <Route path = {routes.PersonalityCheck} element = {<PersonalityCheck/>}></Route>
         <Route path = {routes.Quiz} element = {<Quiz/>}></Route>
         <Route path = {routes.ModulesPage} element = {<ModulesPage/>}></Route>
 
