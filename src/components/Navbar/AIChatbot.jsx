@@ -1,5 +1,6 @@
 import React, { useReducer, useRef, useEffect, useContext } from 'react';
 import { AuthContext } from "../../context/AuthContext"; 
+import { useNavigate } from 'react-router-dom';
 import './AIChatbot.css';
 
 const initialState = {
@@ -26,10 +27,13 @@ function chatReducer(state, action) {
   }
 }
 
-const AIChatbot = ({ user = { name: "Lumen Ra", id: "user_123" } }) => {
-  const [state, dispatch] = useReducer(chatReducer, initialState);
-  const { token } = useContext(AuthContext); 
-  const scrollRef = useRef(null);
+const AIChatbot = () => {
+  const { token, user: loggedInUser, logout } = useContext(AuthContext);
+  const user = loggedInUser || { name: "Lumen Ra", id: "user_123" };
+  const navigate = useNavigate();
+
+  const [state, dispatch] = useReducer(chatReducer, initialState); // <-- useReducer first
+  const scrollRef = useRef(null); // <-- useRef after useReducer
 
   // Auto-scroll to bottom
   useEffect(() => {
@@ -38,7 +42,12 @@ const AIChatbot = ({ user = { name: "Lumen Ra", id: "user_123" } }) => {
     }
   }, [state.messages, state.isTyping]);
 
-  const initials = user.name.split(' ').map(n => n[0]).join('').toLowerCase().slice(0, 2);
+  const initials = user.name
+  .split(' ')
+  .map(n => n[0])
+  .join('')
+  .toLowerCase()
+  .slice(0, 2);
 
   const onSend = async (e, customText = null) => {
     if (e) e.preventDefault();
@@ -46,15 +55,16 @@ const AIChatbot = ({ user = { name: "Lumen Ra", id: "user_123" } }) => {
     const messageToSend = customText || state.input;
     if (!messageToSend.trim()) return;
 
-    // 1. UI: Add User Message immediately
+    //UI: Add User Message immediately
     dispatch({ 
       type: 'SEND_MESSAGE', 
       payload: { id: Date.now(), text: messageToSend, sender: 'user' } 
     });
     
     dispatch({ type: 'TOGGLE_TYPING', payload: true });
+    
 
-    // 2. HARDENED TOKEN LOOKUP
+    // HARDENED TOKEN LOOKUP
     // We check context first, then localStorage as a backup
     const activeToken = token || localStorage.getItem("auth_token");
 
@@ -63,7 +73,7 @@ const AIChatbot = ({ user = { name: "Lumen Ra", id: "user_123" } }) => {
         throw new Error("No authentication token found. Please log in.");
       }
 
-      // 3. API CALL (Matches your API Tester exactly)
+      // API CALL (Matches your API Tester exactly)
       const response = await fetch('https://lumenra.onrender.com/api/ai/chat', {
         method: 'POST',
         headers: { 
@@ -83,7 +93,7 @@ const AIChatbot = ({ user = { name: "Lumen Ra", id: "user_123" } }) => {
         throw new Error(data.message || `Server responded with ${response.status}`);
       }
 
-      // 4. UI: Add Bot Response
+      // Add Bot Response
       dispatch({ 
         type: 'SEND_MESSAGE', 
         payload: { 
@@ -105,8 +115,14 @@ const AIChatbot = ({ user = { name: "Lumen Ra", id: "user_123" } }) => {
         type: 'SEND_MESSAGE', 
         payload: { id: Date.now() + 1, text: errorMessage, sender: 'bot' } 
   })
-}
+  }
   };
+
+ const handleLogout = () => {
+  logout?.();                   // clear context
+  localStorage.removeItem("auth_token"); // extra safety
+  navigate("/", { replace: true }); 
+ };
 
   return (
     <div className="chat-interface">
@@ -127,7 +143,11 @@ const AIChatbot = ({ user = { name: "Lumen Ra", id: "user_123" } }) => {
             </div>
           </div>
           <div className="nav-actions">
-            <button className="btn-clear" title="Reset Chat" onClick={() => dispatch({ type: 'RESET_CHAT' })}>🗑️</button>
+            <button className="btn-clear" title="Reset Chat" 
+            onClick={() => dispatch({ type: 'RESET_CHAT' })}>🗑️</button>
+            <button className="btn-logout" title="Logout" onClick={handleLogout}>
+            Logout
+            </button>
           </div>
         </header>
 
@@ -144,8 +164,8 @@ const AIChatbot = ({ user = { name: "Lumen Ra", id: "user_123" } }) => {
               <div className="msg-bubble typing-dots">...</div>
             </div>
           )}
+    
         </div>
-
         <footer className="chat-controls">
           <div className="suggestion-pills">
             
