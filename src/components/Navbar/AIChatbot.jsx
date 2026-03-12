@@ -54,7 +54,6 @@ const AIChatbot = ({ user = { name: "Lumen Ra", id: "user_123" } }) => {
     
     dispatch({ type: 'TOGGLE_TYPING', payload: true });
 
-<<<<<<< HEAD
     // 2. HARDENED TOKEN LOOKUP
     // We check context first, then localStorage as a backup
     const activeToken = token || localStorage.getItem("auth_token");
@@ -105,46 +104,8 @@ const AIChatbot = ({ user = { name: "Lumen Ra", id: "user_123" } }) => {
       dispatch({ 
         type: 'SEND_MESSAGE', 
         payload: { id: Date.now() + 1, text: errorMessage, sender: 'bot' } 
-=======
-    try {
-      // 2. Fetch API with the required userId and sessionId
-      const response = await fetch('/api/ai/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          message: messageToSend,
-          userId: user.id, // REQUIRED BY YOUR BACKEND
-          sessionId: state.sessionId 
-        })
-      });
-      
-      const data = await response.json();
-      
-      if (response.ok) {
-        // 3. UI: Add Bot Response from API
-        dispatch({ 
-          type: 'SEND_MESSAGE', 
-          payload: { id: Date.now() + 1, text: data.reply || data.message, sender: 'bot' } 
-        });
-
-        // 4. Update session ID if the backend provides one
-        if (data.sessionId) {
-          dispatch({ type: 'SET_SESSION', payload: data.sessionId });
-        }
-      } else {
-        throw new Error(data.error || "Failed to get response");
-      }
-
-    } catch (err) {
-      console.error("API Error:", err);
-      dispatch({ 
-        type: 'SEND_MESSAGE', 
-        payload: { id: Date.now() + 1, text: "I'm having trouble connecting right now. Please try again later.", sender: 'bot' } 
->>>>>>> dev
-      });
-    } finally {
-      dispatch({ type: 'TOGGLE_TYPING', payload: false });
-    }
+  })
+}
   };
 
   return (
@@ -187,18 +148,10 @@ const AIChatbot = ({ user = { name: "Lumen Ra", id: "user_123" } }) => {
 
         <footer className="chat-controls">
           <div className="suggestion-pills">
-<<<<<<< HEAD
-            <button onClick={(e) => onSend(e, "How do I start a conversation?")}>
-              How do I start a conversation?
-            </button>
-            <button onClick={(e) => onSend(e, "What are common GBV warning signs?")}>
-              What are common GBV warning signs?
-            </button>
-=======
+            
             <button onClick={() => onSend(null, "How do I start a conversation?")}>How do I start a conversation?</button>
             <button onClick={() => onSend(null, "What are common GBV warning signs?")}>What are common GBV warning signs?</button>
             <button onClick={() => onSend(null, "I'm worried about saying the wrong thing.")}>I'm worried about saying the wrong thing.</button>
->>>>>>> dev
           </div>
 
           <form className="input-field" onSubmit={onSend}>

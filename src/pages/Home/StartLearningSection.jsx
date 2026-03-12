@@ -1,5 +1,6 @@
 {/* ==================Start Learning Section================== */}
 import React from "react";
+import {Link} from "react-router-dom"
 import "./StartLearningSection.css";
 import Button from "../../components/Buttons/Button";
 import CertificateImage from "../../assets/HomeImages/certificate.svg"; 
@@ -33,7 +34,9 @@ const StartLearningSection = () => {
               your commitment to informed allyship.
             </p>
             
+            <Link to = "/Modules">
             <Button label="Start Learning" variant="primary"/>
+            </Link>
           </div>
           <div className="certificate-right">
             <img src={CertificateImage} alt="Certificate of Completion" />

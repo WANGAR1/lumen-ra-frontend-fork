@@ -11,10 +11,9 @@ const routes = {
     Contacts: '/contacts',
     ForgotPassword: '/forgot-password',
     OTPVerification: '/otp-verification',
-    ResetPassword: '/reset-password'
+    ResetPassword: '/reset-password',
     AIChatbot: '/AIChatbot', 
     ModulesPage: '/modules',
-
 }
 
 export default routes;
