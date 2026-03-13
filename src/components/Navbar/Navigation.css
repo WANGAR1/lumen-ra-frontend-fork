@@ -68,6 +68,8 @@ font-weight: bold;
   gap: 32px;
 }
 
+/* =================Responsive================== */
+
 @media (max-width: 768px) {
   .navbar .container {
     flex-direction: column;
@@ -76,14 +78,32 @@ font-weight: bold;
   }
 
   .nav-links {
+    display: flex;
     flex-direction: column;
     width: 100%;
     gap: 10px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    width: auto;
   }
 
   .navbar .container > div:last-child {
     flex-direction: column;
     width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-links li {
+    width: auto;
+    margin: 0 auto;
+  }
+
+  .nav-links li a {
+  display: block;
   }
 }
 
