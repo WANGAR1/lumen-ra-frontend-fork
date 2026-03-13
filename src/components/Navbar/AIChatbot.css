@@ -1,4 +1,4 @@
-/* Container & Layout */
+/* Chat Container & Layout */
 .chat-interface {
   background: #fff;
   min-height: 100vh;
@@ -34,7 +34,10 @@
   border-bottom: 1px solid #f0f0f0;
 }
 
-.nav-profile { display: flex; align-items: center; gap: 14px; }
+.nav-profile { 
+  display: flex; 
+  align-items: center; 
+  gap: 14px; }
 
 .user-initials {
   width: 44px; height: 44px;
@@ -47,15 +50,25 @@
 }
 
 .online-status {
-  width: 10px; height: 10px;
+  width: 10px; 
+  height: 10px;
   background: #28A745;
   border: 2px solid #fff;
   border-radius: 50%;
-  position: absolute; bottom: 1px; right: 1px;
+  position: absolute; 
+  bottom: 1px; 
+  right: 1px;
 }
 
-.user-details h2 { font-size: 18px; margin: 0; color: #111; }
-.user-details small { color: #28A745; font-weight: 600; }
+.user-details h2 { 
+  font-size: 18px; 
+  margin: 0; 
+  color: #111; 
+}
+.user-details small { 
+  color: #28A745; 
+  font-weight: 600; 
+}
 
 .btn-logout {
   background-color: #2D7A7F;
@@ -82,8 +95,15 @@
   overflow-y: auto;
 }
 
-.msg-group { display: flex; margin-bottom: 24px; gap: 12px; }
-.user { justify-content: flex-end; }
+.msg-group { 
+  display: flex; 
+  margin-bottom: 24px; 
+  gap: 12px; 
+}
+
+.user { 
+  justify-content: flex-end; 
+}
 
 .bot-avatar {
   width: 32px; height: 32px;
@@ -112,7 +132,11 @@
 }
 
 /* Suggestions & Inputs */
-.chat-controls { padding: 20px 24px; border-top: 1px solid #f0f0f0; }
+.chat-controls {
+  padding: 20px 24px; 
+  border-top: 1px solid #f0f0f0;
+ }
+
 
 .suggestion-pills { 
   display: flex; 
@@ -136,7 +160,10 @@
   background: #dfe1e6;
 }
 
-.input-field { display: flex; gap: 12px; }
+.input-field { 
+  display: flex; 
+  gap: 12px; 
+}
 
 .input-field input {
   flex: 1;
@@ -151,6 +178,8 @@
   background: #2D7A7F;
   border: none;
   border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
   cursor: pointer;
 }

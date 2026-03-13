@@ -25,12 +25,12 @@ const Navigation = ()=> {
      </ul>
      <div>
      <NavLink to="/Login">
-     <Button label="Login" variant="secondary" />
-    </NavLink>
+      <Button label="Login" variant="secondary" />
+     </NavLink>
 
-    <NavLink to="/AIChatbot">
-     <Button label="Let's Chat" variant="primary" />
-    </NavLink>
+     <NavLink to="/AIChatbot">
+      <Button label="Let's Chat" variant="primary" />
+     </NavLink>
 
    </div> 
    </div>
