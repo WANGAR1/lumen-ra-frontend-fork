@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext"; // Adjust path if needed
 import './PersonalityCheck.css';
 
-// 1. Initial State for the multi-step form
+// Initial State for the multi-step form
 const initialState = {
   currentStep: 1,
   response: "",
@@ -12,16 +12,19 @@ const initialState = {
   isFinished: false
 };
 
-// 2. Reducer to manage form transitions
+// Reducer to manage form transitions
 function reducer(state, action) {
   switch (action.type) {
-    case 'SET_RESPONSE':
-      return { ...state, response: action.payload };
-    case 'NEXT_STEP':
-      return {
-        ...state,
-        currentStep: state.currentStep + 1,
-        formData: { ...state.formData, [`question_${state.currentStep}`]: state.response },
+    case 'SET_RESPONSE': return { 
+      ...state, 
+      response: action.payload };
+      
+    case 'NEXT_STEP':return {
+      ...state, 
+      currentStep: state.currentStep + 1,
+      formData: { 
+      ...state.formData, 
+      [`question_${state.currentStep}`]: state.response },
         response: "" 
       };
     case 'START_SUBMIT':
@@ -40,7 +43,7 @@ function reducer(state, action) {
 }
 
 const PersonalityCheck = () => {
-  // 3. Hooks (MUST be inside the component body)
+  // Hooks MUST be inside the component body
   const [state, dispatch] = useReducer(reducer, initialState);
   const { token } = useContext(AuthContext); 
   const navigate = useNavigate();

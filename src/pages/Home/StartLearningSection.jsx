@@ -17,6 +17,7 @@ const StartLearningSection = () => {
               Start your journey to become an ally with clarity and care.
             </p>
           </div>
+
           <div className="option-card-2">
             <h3>For Organisations</h3>
             <p>
@@ -33,11 +34,11 @@ const StartLearningSection = () => {
               Track your progress and receive a digital certificate to recognise
               your commitment to informed allyship.
             </p>
-            
-            <Link to = "/Modules">
+            <Link to = "/Signup">
             <Button label="Start Learning" variant="primary"/>
             </Link>
           </div>
+          
           <div className="certificate-right">
             <img src={CertificateImage} alt="Certificate of Completion" />
           </div>
