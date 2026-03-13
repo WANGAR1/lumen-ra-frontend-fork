@@ -13,7 +13,7 @@ const navigate = useNavigate();
 
 const handleStartLearning = () => {
   if (user){
-  navigate("/dashboard");
+  navigate("/Dashboard");
  }else {
   navigate("/Signup")
  }
