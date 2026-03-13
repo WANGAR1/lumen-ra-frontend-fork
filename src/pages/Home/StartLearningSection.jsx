@@ -1,10 +1,24 @@
 {/* ==================Start Learning Section================== */}
-import React from "react";
-import {Link} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+import React, { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext"; 
 import "./StartLearningSection.css";
 import Button from "../../components/Buttons/Button";
 import CertificateImage from "../../assets/HomeImages/certificate.svg"; 
+
 const StartLearningSection = () => {
+
+const { user } = useContext(AuthContext); 
+const navigate = useNavigate();
+
+const handleStartLearning = () => {
+  if (user){
+  navigate("/dashboard");
+ }else {
+  navigate("/Signup")
+ }
+ };
+
   return (
     <section className="start-learning">
       <div className="start-learning-container">
@@ -34,11 +48,9 @@ const StartLearningSection = () => {
               Track your progress and receive a digital certificate to recognise
               your commitment to informed allyship.
             </p>
-            <Link to = "/Signup">
-            <Button label="Start Learning" variant="primary"/>
-            </Link>
+            <Button label="Start Learning" variant="primary" onClick={handleStartLearning}/>
           </div>
-          
+
           <div className="certificate-right">
             <img src={CertificateImage} alt="Certificate of Completion" />
           </div>
