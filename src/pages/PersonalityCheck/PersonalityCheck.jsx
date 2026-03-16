@@ -1,6 +1,6 @@
-import React, { useReducer, useContext } from 'react';
+import React, { useState, useReducer, useContext } from 'react';
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext"; // Adjust path if needed
+import { AuthContext } from "../../context/AuthContext"; 
 import './PersonalityCheck.css';
 
 // Initial State for the multi-step form
@@ -49,10 +49,11 @@ function reducer(state, action) {
 
 const PersonalityCheck = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { token } = useContext(AuthContext); 
+  const [showWelcome, setShowWelcome] = useState(false); 
+  const { token, user } = useContext(AuthContext); 
   const navigate = useNavigate();
 
-  
+
   const totalSteps = 4;
   const questions = [
     "How familiar are you with gender-based violence (GBV)?",
@@ -81,6 +82,7 @@ const PersonalityCheck = () => {
       console.log("Token:", token);
 
     try {
+      
     const res = await fetch('https://lumenra.onrender.com/api/auth/personality-check', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json',
@@ -114,35 +116,55 @@ const PersonalityCheck = () => {
     }
   };
 
-  // Success Screen
-  if (state.isFinished) {
+  // Success Screen shows "All done!" with Continue button
+  if (state.isFinished && !showWelcome) {
+
   return (
     <div className="personality-container">
-    <div className="personality-card finished-card">
-      <h1>All done! Your roadmap is ready.</h1>
-      <p>Your profile has been saved successfully.</p>
-    <div className="card-footer">
-      {state.isFinished && (
-
-    <button
-    className="next-btn"
-    onClick={() => {
-      if (token) {
-        navigate("/dashboard");
-      } else {
-        navigate("/get-started");
-      }
-    }}
-  >Continue
-    </button>
-  )}
-    </div>
-    </div>
+      <div className="personality-card finished-card">
+        <h1>All done! Your roadmap is ready.</h1>
+        <p>Your profile has been saved successfully.</p>
+        <div className="card-footer">
+          <button
+            className="next-btn"
+            onClick={() => setShowWelcome(true)} // moves to next stage
+          >
+            Continue
+          </button>
+        </div>
+      </div>
     </div>
   );
-  }
+}
 
-const progressWidth = (state.currentStep / totalSteps) * 100;
+// Step 2: Welcome message / Navigate
+if (showWelcome) {
+  return (
+    <div className="personality-container">
+      <div className="personality-card finished-card">
+        <h1>
+          Welcome back, {user?.name || "Explorer"}!
+        </h1>
+        <div className="card-footer">
+          <button
+            className="next-btn"
+            onClick={() => {
+              if (token) {
+                navigate("/dashboard"); // logged-in
+              } else {
+                navigate("/get-started"); // new users
+              }
+            }}
+          >
+            {token ? "Go to Dashboard" : "Get Started"}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+  const progressWidth = (state.currentStep / totalSteps) * 100;
 
    return (
     <div className="personality-container">
@@ -178,7 +200,7 @@ const progressWidth = (state.currentStep / totalSteps) * 100;
       disabled={state.loading}
     >Previous
      </button>
-  )}
+   )}
     <button
       className="next-btn"
       onClick={handleAction }
