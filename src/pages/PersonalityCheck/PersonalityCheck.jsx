@@ -26,6 +26,13 @@ function reducer(state, action) {
         response: "" 
       };
 
+      case 'PREVIOUS_STEP':
+  return {
+    ...state,
+    currentStep: state.currentStep - 1,
+    response: state.formData[`question_${state.currentStep - 1}`] || ""
+  };
+
     case 'START_SUBMIT':
       return { ...state, loading: true, formData: 
         { ...state.formData, [`question_${state.currentStep}`]: state.response } 
@@ -38,13 +45,14 @@ function reducer(state, action) {
       return { ...state, loading: false };
     default: return state;
   }
- }
+  }
 
 const PersonalityCheck = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { token } = useContext(AuthContext); 
   const navigate = useNavigate();
 
+  
   const totalSteps = 4;
   const questions = [
     "How familiar are you with gender-based violence (GBV)?",
@@ -52,6 +60,12 @@ const PersonalityCheck = () => {
     "What are your primary goals for this roadmap?",
     "How do you prefer to receive support and information?"
   ];
+
+  const handlePrevious = () => {
+  if (state.currentStep > 1) {
+    dispatch({ type: 'PREVIOUS_STEP' });
+  }
+  };
 
   // Handles moving to next step or submitting final responses
   const handleAction = async () => {
@@ -69,7 +83,10 @@ const PersonalityCheck = () => {
     try {
     const res = await fetch('https://lumenra.onrender.com/api/auth/personality-check', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+       },
+      
       body: JSON.stringify({ answers: finalData }),
     });
 
@@ -105,8 +122,20 @@ const PersonalityCheck = () => {
       <h1>All done! Your roadmap is ready.</h1>
       <p>Your profile has been saved successfully.</p>
     <div className="card-footer">
-      <button className="next-btn" 
-      onClick={() => navigate("/dashboard")}>Go to Dashboard</button>
+      {state.isFinished && (
+
+    <button
+    className="next-btn"
+    onClick={() => {
+      if (token) {
+        navigate("/dashboard");
+      } else {
+        navigate("/get-started");
+      }
+    }}
+  >Continue
+    </button>
+  )}
     </div>
     </div>
     </div>
@@ -141,15 +170,23 @@ const progressWidth = (state.currentStep / totalSteps) * 100;
         autoFocus/>
     </div>
 
-        <footer className="card-footer">
-          <button
-            className="next-btn"
-            onClick={handleAction }
-            disabled={!state.response.trim() || state.loading}>
-            {state.loading ? "Saving..." : state.currentStep === totalSteps ? "Finish" : "Next"}
-          </button>
-        </footer>
-      </div>
+    <footer className="card-footer">
+           {state.currentStep > 1 && (
+     <button
+      className="prev-btn"
+      onClick={handlePrevious}
+      disabled={state.loading}
+    >Previous
+     </button>
+  )}
+    <button
+      className="next-btn"
+      onClick={handleAction }
+      disabled={!state.response.trim() || state.loading}>
+      {state.loading ? "Saving..." : state.currentStep === totalSteps ? "Finish" : "Next"}
+      </button>
+    </footer>
+    </div>
     </div>
   );
 };

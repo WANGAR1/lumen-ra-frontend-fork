@@ -21,19 +21,19 @@ const handleStartLearning = () => {
  };
 
   return (
-    <section className="start-learning">
-      <div className="start-learning-container">
+    <section className = "start-learning">
+      <div className = "start-learning-container">
 
-        {/* ==================Top options================= */}
-        <div className="options">
-          <div className="option-card-1">
+{/* ==================Top options================= */}
+        <div className = "options">
+          <div className = "option-card-1">
             <h3>For Individuals</h3>
             <p>
               Start your journey to become an ally with clarity and care.
             </p>
           </div>
 
-          <div className="option-card-2">
+          <div className = "option-card-2">
             <h3>For Organisations</h3>
             <p>
               Partner with us to bring allyship training to schools or workplaces.
@@ -41,19 +41,19 @@ const handleStartLearning = () => {
           </div>
         </div>
 
-        {/*================ Certificate section============ */}
-        <div className="certificate-section">
-          <div className="certificate-left">
+{/*================ Certificate section============ */}
+        <div className = "certificate-section">
+          <div className = "certificate-left">
             <h2>Earn a Certificate of Completion</h2>
             <p>
               Track your progress and receive a digital certificate to recognise
               your commitment to informed allyship.
             </p>
-            <Button label="Start Learning" variant="primary" onClick={handleStartLearning}/>
+            <Button label = "Start Learning" variant="primary" onClick={handleStartLearning}/>
           </div>
 
-          <div className="certificate-right">
-            <img src={CertificateImage} alt="Certificate of Completion" />
+          <div className = "certificate-right">
+            <img src = {CertificateImage} alt="Certificate of Completion"/>
           </div>
         </div>
       </div>

@@ -61,47 +61,6 @@ const AIChatbot = () => {
     });
     
     dispatch({ type: 'TOGGLE_TYPING', payload: true });
-<<<<<<< HEAD
-
-    try {
-      // 2. Fetch API with the required userId and sessionId
-      const response = await fetch('/api/ai/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          message: messageToSend,
-          userId: user.id, // REQUIRED BY YOUR BACKEND
-          sessionId: state.sessionId 
-        })
-      });
-      
-      const data = await response.json();
-      
-      if (response.ok) {
-        // 3. UI: Add Bot Response from API
-        dispatch({ 
-          type: 'SEND_MESSAGE', 
-          payload: { id: Date.now() + 1, text: data.reply || data.message, sender: 'bot' } 
-        });
-
-        // 4. Update session ID if the backend provides one
-        if (data.sessionId) {
-          dispatch({ type: 'SET_SESSION', payload: data.sessionId });
-        }
-      } else {
-        throw new Error(data.error || "Failed to get response");
-      }
-
-    } catch (err) {
-      console.error("API Error:", err);
-      dispatch({ 
-        type: 'SEND_MESSAGE', 
-        payload: { id: Date.now() + 1, text: "I'm having trouble connecting right now. Please try again later.", sender: 'bot' } 
-      });
-    } finally {
-      dispatch({ type: 'TOGGLE_TYPING', payload: false });
-    }
-=======
     
     // Context first, then localStorage backup
     const activeToken = token || localStorage.getItem("auth_token");
@@ -153,7 +112,6 @@ const AIChatbot = () => {
         payload: { id: Date.now() + 1, text: errorMessage, sender: 'bot' } 
   })
   }
->>>>>>> dev
   };
 
  const handleLogout = () => {
@@ -209,19 +167,10 @@ const AIChatbot = () => {
         </div>
         <footer className="chat-controls">
           <div className="suggestion-pills">
-<<<<<<< HEAD
-            <button onClick={(e) => onSend(e, "How do I start a conversation?")}>
-              How do I start a conversation?
-            </button>
-            <button onClick={(e) => onSend(e, "What are common GBV warning signs?")}>
-              What are common GBV warning signs?
-            </button>
-=======
             
             <button onClick={() => onSend(null, "How do I start a conversation?")}>How do I start a conversation?</button>
             <button onClick={() => onSend(null, "What are common GBV warning signs?")}>What are common GBV warning signs?</button>
             <button onClick={() => onSend(null, "I'm worried about saying the wrong thing.")}>I'm worried about saying the wrong thing.</button>
->>>>>>> dev
           </div>
 
           <form className="input-field" onSubmit={onSend}>
@@ -231,11 +180,11 @@ const AIChatbot = () => {
               onChange={(e) => dispatch({ 
               type: 'UPDATE_INPUT',
               payload: e.target.value })}
-              disabled={state.isTyping}
+              disabled = {state.isTyping}
             />
             <button type="submit" 
             className="btn-send" 
-            disabled={state.isTyping || !state.input.trim()}>
+            disabled = {state.isTyping || !state.input.trim()}>
               <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" fill="white"/></svg>
             </button>
           </form>
