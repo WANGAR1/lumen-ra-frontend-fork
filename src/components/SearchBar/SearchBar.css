@@ -173,3 +173,54 @@
   line-height: 1.6;
   white-space: pre-wrap;
 }
+
+@media (min-width: 1400px) {
+  .search-wrapper-main {
+    max-width: 700px;
+  }
+
+  .search-input-field {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .search-wrapper-main {
+    max-width: 520px;
+    padding: 0 16px;
+  }
+
+  .search-pill {
+    padding: 6px 14px;
+  }
+
+  .search-input-field {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .search-wrapper-main {
+    max-width: 100%;
+    padding: 0 14px;
+    margin: 16px auto;
+  }
+
+  .search-pill {
+    padding: 6px 12px;
+    gap: 6px;
+  }
+
+  .search-input-field {
+    font-size: 0.95rem;
+    padding: 8px 0;
+  }
+
+  .utility-icons-right {
+    gap: 10px;
+  }
+
+  .icon-search-left {
+    margin-right: 8px;
+  }
+}

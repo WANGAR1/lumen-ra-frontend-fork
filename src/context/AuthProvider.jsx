@@ -24,6 +24,33 @@ export function AuthProvider({ children }) {
     }
   }, [token]);
 
+  // ---------------- Fetch user if token exists ----------------
+useEffect(() => {
+  const fetchUser = async () => {
+    if (token && !user) {
+      try {
+        const res = await fetch(`${BASE_URL}/me`, { // <-- your API endpoint to get current user
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+
+        const data = await res.json();
+        if (res.ok) {
+          setUser(data.user);  // <-- populate user
+        } else {
+          setToken(null);      // token invalid
+        }
+      } catch (err) {
+        console.error("Failed to fetch user:", err);
+        setToken(null);
+      }
+    }
+  };
+
+  fetchUser();
+}, [token, user]);
+
   // ---------------- LOGIN ----------------
   const login = async (email, password) => {
     setLoading(true);
