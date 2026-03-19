@@ -1,5 +1,6 @@
 import LoginForm from './LoginForm';
 import './Login.css';
+import { Link } from "react-router-dom";
 import logo from '../../assets/LOGO.svg';
 
 const Login = () => {
@@ -19,7 +20,7 @@ const Login = () => {
         <LoginForm />
 
         <p className="signup-prompt">
-          Don't have an account? <a href="/signup">Sign up</a>
+          Don't have an account? <Link to="/signup">Sign up</Link>
         </p>
 
         <div className="social-divider">
