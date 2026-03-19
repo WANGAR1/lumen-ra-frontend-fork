@@ -47,7 +47,7 @@ function reducer(state, action) {
   }
   }
 
-const PersonalityCheck = () => {
+  const PersonalityCheck = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [showWelcome, setShowWelcome] = useState(false); 
   const { token, user } = useContext(AuthContext); 
@@ -88,7 +88,6 @@ const PersonalityCheck = () => {
       headers: { 'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`,
        },
-      
       body: JSON.stringify({ answers: finalData }),
     });
 
@@ -137,7 +136,7 @@ const PersonalityCheck = () => {
   );
 }
 
-// Step 2: Welcome message / Navigate
+// Welcome message / Navigate
 if (showWelcome) {
   return (
     <div className="personality-container">
