@@ -157,3 +157,86 @@
   float: right;
   margin-top: 5px;
 }
+
+/* ================= Responsive ================= */
+
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 20px 15px;
+  }
+
+  .welcome-card {
+    padding: 20px;
+  }
+
+  .welcome-card h1 {
+    font-size: 1.8rem;
+  }
+
+  .continue-card {
+    padding: 15px;
+  }
+
+  .stats-row {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .card {
+    padding: 15px;
+  }
+
+  .progress-circle {
+    width: 80px;
+    height: 80px;
+  }
+
+  .knowledge-card {
+    padding: 20px;
+  }
+
+  .donut {
+    width: 150px;
+    height: 150px;
+  }
+
+  .module-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .module-card {
+    padding: 15px;
+  }
+
+  .recent-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard {
+    padding: 15px 10px;
+  }
+
+  .welcome-card {
+    padding: 15px;
+  }
+
+  .welcome-card h1 {
+    font-size: 1.5rem;
+  }
+
+  .card {
+    padding: 12px;
+  }
+
+  .knowledge-card {
+    padding: 15px;
+  }
+
+  .module-card {
+    padding: 12px;
+  }
+}

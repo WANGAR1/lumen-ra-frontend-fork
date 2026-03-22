@@ -130,3 +130,57 @@
     order: 3;
   }
 }
+
+@media (max-width: 768px) {
+  .footer-container {
+    padding: 20px 20px 15px 20px;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .footer-section {
+    min-width: auto;
+    text-align: center;
+  }
+
+  .footer-brand h2 {
+    font-size: 1.2rem;
+  }
+
+  .footer-brand p {
+    font-size: 0.9rem;
+  }
+
+  .footer-section h3 {
+    font-size: 1rem;
+  }
+
+  .footer-links a {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-container {
+    padding: 15px 15px 10px 15px;
+  }
+
+  .footer-content {
+    gap: 20px;
+  }
+
+  .footer-brand h2 {
+    font-size: 1.1rem;
+  }
+
+  .footer-section h3 {
+    font-size: 0.95rem;
+  }
+
+  .social-icons {
+    gap: 15px;
+  }
+}
