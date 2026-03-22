@@ -122,7 +122,7 @@
   background-color: #1F6F78;
   color: white;
   border: none;
-  padding: 12px 35px;
+  padding: 12px 30px;
   border-radius: 8px;
   font-weight: bold;
   cursor: pointer;
@@ -140,12 +140,8 @@
   cursor: not-allowed;
 }
 
-/* Secondary Button (Login / Signup) */
-.secondary-btn {
-  background-color: transparent;
-  border: 2px solid #1F6F78;
-  color: #1F6F78;
-  padding: 12px 35px;
+.prev-btn {
+  padding: 12px 30px;
   border-radius: 8px;
   font-weight: bold;
   cursor: pointer;
@@ -153,9 +149,14 @@
   transition: all 0.2s ease;
 }
 
-.secondary-btn:hover {
+.prev-btn:hover:not(:disabled) {
   background-color: #1F6F78;
   color: white;
+}
+
+.prev-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 /* Tablet */
@@ -181,7 +182,7 @@
   }
 
   .next-btn,
-  .secondary-btn {
+  .prev-btn {
     width: 100%;
   }
 
