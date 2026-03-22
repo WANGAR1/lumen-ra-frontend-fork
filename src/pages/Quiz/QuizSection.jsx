@@ -1,5 +1,5 @@
 import React from "react";
-import "./quizSection.css";
+import "./QuizSection.css";
 
 const QuizSection = ({ onStartQuiz }) => {
   return (
