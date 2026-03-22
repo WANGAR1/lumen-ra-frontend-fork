@@ -27,11 +27,11 @@ function reducer(state, action) {
       };
 
       case 'PREVIOUS_STEP':
-  return {
-    ...state,
-    currentStep: state.currentStep - 1,
-    response: state.formData[`question_${state.currentStep - 1}`] || ""
-  };
+       return {
+        ...state,
+       currentStep: state.currentStep - 1,
+        response: state.formData[`question_${state.currentStep - 1}`] || ""
+     };
 
     case 'START_SUBMIT':
       return { ...state, loading: true, formData: 
@@ -50,7 +50,7 @@ function reducer(state, action) {
   const PersonalityCheck = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [showWelcome, setShowWelcome] = useState(false); 
-  const { token, user } = useContext(AuthContext); 
+  const { token, user, personalityCheck } = useContext(AuthContext); 
   const navigate = useNavigate();
 
 
@@ -78,35 +78,30 @@ function reducer(state, action) {
   // Prepare final submission including last answer
       const finalData = { ...state.formData, [`question_${state.currentStep}`]: state.response };
       console.log("Submitting answers:", finalData);
-
       console.log("Token:", token);
 
+       if (!token) {
+        alert("Please login first to continue.");
+        navigate("/login", { state: { from: "/personality-check" } });
+      return;
+   }
+
     try {
-    const res = await fetch('https://lumenra.onrender.com/api/auth/personality-check', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
-       },
-      body: JSON.stringify({ answers: finalData }),
-    });
+  const result = await personalityCheck({ answers: finalData });
 
-    const data = await res.json();
-    console.log("Status:", res.status);
-    console.log("Response:", data);
-
-    if (res.ok) {
-        dispatch({ type: "SUBMIT_SUCCESS" });
-      } else {
-        console.error("Submission error:", data);
-        dispatch({ type: "SUBMIT_ERROR" });
-        alert("Failed to save profile.");
-      }
-    } catch (err) {
-      console.error("Server error:", err);
-      dispatch({ type: "SUBMIT_ERROR" });
-      alert(`Failed to save profile: ${err.message || "Unknown error"}`);
-    }   
-    }};
+  if (result.ok) {
+    dispatch({ type: "SUBMIT_SUCCESS" });
+  } else { 
+    console.error("Submission error:", result.error);
+    dispatch({ type: "SUBMIT_ERROR" });
+    alert(result.error || "Failed to save profile.");
+  }
+} catch (err) {
+  console.error("Server error:", err);
+  dispatch({ type: "SUBMIT_ERROR" });
+  alert(`Failed to save profile: ${err.message || "Unknown error"}`);
+}}
+}
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && state.response.trim() && !state.loading) {
@@ -115,19 +110,19 @@ function reducer(state, action) {
   };
 
   // Success Screen
-if (state.isFinished && !showWelcome) {
-  return (
-    <div className="personality-container">
-      <div className="personality-card finished-card">
-        <h1>All done! Your roadmap is ready.</h1>
-        <p>Your profile has been saved successfully.</p>
-        <div className="card-footer">
-          <button
-            className="next-btn"
-            onClick={() => setShowWelcome(true)} // moves to next stage
-          >
-            Continue
-          </button>
+  if (state.isFinished && !showWelcome) {
+   return (
+    <div className="personality-container">    
+    <div className="personality-card finished-card">
+      <h1>All done! Your roadmap is ready.</h1>
+      <p>Your profile has been saved successfully.</p>
+      <div className="card-footer">
+
+      <button
+       className="next-btn"
+       onClick={() => setShowWelcome(true)} // moves to next stage
+       >Continue
+       </button>
         </div>
       </div>
     </div>
@@ -151,9 +146,7 @@ if (showWelcome) {
               } else {
                 navigate("/get-started"); // new users
               }
-            }}>
-            {token ? "Go to Dashboard" : "Get Started"}
-          </button>
+            }}></button>
         </div>
       </div>
     </div>
@@ -189,13 +182,11 @@ if (showWelcome) {
     </div>
 
     <footer className="card-footer">
-           {state.currentStep > 1 && (
+     {state.currentStep > 1 && (
      <button
       className="prev-btn"
       onClick={handlePrevious}
-      disabled={state.loading}
-    >Previous
-     </button>
+      disabled={state.loading}>Previous</button>
    )}
     <button
       className="next-btn"
