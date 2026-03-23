@@ -20,8 +20,10 @@ const AboutLumenraSection = () => {
           <Button label="Get Started" variant="started"/>
           </Link>
           
+          <Link to= '/Toolkit'>
           <Button label="Learn More" variant = "check"/>
-      
+          </Link>
+
         </div>
       </div>
     </section>
