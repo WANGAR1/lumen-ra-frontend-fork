@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Navigation.css";
 import Button from "../Buttons/Button";
 import routes from "../../utils/routes";
@@ -10,6 +10,23 @@ const Navigation = () => {
 
   const toggleMenu = () => setIsMenuOpen(prev => !prev);
   const closeMenu = () => setIsMenuOpen(false);
+
+  // --- Mobile-Only Auto-Close Logic ---
+  useEffect(() => {
+    let timer;
+    
+    // Check if menu is open AND if we are on a mobile/tablet screen size
+    const isMobile = window.innerWidth <= 1024;
+
+    if (isMenuOpen && isMobile) {
+      timer = setTimeout(() => {
+        setIsMenuOpen(false);
+        console.log("Mobile menu auto-closed after 10s");
+      }, 10000); 
+    }
+
+    return () => clearTimeout(timer);
+  }, [isMenuOpen]);
 
   return (
     <nav className="navbar">
@@ -25,7 +42,7 @@ const Navigation = () => {
           </NavLink>
         </div>
 
-        {/* MIDDLE: Links (Hidden on mobile dropdown) */}
+        {/* MIDDLE: Links */}
         <ul className={`nav-links ${isMenuOpen ? "open" : ""}`}>
           <li><NavLink to={routes.Home} onClick={closeMenu} className={({ isActive }) => (isActive ? "active-link" : "")}>Home</NavLink></li>
           <li><NavLink to={routes.About} onClick={closeMenu} className={({ isActive }) => (isActive ? "active-link" : "")}>About</NavLink></li>
@@ -33,7 +50,7 @@ const Navigation = () => {
           <li><NavLink to={routes.Toolkit} onClick={closeMenu} className={({ isActive }) => (isActive ? "active-link" : "")}>Toolkit</NavLink></li>
         </ul>
 
-        {/* RIGHT: Buttons (Always Visible) */}
+        {/* RIGHT: Actions */}
         <div className="navbar-actions">
           <NavLink to="/Login">
             <Button label="Login" variant="secondary" />
