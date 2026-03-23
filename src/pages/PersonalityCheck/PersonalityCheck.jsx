@@ -1,6 +1,6 @@
-import React, { useReducer, useContext } from 'react';
+import React, { useState, useReducer, useContext } from 'react';
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext"; // Adjust path if needed
+import { AuthContext } from "../../context/AuthContext"; 
 import './PersonalityCheck.css';
 
 // Initial State for the multi-step form
@@ -26,6 +26,13 @@ function reducer(state, action) {
         response: "" 
       };
 
+      case 'PREVIOUS_STEP':
+       return {
+        ...state,
+       currentStep: state.currentStep - 1,
+        response: state.formData[`question_${state.currentStep - 1}`] || ""
+     };
+
     case 'START_SUBMIT':
       return { ...state, loading: true, formData: 
         { ...state.formData, [`question_${state.currentStep}`]: state.response } 
@@ -38,12 +45,14 @@ function reducer(state, action) {
       return { ...state, loading: false };
     default: return state;
   }
- }
+  }
 
-const PersonalityCheck = () => {
+  const PersonalityCheck = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { token } = useContext(AuthContext); 
+  const [showWelcome, setShowWelcome] = useState(false); 
+  const { token, user, personalityCheck } = useContext(AuthContext); 
   const navigate = useNavigate();
+
 
   const totalSteps = 4;
   const questions = [
@@ -52,6 +61,12 @@ const PersonalityCheck = () => {
     "What are your primary goals for this roadmap?",
     "How do you prefer to receive support and information?"
   ];
+
+  const handlePrevious = () => {
+  if (state.currentStep > 1) {
+    dispatch({ type: 'PREVIOUS_STEP' });
+  }
+  };
 
   // Handles moving to next step or submitting final responses
   const handleAction = async () => {
@@ -63,33 +78,30 @@ const PersonalityCheck = () => {
   // Prepare final submission including last answer
       const finalData = { ...state.formData, [`question_${state.currentStep}`]: state.response };
       console.log("Submitting answers:", finalData);
-
       console.log("Token:", token);
 
+       if (!token) {
+        alert("Please login first to continue.");
+        navigate("/login", { state: { from: "/personality-check" } });
+      return;
+   }
+
     try {
-    const res = await fetch('https://lumenra.onrender.com/api/auth/personality-check', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ answers: finalData }),
-    });
+  const result = await personalityCheck({ answers: finalData });
 
-    const data = await res.json();
-    console.log("Status:", res.status);
-    console.log("Response:", data);
-
-    if (res.ok) {
-        dispatch({ type: "SUBMIT_SUCCESS" });
-      } else {
-        console.error("Submission error:", data);
-        dispatch({ type: "SUBMIT_ERROR" });
-        alert("Failed to save profile.");
-      }
-    } catch (err) {
-      console.error("Server error:", err);
-      dispatch({ type: "SUBMIT_ERROR" });
-      alert(`Failed to save profile: ${err.message || "Unknown error"}`);
-    }   
-    }};
+  if (result.ok) {
+    dispatch({ type: "SUBMIT_SUCCESS" });
+  } else { 
+    console.error("Submission error:", result.error);
+    dispatch({ type: "SUBMIT_ERROR" });
+    alert(result.error || "Failed to save profile.");
+  }
+} catch (err) {
+  console.error("Server error:", err);
+  dispatch({ type: "SUBMIT_ERROR" });
+  alert(`Failed to save profile: ${err.message || "Unknown error"}`);
+}}
+}
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && state.response.trim() && !state.loading) {
@@ -98,22 +110,50 @@ const PersonalityCheck = () => {
   };
 
   // Success Screen
-  if (state.isFinished) {
-  return (
-    <div className="personality-container">
+  if (state.isFinished && !showWelcome) {
+   return (
+    <div className="personality-container">    
     <div className="personality-card finished-card">
       <h1>All done! Your roadmap is ready.</h1>
       <p>Your profile has been saved successfully.</p>
-    <div className="card-footer">
-      <button className="next-btn" 
-      onClick={() => navigate("/dashboard")}>Go to Dashboard</button>
-    </div>
-    </div>
+      <div className="card-footer">
+
+      <button
+       className="next-btn"
+       onClick={() => setShowWelcome(true)} // moves to next stage
+       >Continue
+       </button>
+        </div>
+      </div>
     </div>
   );
-  }
+}
 
-const progressWidth = (state.currentStep / totalSteps) * 100;
+// Welcome message / Navigate
+if (showWelcome) {
+  return (
+    <div className="personality-container">
+      <div className="personality-card finished-card">
+        <h1>
+          Welcome back, {user?.name || "Explorer"}!
+        </h1>
+        <div className="card-footer">
+          <button
+            className="next-btn"
+            onClick={() => {
+              if (token) {
+                navigate("/dashboard"); // logged-in
+              } else {
+                navigate("/get-started"); // new users
+              }
+            }}></button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+  const progressWidth = (state.currentStep / totalSteps) * 100;
 
    return (
     <div className="personality-container">
@@ -141,15 +181,21 @@ const progressWidth = (state.currentStep / totalSteps) * 100;
         autoFocus/>
     </div>
 
-        <footer className="card-footer">
-          <button
-            className="next-btn"
-            onClick={handleAction }
-            disabled={!state.response.trim() || state.loading}>
-            {state.loading ? "Saving..." : state.currentStep === totalSteps ? "Finish" : "Next"}
-          </button>
-        </footer>
-      </div>
+    <footer className="card-footer">
+     {state.currentStep > 1 && (
+     <button
+      className="prev-btn"
+      onClick={handlePrevious}
+      disabled={state.loading}>Previous</button>
+   )}
+    <button
+      className="next-btn"
+      onClick={handleAction }
+      disabled={!state.response.trim() || state.loading}>
+      {state.loading ? "Saving..." : state.currentStep === totalSteps ? "Finish" : "Next"}
+      </button>
+    </footer>
+    </div>
     </div>
   );
 };

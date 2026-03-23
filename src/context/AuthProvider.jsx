@@ -72,16 +72,14 @@ export function AuthProvider({ children }) {
 
   // ---------------- PERSONALITY CHECK ----------------
   const personalityCheck = async (personalityData) => {
-    if (!token) return { ok: false, error: "No authentication token found" };
     
     setLoading(true);
     try {
       const res = await fetch(PERSONALITY_CHECK_URL, {
         method: "POST",
         headers: { 
-          "Content-Type": "application/json",
-          // This Header fixes the 401 Unauthorized error
-          "Authorization": `Bearer ${token}` 
+         "Content-Type": "application/json",
+         ...(token && { Authorization: `Bearer ${token}` })
         },
         body: JSON.stringify(personalityData),
       });

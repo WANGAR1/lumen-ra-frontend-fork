@@ -180,11 +180,11 @@ const AIChatbot = () => {
               onChange={(e) => dispatch({ 
               type: 'UPDATE_INPUT',
               payload: e.target.value })}
-              disabled={state.isTyping}
+              disabled = {state.isTyping}
             />
             <button type="submit" 
             className="btn-send" 
-            disabled={state.isTyping || !state.input.trim()}>
+            disabled = {state.isTyping || !state.input.trim()}>
               <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" fill="white"/></svg>
             </button>
           </form>
