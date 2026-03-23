@@ -1,11 +1,10 @@
-/* ================= Navbar Container ================== */
+/* ================= Navbar Reset & Container ================== */
 .navbar {
-  position: sticky;
-  top: 0;
-  z-index: 999;
-  background-color: #e3d0ca; /* Beige background from image */
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  position: relative; /* Scrolls with page */
+  background-color: #e3d0ca; 
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   width: 100%;
+  box-sizing: border-box;
 }
 
 .navbar .container {
@@ -16,28 +15,40 @@
   margin: 0 auto;
   padding: 10px 40px;
   min-height: 80px;
+  gap: 15px; /* Prevents items from touching on mid-sized screens */
 }
 
-/* ================= 1. Left (Logo) ================== */
+/* ================= 1. Left Section (Logo & Toggle) ================== */
 .navbar-left {
-  flex: 1; /* Takes 1/3 space */
+  flex: 1; 
   display: flex;
   align-items: center;
+  gap: 15px;
 }
 
 .navbar-logo-img {
-  height: 60px; /* Adjust based on your SVG dimensions */
+  height: 50px; 
   width: auto;
   display: block;
 }
 
-/* ================= 2. Middle (Links) ================== */
+.menu-toggle {
+  display: none; 
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #1f6f70;
+  padding: 0;
+}
+
+/* ================= 2. Middle Section (Nav Links) ================== */
 .nav-links {
-  flex: 2; /* Takes middle space to ensure true centering */
+  flex: 2; 
   display: flex;
   justify-content: center;
   list-style: none;
-  gap: 40px;
+  gap: 30px;
   margin: 0;
   padding: 0;
 }
@@ -46,59 +57,64 @@
   text-decoration: none;
   color: #1a1a1a;
   font-weight: 700;
-  font-size: 1.1rem;
-  padding-bottom: 5px;
-  transition: all 0.2s ease-in-out;
+  font-size: 1rem;
+  padding: 8px 0;
+  white-space: nowrap;
 }
 
-/* Active and Hover State (Underline) */
 .nav-links li a:hover,
 .nav-links li a.active-link {
-  color: #1f6f70; /* Teal color */
+  color: #1f6f70;
   border-bottom: 2px solid #1f6f70;
 }
 
-/* ================= 3. Right (Buttons) ================== */
+/* ================= 3. Right Section (Both Buttons) ================== */
 .navbar-actions {
-  flex: 1; /* Takes 1/3 space */
+  flex: 1; 
   display: flex;
   justify-content: flex-end;
-  gap: 12px;
+  align-items: center;
+  gap: 10px; /* Space between Login and Let's Chat */
 }
 
-/* ================= Mobile Settings ================== */
-.menu-toggle {
-  display: none;
-  font-size: 1.5rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #1f6f70;
-  margin-right: 15px;
-}
-
+/* ================= Mobile Responsive (max-width: 1024px) ================== */
 @media (max-width: 1024px) {
-  .menu-toggle {
-    display: block;
+  .navbar .container {
+    padding: 10px 15px;
   }
 
+  .menu-toggle {
+    display: block;
+    order: 1;
+  }
+
+  .navbar-left {
+    flex: 0; /* Let logo take natural width */
+    order: 2;
+  }
+
+  .navbar-actions {
+    flex: 1; /* Pushes buttons to the right */
+    order: 3;
+    gap: 8px;
+  }
+
+  /* Dropdown Menu */
   .nav-links {
-    display: none; /* Hide desktop links */
+    display: none; 
     flex-direction: column;
     position: absolute;
-    top: 100%;
+    top: 100%; 
     left: 0;
     width: 100%;
     background-color: #e3d0ca;
     padding: 20px;
+    z-index: 1000;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    text-align: center;
   }
 
   .nav-links.open {
     display: flex;
-  }
-
-  .navbar-actions {
-    flex: 0; /* Shrink button container on mobile */
   }
 }

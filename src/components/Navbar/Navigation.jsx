@@ -15,7 +15,7 @@ const Navigation = () => {
     <nav className="navbar">
       <div className="container">
         
-        {/* LEFT: Logo & Mobile Toggle */}
+        {/* LEFT: Burger & Logo */}
         <div className="navbar-left">
           <button className="menu-toggle" onClick={toggleMenu} aria-label="Toggle menu">
             ☰
@@ -25,31 +25,15 @@ const Navigation = () => {
           </NavLink>
         </div>
 
-        {/* MIDDLE: Nav Links */}
+        {/* MIDDLE: Links (Hidden on mobile dropdown) */}
         <ul className={`nav-links ${isMenuOpen ? "open" : ""}`}>
-          <li>
-            <NavLink to={routes.Home} onClick={closeMenu} className={({ isActive }) => (isActive ? "active-link" : "")}>
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to={routes.About} onClick={closeMenu} className={({ isActive }) => (isActive ? "active-link" : "")}>
-              About
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to={routes.Progress} onClick={closeMenu} className={({ isActive }) => (isActive ? "active-link" : "")}>
-              Progress
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to={routes.Toolkit} onClick={closeMenu} className={({ isActive }) => (isActive ? "active-link" : "")}>
-              Toolkit
-            </NavLink>
-          </li>
+          <li><NavLink to={routes.Home} onClick={closeMenu} className={({ isActive }) => (isActive ? "active-link" : "")}>Home</NavLink></li>
+          <li><NavLink to={routes.About} onClick={closeMenu} className={({ isActive }) => (isActive ? "active-link" : "")}>About</NavLink></li>
+          <li><NavLink to={routes.Progress} onClick={closeMenu} className={({ isActive }) => (isActive ? "active-link" : "")}>Progress</NavLink></li>
+          <li><NavLink to={routes.Toolkit} onClick={closeMenu} className={({ isActive }) => (isActive ? "active-link" : "")}>Toolkit</NavLink></li>
         </ul>
 
-        {/* RIGHT: Buttons */}
+        {/* RIGHT: Buttons (Always Visible) */}
         <div className="navbar-actions">
           <NavLink to="/Login">
             <Button label="Login" variant="secondary" />
