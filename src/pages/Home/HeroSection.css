@@ -28,7 +28,7 @@
   flex: 1 1 600px;
   min-width: 280px;
   padding-top: 10px;
-  margin-bottom: 200px;
+  margin-bottom: 20px;
 }
 
 .hero-left h2 {
@@ -114,7 +114,7 @@
 
 @media (max-width: 768px) {
   .hero {
-    padding: 40px 16px;
+    padding: 10px 6px;
   }
 
   .hero-left h2 {
