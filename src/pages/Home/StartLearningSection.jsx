@@ -6,14 +6,6 @@ import "./StartLearningSection.css";
 import Button from "../../components/Buttons/Button";
 import { Link } from "react-router-dom";
 import CertificateImage from "../../assets/HomeImages/certificate.svg"; 
-<<<<<<< HEAD
-import { Link } from "react-router-dom";
-const StartLearningSection = () => {
-  return (
-    <section className="start-learning">
-      <div className="start-learning-container">
-=======
->>>>>>> eb914fef5b1169eca1c6fa9f5dfe25f7a2108628
 
 const StartLearningSection = () => {
 
@@ -57,15 +49,14 @@ const handleStartLearning = () => {
               Track your progress and receive a digital certificate to recognise
               your commitment to informed allyship.
             </p>
-<<<<<<< HEAD
+
 
           <Link to="/Modules">
             <Button label="Start Learning" variant="primary"/>
           </Link>
 
-=======
             <Button label = "Start Learning" variant="primary" onClick={handleStartLearning}/>
->>>>>>> eb914fef5b1169eca1c6fa9f5dfe25f7a2108628
+
           </div>
 
           <div className = "certificate-right">
