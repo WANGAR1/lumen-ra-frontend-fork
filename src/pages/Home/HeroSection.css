@@ -25,16 +25,16 @@
 }
 
 .hero-left {
-  flex: 1 1 600px;
+  flex: 1 1 100px;
   min-width: 280px;
   padding-top: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .hero-left h2 {
   font-size: 3rem;
   line-height: 1.2;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   color: rgba(30, 30, 30, 1);
   font-weight: 700;
   max-width: 646px;
@@ -44,7 +44,7 @@
   font-size: 1.1rem;
   line-height: 1.6;
   color: rgba(30, 30, 30, 1);
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   max-width: 676px;
 }
 
@@ -95,7 +95,7 @@
   }
 
   .hero-left {
-  margin-bottom: 60px;
+  margin-bottom: 10px;
  }
 
   .hero-left h2 {
@@ -126,7 +126,7 @@
  }  
 
   .hero-left {
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   }
 
    .hero-left h2,
