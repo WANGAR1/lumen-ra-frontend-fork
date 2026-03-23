@@ -7,12 +7,11 @@ const REGISTER_URL = `${BASE_URL}/register`;
 const FORGOT_PASSWORD_URL = `${BASE_URL}/forgot-password`;
 const VERIFY_OTP_URL = `${BASE_URL}/verify-otp`;
 const RESET_PASSWORD_URL = `${BASE_URL}/reset-password`;
+const PERSONALITY_CHECK_URL = `${BASE_URL}/personality-check`;
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [token, setToken] = useState(() =>
-    localStorage.getItem("auth_token")
-  );
+  const [token, setToken] = useState(() => localStorage.getItem("auth_token"));
   const [loading, setLoading] = useState(false);
 
   // Sync token with localStorage
@@ -40,7 +39,6 @@ export function AuthProvider({ children }) {
 
       setToken(data.token);
       setUser(data.user);
-
       return { ok: true };
     } catch (err) {
       return { ok: false, error: err.message };
@@ -62,7 +60,6 @@ export function AuthProvider({ children }) {
       
       if (!res.ok) throw new Error(data.message || "Registration failed");
 
-      // Log the user in automatically after successful signup
       setToken(data.token);
       setUser(data.user);
       return { ok: true, data };
@@ -73,7 +70,38 @@ export function AuthProvider({ children }) {
     }
   };
 
-  // --- 3. FORGOT PASSWORD ---
+  // ---------------- PERSONALITY CHECK ----------------
+  const personalityCheck = async (personalityData) => {
+    
+    setLoading(true);
+    try {
+      const res = await fetch(PERSONALITY_CHECK_URL, {
+        method: "POST",
+        headers: { 
+         "Content-Type": "application/json",
+         ...(token && { Authorization: `Bearer ${token}` })
+        },
+        body: JSON.stringify(personalityData),
+      });
+
+      const data = await res.json();
+
+      if (res.status === 401) {
+        logout(); // Token likely expired
+        throw new Error("Session expired. Please login again.");
+      }
+
+      if (!res.ok) throw new Error(data.message || "Personality check failed");
+
+      return { ok: true, data };
+    } catch (err) {
+      return { ok: false, error: err.message };
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // ---------------- FORGOT PASSWORD ----------------
   const forgotPassword = async (email) => {
     setLoading(true);
     try {
@@ -87,7 +115,7 @@ export function AuthProvider({ children }) {
       });
 
       const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Registration failed");
+      if (!res.ok) throw new Error(data.message || "Request failed");
 
       return { ok: true, data };
     } catch (err) {
@@ -97,9 +125,7 @@ export function AuthProvider({ children }) {
     }
   };
 
- 
   // ---------------- VERIFY OTP ----------------
-  // --- 4. VERIFY OTP ---
   const verifyOTP = async (email, otp) => {
     setLoading(true);
     try {
@@ -141,9 +167,11 @@ export function AuthProvider({ children }) {
     }
   };
 
+  // ---------------- LOGOUT ----------------
   const logout = () => {
     setToken(null);
     setUser(null);
+    localStorage.removeItem("auth_token");
   };
 
   return (
@@ -158,6 +186,7 @@ export function AuthProvider({ children }) {
         forgotPassword,
         verifyOTP,
         resetPassword,
+        personalityCheck,
       }}
     >
       {children}

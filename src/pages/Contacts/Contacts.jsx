@@ -1,7 +1,8 @@
 import React from 'react';
 import './Contacts.css';
 // Add this import line!
-import { Mail, MapPin, Share2, Facebook, Twitter, Linkedin } from 'react';
+// Change 'react' to 'lucide-react'
+import { Mail, MapPin, Share2, Facebook, Twitter, Linkedin } from 'lucide-react';
 
 const Contacts = () => {
   return (

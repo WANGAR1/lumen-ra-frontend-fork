@@ -4,6 +4,7 @@ import React from "react";
 import "./ConfidenceSection.css";
 import StatsBadge from "../../components/StatsBadge/StatsBadge";
 import Button from "../../components/Buttons/Button";
+import { Link } from "react-router-dom";
 import ConfidenceImage from "../../assets/HomeImages/handsimage.svg";
 
 const ConfidenceSection = () => {
@@ -16,7 +17,10 @@ const ConfidenceSection = () => {
             Learn actionable techniques to boost your confidence and 
             enhance your digital allyship skills.
           </p>
+
+          <Link to="/PersonalityCheck">
           <Button label="Take the Quiz" variant="quiz" />
+          </Link>
         </div>
 
         <div className="confidence-right">

@@ -140,4 +140,40 @@
   .main-content {
     grid-template-columns: 1fr;
   }
+
+  .form-card {
+    padding: 30px 20px;
+  }
+
+  .info-card {
+    padding: 20px;
+  }
+
+  .emergency-card {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-container {
+    padding: 30px 15px;
+  }
+
+  .form-card {
+    padding: 20px 15px;
+  }
+
+  .info-card {
+    padding: 15px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .emergency-card {
+    padding: 15px;
+  }
+
+  .header-section h1 {
+    font-size: 1.8rem;
+  }
 }

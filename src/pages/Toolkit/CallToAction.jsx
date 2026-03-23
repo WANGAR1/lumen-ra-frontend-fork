@@ -1,8 +1,11 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'; // 1. Import useNavigate
 import './CallToAction.css';
 import { Link } from 'react-router-dom';
 
 const CallToAction = () => {
+  const navigate = useNavigate(); // 2. Initialize the navigate function
+
   return (
     <div className="cta-page-wrapper">
       <section className="cta-card">

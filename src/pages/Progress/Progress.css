@@ -157,3 +157,84 @@
 }
 
 .preview-btn:disabled { background: #95a5a6; cursor: not-allowed; }
+
+/* ================= Responsive ================= */
+
+@media (max-width: 768px) {
+  .progress-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .progress-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .stat-card {
+    padding: 1.2rem;
+  }
+
+  .stat-value {
+    font-size: 1.8rem;
+  }
+
+  .journey-section {
+    padding: 1.5rem;
+  }
+
+  .timeline-item {
+    padding-left: 2rem;
+  }
+
+  .timeline-item::before {
+    left: 12px;
+  }
+
+  .timeline-dot {
+    width: 28px;
+    height: 28px;
+  }
+
+  .certificate-footer {
+    padding: 2rem 1.5rem;
+  }
+
+  .cert-preview-placeholder {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .progress-container {
+    padding: 1rem 0.5rem;
+  }
+
+  .progress-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .stat-card {
+    padding: 1rem;
+  }
+
+  .stat-value {
+    font-size: 1.5rem;
+  }
+
+  .timeline-item {
+    padding-left: 1.5rem;
+  }
+
+  .timeline-dot {
+    width: 24px;
+    height: 24px;
+  }
+
+  .certificate-footer {
+    padding: 1.5rem 1rem;
+  }
+}

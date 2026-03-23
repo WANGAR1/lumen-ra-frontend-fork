@@ -14,7 +14,6 @@ const routes = {
     ResetPassword: '/reset-password',
     AIChatbot: '/AIChatbot', 
     ModulesPage: '/modules',
-
 }
 
 export default routes;

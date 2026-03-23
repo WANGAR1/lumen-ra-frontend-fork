@@ -1,16 +1,29 @@
-# React + Vite
+# Lumen-Ra Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## About the Project
+Lumen-Ra is a team project aimed at helping and guiding men to support women better in their lives. The frontend is built with **React.js** and **Vite** to provide a fast, responsive, and interactive user experience. I structured the app using **reusable components**, making it easy to maintain and extend as we add more features.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## What It Does
+- Provides a clear and intuitive interface for users to explore guidance and resources  
+- Handles user registration, login, and protected content  
+- Uses **modular components** for consistent UI across pages  
+- Works seamlessly on both desktop and mobile devices  
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
+- **React.js** – building reusable, interactive components  
+- **Vite** – fast development and bundling  
+- **CSS / Styled Components** – styling the interface  
+- **React Router** – for smooth navigation between pages  
+- **Context API** – managing state across the app  
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## How to Run It Locally
+1. Clone the repo:  
+```bash
+git clone https://github.com/Sherifat-Aduku/lumen-ra-frontend.git
+cd lumen-ra-frontend

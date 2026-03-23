@@ -1,17 +1,18 @@
-import React, { useReducer, useEffect } from "react";
+import React, { useReducer, useEffect, useRef } from "react";
 import "./SearchBar.css";
 import SearchIcon from "../../assets/searchicon.svg";
 
-// 1. Initial State
+// Initial State
 const initialState = {
   query: "",
   loading: false,
   results: [],
   error: "",
   isListening: false,
+  file: null,
 };
 
-// 2. Reducer Function
+// Reducer Function
 function searchReducer(state, action) {
   switch (action.type) {
     case "SET_QUERY":
@@ -28,16 +29,35 @@ function searchReducer(state, action) {
       return { ...state, error: "" };
     case "CLEAR_RESULTS":
       return { ...state, results: [] };
-    default:
+    case "SET_FILE":
+     return { ...state, file: action.payload };
+    case "CLEAR_FILE":
+     return { ...state, file: null };
+     default:
       return state;
   }
 }
 
 const SearchBar = () => {
   const [state, dispatch] = useReducer(searchReducer, initialState);
-  const { query, loading, results, error, isListening } = state;
+  const { query, loading, results, error, isListening, file } = state;
 
-  // --- Voice Recognition Logic ---
+   // File Attachment Logic 
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files?.[0];
+  if (!selectedFile) return;
+
+  dispatch({
+    type: "SET_FILE",
+    payload: selectedFile,
+  });
+
+  console.log("File selected:", selectedFile);
+};
+
+ const fileInputRef = useRef(null);
+
+  // Voice Recognition Logic 
   const handleVoiceSearch = () => {
     const SpeechRecognition = window.SpeechRecognition 
     || window.webkitSpeechRecognition;
@@ -47,7 +67,7 @@ const SearchBar = () => {
       payload: "Voice search not supported in this browser." });
       return;
     }
-
+    
     const recognition = new SpeechRecognition();
     recognition.lang = "en-US";
     recognition.interimResults = false;
@@ -76,7 +96,7 @@ const SearchBar = () => {
     recognition.start();
   };
 
-  // --- API Search Logic ---
+  // API Search Logic
   const handleSearch = async () => {
     if (!query.trim()) return;
     dispatch({ type: "START_SEARCH" });
@@ -113,9 +133,17 @@ const SearchBar = () => {
     return () => clearTimeout(timer);
   }, [error]);
 
-  return (
+   return (
     <div className="search-wrapper-main">
       <div className={`search-pill ${isListening ? "active-glow" : ""}`}>
+         <input
+          type="file"
+          ref={fileInputRef}
+          id="file-upload"
+          style={{ display: "none" }}
+          className="hidden-file-input"
+          onChange={handleFileChange}/>
+
         <img src={SearchIcon} alt="Search" className="icon-search-left" />
         
         <input
@@ -127,22 +155,36 @@ const SearchBar = () => {
           payload: e.target.value })}
           onKeyDown={(e) => e.key === "Enter" && handleSearch()}
           disabled={loading}
-        />
+          aria-label="Search input"/>
 
         <div className="utility-icons-right">
           <button 
             className={`icon-btn-util ${isListening ? "is-mic-listening" : ""}`}
             onClick={handleVoiceSearch}
             type="button"
-          >
+            aria-label={isListening ? "Stop voice search" : "Start voice search"}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
           </button>
           
-          <button className="icon-btn-util" type="button">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.51a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+          <button
+           type="button"
+           aria-label="Attach a file"
+           className="icon-btn-util"
+           onClick={() => fileInputRef.current?.click()}> 
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.51a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
           </button>
-        </div>
+
+       </div>
+         {file && (
+        <div className="file-preview">
+        {file.name}
+       <button
+        aria-label="Remove attached file"
+        onClick={() => dispatch({ type: "CLEAR_FILE" })}>×
+      </button>
       </div>
+    )}
+       </div>
 
       {loading && <div className="loading-indicator"></div>}
       {error && <div className="error-toast">{error}</div>}

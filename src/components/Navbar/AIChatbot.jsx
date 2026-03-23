@@ -1,4 +1,6 @@
-import React, { useReducer, useRef, useEffect } from 'react';
+import React, { useReducer, useRef, useEffect, useContext } from 'react';
+import { AuthContext } from "../../context/AuthContext"; 
+import { useNavigate } from 'react-router-dom';
 import './AIChatbot.css';
 
 const initialState = {
@@ -11,91 +13,116 @@ const initialState = {
   ],
   input: '',
   isTyping: false,
-  sessionId: null, // Track session for the backend
+  sessionId: null,
 };
 
 function chatReducer(state, action) {
   switch (action.type) {
-    case 'UPDATE_INPUT': return { ...state, input: action.payload };
-    case 'SEND_MESSAGE': return { ...state, messages: [...state.messages, action.payload], input: '' };
-    case 'TOGGLE_TYPING': return { ...state, isTyping: action.payload };
-    case 'SET_SESSION': return { ...state, sessionId: action.payload };
-    case 'RESET_CHAT': return { ...initialState };
-    default: return state;
+    case 'UPDATE_INPUT':
+      return { ...state, input: action.payload };
+    case 'SEND_MESSAGE':
+      return { ...state, messages: [...state.messages, action.payload], input: '' };
+    case 'TOGGLE_TYPING':
+      return { ...state, isTyping: action.payload };
+    case 'SET_SESSION':
+      return { ...state, sessionId: action.payload };
+    case 'RESET_CHAT':
+      return { ...initialState };
+    default:
+      return state;
   }
 }
 
-const AIChatbot = ({ user = { name: "Lumen Ra", id: "user_123" } }) => {
+const AIChatbot = () => {
+  const { token, user: loggedInUser, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
   const [state, dispatch] = useReducer(chatReducer, initialState);
-  const scrollRef = useRef(null);
+  const scrollRef = useRef(null); 
 
+  const user = loggedInUser || { name: "Lumen Ra", id: "user_123" };
+  const initials = user.name
+    .split(' ')
+    .map(n => n[0])
+    .join('')
+    .toLowerCase()
+    .slice(0, 2);
+
+  // Auto-scroll
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   }, [state.messages, state.isTyping]);
 
-  const initials = user.name.split(' ').map(n => n[0]).join('').toLowerCase().slice(0, 2);
-
+  // Send a message
   const onSend = async (e, customText = null) => {
     if (e) e.preventDefault();
-    
+
     const messageToSend = customText || state.input;
     if (!messageToSend.trim()) return;
 
-    // 1. UI: Add User Message immediately
+    // Add user message
     dispatch({ 
       type: 'SEND_MESSAGE', 
       payload: { id: Date.now(), text: messageToSend, sender: 'user' } 
     });
-    
+
     dispatch({ type: 'TOGGLE_TYPING', payload: true });
 
+    const activeToken = token || localStorage.getItem("auth_token");
+
+    if (!activeToken) {
+      dispatch({ type: 'SEND_MESSAGE', payload: { id: Date.now() + 1, text: "Please log in to chat.", sender: 'bot' } });
+      dispatch({ type: 'TOGGLE_TYPING', payload: false });
+      return;
+    }
+
     try {
-      // 2. Fetch API with the required userId and sessionId
-      const response = await fetch('/api/ai/chat', {
+      const response = await fetch('https://lumenra.onrender.com/api/ai/chat', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${activeToken}`
+        },
         body: JSON.stringify({ 
           message: messageToSend,
-          userId: user.id, // REQUIRED BY YOUR BACKEND
-          sessionId: state.sessionId 
+          sessionId: state.sessionId
         })
       });
-      
+
       const data = await response.json();
-      
-      if (response.ok) {
-        // 3. UI: Add Bot Response from API
-        dispatch({ 
-          type: 'SEND_MESSAGE', 
-          payload: { id: Date.now() + 1, text: data.reply || data.message, sender: 'bot' } 
-        });
 
-        // 4. Update session ID if the backend provides one
-        if (data.sessionId) {
-          dispatch({ type: 'SET_SESSION', payload: data.sessionId });
-        }
-      } else {
-        throw new Error(data.error || "Failed to get response");
-      }
+      if (!response.ok) throw new Error(data.message || "Chat API failed");
 
-    } catch (err) {
-      console.error("API Error:", err);
+      if (data.sessionId) dispatch({ type: 'SET_SESSION', payload: data.sessionId });
+
       dispatch({ 
         type: 'SEND_MESSAGE', 
-        payload: { id: Date.now() + 1, text: "I'm having trouble connecting right now. Please try again later.", sender: 'bot' } 
+        payload: { id: Date.now() + 1, text: data.reply || "I don't have an answer right now.", sender: 'bot' } 
       });
+
+    } catch (err) {
+      console.error("Chat API Error:", err);
+      const errorMsg = err.message.includes("token") ? 
+        "Session expired. Please log in again." : 
+        "I'm having trouble connecting. Please try again.";
+      dispatch({ type: 'SEND_MESSAGE', payload: { id: Date.now() + 1, text: errorMsg, sender: 'bot' } });
     } finally {
       dispatch({ type: 'TOGGLE_TYPING', payload: false });
     }
+  };
+
+  const handleLogout = () => {
+    logout?.();
+    localStorage.removeItem("auth_token");
+    navigate("/", { replace: true });
   };
 
   return (
     <div className="chat-interface">
       <div className="chat-frame">
         <div className="alert-bar">
-          <span>⚠️</span> <strong>Privacy Notice:</strong> Your conversations are private. Use "Delete Session" to clear history.
+          <span>⚠️</span> <strong>Privacy Notice:</strong> Your conversations are private.
         </div>
 
         <header className="chat-nav">
@@ -109,9 +136,10 @@ const AIChatbot = ({ user = { name: "Lumen Ra", id: "user_123" } }) => {
               <small>● Online</small>
             </div>
           </div>
+
           <div className="nav-actions">
-            <button className="btn-clear" onClick={() => dispatch({ type: 'RESET_CHAT' })}>🗑️</button>
-            <button className="btn-logout">Log out</button>
+            <button className="btn-clear" title="Reset Chat" onClick={() => dispatch({ type: 'RESET_CHAT' })}>🗑️</button>
+            <button className="btn-logout" title="Logout" onClick={handleLogout}>Logout</button>
           </div>
         </header>
 
@@ -122,6 +150,7 @@ const AIChatbot = ({ user = { name: "Lumen Ra", id: "user_123" } }) => {
               <div className="msg-bubble">{m.text}</div>
             </div>
           ))}
+
           {state.isTyping && (
             <div className="msg-group bot">
               <div className="bot-avatar"></div>
@@ -142,8 +171,9 @@ const AIChatbot = ({ user = { name: "Lumen Ra", id: "user_123" } }) => {
               placeholder="Type your message..."
               value={state.input}
               onChange={(e) => dispatch({ type: 'UPDATE_INPUT', payload: e.target.value })}
+              disabled={state.isTyping}
             />
-            <button type="submit" className="btn-send">
+            <button type="submit" className="btn-send" disabled={state.isTyping || !state.input.trim()}>
               <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" fill="white"/></svg>
             </button>
           </form>
