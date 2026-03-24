@@ -173,3 +173,42 @@
   color: #8c67c7; /* Match the purple from your screenshot */
   text-decoration: none;
 }
+
+/* ================= Responsive ================= */
+
+@media (max-width: 768px) {
+  .login-page-wrapper {
+    padding: 10px;
+  }
+
+  .login-card {
+    padding: 32px 20px;
+  }
+
+  .welcome-title {
+    font-size: 1.8rem;
+  }
+
+  .social-buttons {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .social-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-card {
+    padding: 24px 16px;
+  }
+
+  .welcome-title {
+    font-size: 1.6rem;
+  }
+
+  .welcome-subtitle {
+    font-size: 0.9rem;
+  }
+}

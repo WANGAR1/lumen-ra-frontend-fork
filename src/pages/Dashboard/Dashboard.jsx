@@ -1,6 +1,8 @@
 import React, { useContext } from "react"; // Added useContext
 import { AuthContext } from "../../context/AuthContext"; // Import your context
 import "./Dashboard.css";
+import { Link } from "react-router-dom";
+import routes from "../../utils/routes";
 
 const Dashboard = () => {
   // 1. Access the user details from the AuthProvider
@@ -17,7 +19,9 @@ const Dashboard = () => {
         <div className="continue-card">
           <span>Continue where you left off</span>
           <h3>Module 2: Trauma Awareness</h3>
-          <button>Resume Learning →</button>
+          <Link to={routes.ModulesPage || routes.Modules} className="resume-link">
+            <button>Resume Learning →</button>
+          </Link>
         </div>
       </div>
 

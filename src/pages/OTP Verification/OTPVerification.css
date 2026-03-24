@@ -69,3 +69,51 @@
   font-weight: 700;
   cursor: pointer;
 }
+
+/* ================= Responsive ================= */
+
+@media (max-width: 768px) {
+  .otp-container {
+    padding: 15px;
+  }
+
+  .otp-card {
+    padding: 30px 24px;
+  }
+
+  .otp-input-group {
+    gap: 10px;
+  }
+
+  .otp-field {
+    width: 50px;
+    height: 55px;
+    font-size: 20px;
+  }
+
+  .verify-button {
+    height: 50px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .otp-card {
+    padding: 20px 16px;
+  }
+
+  .otp-input-group {
+    gap: 8px;
+  }
+
+  .otp-field {
+    width: 45px;
+    height: 50px;
+    font-size: 18px;
+  }
+
+  .verify-button {
+    height: 48px;
+    font-size: 15px;
+  }
+}

@@ -3,6 +3,7 @@ import './AdditionalResources.css';
 import EmpathyImg from '../../assets/Resources/empathy.svg';
 import TipsImg from '../../assets/Resources/tips.svg';
 import ChatbotImg from '../../assets/Resources/chatbot.svg';
+import { Link } from 'react-router-dom';
 
 const AdditionalResources = () => {
   const resources = [
@@ -51,9 +52,12 @@ const AdditionalResources = () => {
         </div>
 
         <div className="footer-action">
+        <Link to= "/Progress">
           <button className="track-progress-btn">
             Track your progress <span className="chevron">&rsaquo;</span>
           </button>
+        </Link>
+
         </div>
       </section>
     </div>

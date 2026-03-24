@@ -14,7 +14,7 @@ import AIChatbot from './components/Navbar/AIChatbot'
 import routes from './utils/routes'
 import Signup from './pages/Signup/Signup'
 import Login from './pages/Login/Login'
-import Contacts from './pages/Contacts/Contacts';
+import Contacts from './pages/Contacts/Contacts'
 import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
 import OTPVerification from './pages/OTP Verification/OTPVerification';
 import ResetPassword from './pages/Reset-Password/ResetPassword';
