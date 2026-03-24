@@ -1,0 +1,98 @@
+.lesson-page-container {
+  background-color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Inter', sans-serif;
+}
+
+/* --- Header & Progress Bar --- */
+.lesson-header {
+  padding: 40px 8% 20px;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 15px;
+}
+
+.module-label { font-size: 0.75rem; font-weight: 700; color: #888; letter-spacing: 0.5px; }
+.lesson-count { font-size: 1.4rem; color: #1b6d7a; margin-top: 5px; }
+.progress-percentage { font-size: 0.85rem; color: #666; font-weight: 600; }
+
+.progress-bar-container {
+  height: 6px;
+  background: #e8f2f2;
+  border-radius: 10px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #1b6d7a;
+  border-radius: 10px;
+}
+
+/* --- Layout Grid --- */
+.lesson-main {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 80px;
+  padding: 40px 8% 100px;
+  align-items: start;
+}
+
+.lesson-text-column h1 { font-size: 2.8rem; line-height: 1.1; margin-bottom: 30px; color: #2d2d2d; }
+.lesson-text-column p { font-size: 1.05rem; line-height: 1.6; color: #555; margin-bottom: 25px; }
+
+/* Key Understanding Box */
+.key-understanding-box {
+  background: #fdf2eb; /* Soft peach */
+  padding: 24px;
+  border-radius: 16px;
+  display: flex;
+  gap: 15px;
+  border-left: 4px solid #f39253;
+  margin-top: 40px;
+}
+
+.info-icon { font-size: 1.2rem; color: #8c5d41; }
+.info-content strong { color: #8c5d41; font-size: 1rem; display: block; margin-bottom: 6px; }
+.info-content p { font-size: 0.9rem; color: #8c5d41; margin: 0; line-height: 1.5; }
+
+/* Visual Column */
+.lesson-image-wrapper { border-radius: 24px; overflow: hidden; margin-bottom: 30px; }
+.lesson-image-wrapper img { width: 100%; display: block; }
+
+.quote-box {
+  background: #f8f9f9;
+  padding: 40px;
+  border-radius: 24px;
+  position: relative;
+}
+
+.quote-mark {
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  font-size: 5rem;
+  color: #e0e0e0;
+  font-family: serif;
+  line-height: 1;
+}
+
+.quote-box p { font-style: italic; color: #555; line-height: 1.6; font-size: 1.1rem; position: relative; z-index: 1; }
+.quote-box cite { display: block; margin-top: 15px; color: #1b6d7a; font-weight: 700; font-style: normal; font-size: 0.9rem; }
+
+/* --- Footer Navigation (Next is Mint/Active) --- */
+.footer-btn.next-active {
+  background-color: #e0f7f1;
+  color: #1b6d7a;
+  padding: 10px 20px;
+  border-radius: 12px;
+}
+
+/* (The rest of your module-footer-nav-static CSS from the previous page works here too) */

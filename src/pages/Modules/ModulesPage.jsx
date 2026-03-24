@@ -1,24 +1,79 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // 1. Import useNavigate
 import './ModulesPage.css';
 
-// Importing the SVGs from your assets folder
-import moduleImg from "../../assets/image.svg"; 
+// Mapping your specific SVG assets
+import gbvImg from "../../assets/motion.img.svg"; 
+import allyImg from "../../assets/image.svg";
+import womensImg from "../../assets/Womens.svg"; 
+import emotionsImg from "../../assets/emotions.svg";
+import traumaImg from "../../assets/trauma.svg";
+import appropriateImg from "../../assets/appropriate.svg";
 import certImg from "../../assets/cert.svg";
 
 const ModulesPage = () => {
+  const [activeFilter, setActiveFilter] = useState('All');
+  const navigate = useNavigate(); // 2. Initialize the navigate function
+
   const modules = [
-    { id: 1, title: "Understanding Gender-Based Violence", time: "20 min", desc: "Learn about GBV, myths vs realities, and its impact on women." },
-    { id: 2, title: "The Role of an Ally", time: "15 min", desc: "Understand the women's health challenges, its emotional and physical impact." },
-    { id: 3, title: "Women's non-clinical challenges", time: "20 min", desc: "Set boundaries, and challenging disclosures." },
-    { id: 4, title: "Emotional safety principles", time: "20 min", desc: "Practice active listening and creating a safe and supportive space." },
-    { id: 5, title: "Trauma awareness", time: "15 min", desc: "Engage in interactive scenarios, aid and make efficiently." },
-    { id: 6, title: "Appropriate response to disclosure", time: "20 min", desc: "Provide immediate, safe support when harm is disclosed." },
+    { 
+      id: 1, 
+      title: "Understanding Gender-Based Violence", 
+      img: gbvImg, 
+      time: "20 min", 
+      category: "Foundational",
+      path : "/IntroGBV", // This must match routes.IntroGBV in your App.jsx
+      desc: "Learn about GBV, myths vs realities, and its impact on women." 
+    },
+    { 
+      id: 2, 
+      title: "The Role of an Ally", 
+      img: allyImg, 
+      time: "15 min", 
+      category: "Practical Allyship Guides",
+      desc: "Understand the women's health challenges, its emotional and physical impact." 
+    },
+    { 
+      id: 3, 
+      title: "Women's non-clinical challenges", 
+      img: womensImg, 
+      time: "20 min", 
+      category: "Scenario-Based",
+      desc: "Set boundaries, and challenging disclosures." 
+    },
+    { 
+      id: 4, 
+      title: "Emotional safety principles", 
+      img: emotionsImg, 
+      time: "20 min", 
+      category: "Multimedia",
+      desc: "Practice active listening and creating a safe and supportive space." 
+    },
+    { 
+      id: 5, 
+      title: "Trauma awareness", 
+      img: traumaImg, 
+      time: "15 min", 
+      category: "Scenario-Based",
+      desc: "Engage in interactive scenarios, aid and make efficiently." 
+    },
+    { 
+      id: 6, 
+      title: "Appropriate response to disclosure", 
+      img: appropriateImg, 
+      time: "20 min", 
+      category: "Emergency",
+      desc: "Provide immediate, safe support when harm is disclosed." 
+    },
   ];
+
+  const filteredModules = modules.filter(m => 
+    activeFilter === 'All' || m.category === activeFilter
+  );
 
   return (
     <div className="modules-page-wrapper">
       
-      {/* --- HERO SECTION --- */}
       <header className="hero-section">
         <div className="hero-inner">
           <h1>Browse our Learning Modules</h1>
@@ -30,7 +85,6 @@ const ModulesPage = () => {
         </div>
       </header>
 
-      {/* --- SEARCH & PRIMARY FILTERS --- */}
       <section className="toolkit-controls">
         <div className="search-container">
           <span className="icon-search">🔍</span>
@@ -38,11 +92,15 @@ const ModulesPage = () => {
         </div>
 
         <div className="filter-row">
-          <button className="pill-btn active">All</button>
-          <button className="pill-btn">Scenario-Based</button>
-          <button className="pill-btn">Practical Allyship Guides</button>
-          <button className="pill-btn">Multimedia</button>
-          <button className="pill-btn">Emergency</button>
+          {['All', 'Scenario-Based', 'Practical Allyship Guides', 'Multimedia', 'Emergency'].map((cat) => (
+            <button 
+              key={cat}
+              className={`pill-btn ${activeFilter === cat ? 'active' : ''}`}
+              onClick={() => setActiveFilter(cat)}
+            >
+              {cat}
+            </button>
+          ))}
         </div>
 
         <div className="progress-tracker">
@@ -50,46 +108,41 @@ const ModulesPage = () => {
         </div>
       </section>
 
-      {/* --- SUB-NAV SECTION (Gray Bar) --- */}
       <section className="sub-nav-bar">
         <div className="sub-nav-top">
-          <h3 className="section-title">Modules</h3>
+          <h3 className="section-title">Modules ({filteredModules.length})</h3>
           <div className="tag-indicators">
             <span>Expert-reviewed</span>
             <span>Scenario-Based</span>
             <span>Self-paced</span>
           </div>
         </div>
-        <div className="filter-row secondary">
-          <button className="pill-btn active">All</button>
-          <button className="pill-btn">Partner NGOs</button>
-          <button className="pill-btn">Gender Experts</button>
-          <button className="pill-btn">GBV Experts</button>
-          <button className="pill-btn">Academic Advisors</button>
-          <button className="pill-btn">Referrals</button>
-        </div>
       </section>
 
-      {/* --- MODULES GRID --- */}
       <main className="modules-grid">
-        {modules.map((m) => (
+        {filteredModules.map((m) => (
           <div key={m.id} className="module-card">
             <div className="card-image-box">
-              <img src={moduleImg} alt={m.title} className="card-thumb" />
+              <img src={m.img} alt={m.title} className="card-thumb" />
             </div>
             <div className="card-content">
               <h4>{m.title}</h4>
               <p>{m.desc}</p>
               <div className="card-footer">
                 <span className="duration-text">{m.time}</span>
-                <button className="btn-start-module">Start Module</button>
+                {/* 3. Added the onClick handler here */}
+                <button 
+                  className="btn-start-module"
+                  onClick={() => m.path ? navigate(m.path) : alert("Module coming soon!")}
+                >
+                  Start Module
+                </button>
               </div>
             </div>
           </div>
         ))}
       </main>
 
-      {/* --- GUIDED LEARNING JOURNEY (Blue-ish Section) --- */}
       <section className="learning-journey">
         <div className="journey-text">
           <h2>Guided Learning Journey, Flexible Learning Pace</h2>
@@ -105,7 +158,6 @@ const ModulesPage = () => {
         </div>
       </section>
 
-      {/* --- FINAL ACTION BANNER --- */}
       <section className="action-banner">
         <h2>Transform Allyship from Intention to Action</h2>
         <p>Join the Digital Allyship Toolkit and gain the skills to support women safely and confidently</p>

@@ -26,7 +26,6 @@ const ConfidenceSection = () => {
         <div className="confidence-right">
           <img src={ConfidenceImage} alt="Confidence illustration" />
           <div className="stats-badge-container">
-            <StatsBadge />
           </div>
         </div>
       </div>

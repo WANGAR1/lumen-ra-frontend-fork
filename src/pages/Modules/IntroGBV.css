@@ -1,0 +1,187 @@
+:root {
+  --primary-teal: #1b6d7a;
+  --active-mint: #e0f7f1; 
+  --text-gray: #888888;
+  --emergency-red: #c05c5c;
+  --bg-white: #ffffff;
+  --bg-off-white: #f7f9f9;
+  --safety-peach: #fdf2eb;
+  --safety-text: #8c5d41;
+}
+
+/* --- Main Layout --- */
+.gbv-module-container {
+  background-color: var(--bg-white);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Inter', -apple-system, sans-serif;
+  overflow-x: hidden; /* Prevents horizontal scroll */
+}
+
+/* --- Top Navigation --- */
+.module-top-nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 8%;
+  border-bottom: 1px solid #f0f0f0;
+}
+.nav-left { display: flex; gap: 30px; font-weight: 600; color: #888; }
+.nav-left span.active { color: var(--primary-teal); border-bottom: 2px solid var(--primary-teal); padding-bottom: 5px; }
+
+/* --- Hero Section --- */
+.gbv-hero {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 60px;
+  padding: 60px 8%;
+  align-items: center;
+}
+.hero-title { font-size: 3.5rem; font-weight: 800; line-height: 1.1; color: #1a1a1a; margin-bottom: 20px; }
+.highlight-text { color: var(--primary-teal); }
+.hero-description { font-size: 1.05rem; line-height: 1.6; color: #555; max-width: 580px; margin-bottom: 35px; }
+
+.module-badge {
+  background: var(--soft-teal-bg);
+  color: var(--primary-teal);
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.75rem;
+  display: inline-block;
+  margin-bottom: 25px;
+}
+
+.start-lesson-btn {
+  background: var(--primary-teal);
+  color: white;
+  padding: 14px 30px;
+  border-radius: 50px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+}
+
+/* --- Hero Visual & Glass Card --- */
+.hero-visual { position: relative; }
+.main-image-wrapper { border-radius: 28px; overflow: hidden; background: #fcece2; }
+.main-image-wrapper img { width: 100%; display: block; object-fit: contain; }
+
+.glass-info-card {
+  position: absolute;
+  bottom: 25px;
+  left: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  padding: 18px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border: 1px solid rgba(255,255,255,0.4);
+}
+
+/* --- Objectives Section --- */
+.objectives-section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  padding: 0 8%;
+  margin-bottom: 50px;
+}
+.objective-card { background: var(--bg-off-white); padding: 40px; border-radius: 24px; }
+.objective-card h3 { font-size: 1.3rem; margin: 20px 0 10px; font-weight: 700; }
+.objective-card p { color: #666; font-size: 0.9rem; line-height: 1.5; }
+
+/* --- Safety Banner --- */
+.safety-alert-wrapper { display: flex; justify-content: center; padding: 20px 8% 40px; }
+.safety-pill {
+  background: var(--safety-peach);
+  padding: 20px 40px;
+  border-radius: 25px;
+  display: flex; gap: 20px; align-items: center;
+  max-width: 850px;
+}
+
+/* --- THE PILL FOOTER REPAIR (VISIBLE & CONTAINED) --- */
+.module-footer-nav-static {
+  position: relative;
+  margin: 60px auto 0; 
+  
+  /* CRITICAL FIXES */
+  box-sizing: border-box; /* Includes padding in width calculation */
+  overflow: visible;     /* Ensures icons don't get cut off */
+
+  height: 100px; 
+  width: 100%;
+  max-width: 1000px;
+  background: white;
+  
+  /* Matches image: Rounded top, flat bottom */
+  border-radius: 40px 40px 0 0; 
+  
+  /* Flexbox logic */
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  
+  /* Padding enough to keep items away from the curves */
+  padding: 0 50px; 
+  
+  border: 1px solid #f0f0f0;
+  border-bottom: none;
+  box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.04);
+}
+
+.footer-btn { 
+  display: flex;
+  flex-direction: row; /* Icon above text */
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-gray);
+  gap: 4px;
+  flex-shrink: 0; /* Prevents buttons from squishing */
+}
+
+/* Overview - Active State Bubble */
+.footer-btn.overview.active { 
+  flex-direction: row !important; /* Side by side */
+  background-color: var(--active-mint); 
+  color: var(--primary-teal);
+  padding: 10px 20px;
+  border-radius: 12px;
+  gap: 10px;
+}
+
+.footer-btn span:last-child {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+/* Emergency Styling - Fixed Visibility */
+.footer-btn.emergency { 
+  color: var(--emergency-red); 
+  font-weight: 700;
+}
+
+.footer-btn.emergency .icon {
+  font-size: 1.4rem; /* Larger icon for visibility */
+}
+
+.nav-arrow { font-size: 1.1rem; color: #444; }
+
+/* --- Responsive --- */
+@media (max-width: 1024px) {
+  .gbv-hero, .objectives-section { grid-template-columns: 1fr; text-align: center; }
+  .module-footer-nav-static { 
+    width: 95%; 
+    padding: 0 20px; 
+    height: 65px;
+    border-radius: 25px 25px 0 0;
+  }
+}

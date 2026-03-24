@@ -1,0 +1,77 @@
+.lesson-page-container { background: #fff; font-family: 'Inter', sans-serif; }
+
+/* --- Hero Layout --- */
+.lesson-header-v4 {
+  display: flex;
+  padding: 60px 8%;
+  gap: 5%;
+  align-items: center;
+}
+.header-content-v4 { flex: 1.2; }
+.lesson-tag { font-size: 0.7rem; font-weight: 700; color: #888; letter-spacing: 1px; }
+.header-content-v4 h1 { font-size: 3.2rem; margin: 15px 0; line-height: 1.1; color: #333; }
+.subtitle { font-size: 1.1rem; color: #666; margin-bottom: 40px; line-height: 1.5; }
+
+.progress-section-v4 { max-width: 500px; }
+.progress-text-v4 { display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 700; color: #1b6d7a; margin-bottom: 8px; }
+.progress-bar-v4 { height: 6px; background: #e0eded; border-radius: 10px; }
+.progress-fill-v4 { height: 100%; background: #1b6d7a; border-radius: 10px; }
+
+.header-image-v4 { flex: 0.8; border-radius: 30px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+.header-image-v4 img { width: 100%; display: block; }
+
+/* --- Middle Grid --- */
+.middle-content-v4 {
+  display: grid;
+  grid-template-columns: 1.4fr 0.6fr;
+  gap: 30px;
+  padding: 0 8% 60px;
+}
+.social-norms-card, .power-dynamics-card {
+  background: #f8f9f9;
+  padding: 40px;
+  border-radius: 24px;
+}
+
+.icon-box-teal { background: #e0f7f1; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 8px; margin-bottom: 20px; }
+.icon-box-orange { background: #fdf2eb; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 8px; margin-bottom: 20px; }
+
+.check-list-v4 { list-style: none; padding: 0; margin-top: 20px; }
+.check-list-v4 li { display: flex; gap: 12px; font-size: 0.9rem; color: #555; margin-bottom: 12px; line-height: 1.4; }
+.check-icon { color: #1b6d7a; font-weight: bold; }
+
+.critical-insight { background: #fdf2eb; padding: 20px; border-radius: 12px; margin-top: 20px; }
+.critical-insight strong { font-size: 0.7rem; color: #8c5d41; letter-spacing: 0.5px; }
+.critical-insight p { font-size: 0.85rem; font-style: italic; color: #8c5d41; margin-top: 8px; }
+
+/* --- Dark Systemic Section --- */
+.systemic-barriers-v4 {
+  background: #0d6363;
+  margin: 0 8%;
+  border-radius: 32px;
+  display: flex;
+  color: white;
+  overflow: hidden;
+}
+.barriers-text { flex: 1.2; padding: 60px; }
+.barriers-text h2 { font-size: 2.2rem; margin-bottom: 20px; }
+.barriers-text p { color: #a3cccc; line-height: 1.6; margin-bottom: 40px; }
+
+.sub-barriers-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.sub-barrier { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; }
+.mini-icon { display: block; margin-bottom: 10px; }
+.sub-barrier h4 { font-size: 0.9rem; margin-bottom: 8px; }
+.sub-barrier p { font-size: 0.75rem; color: #a3cccc; margin: 0; line-height: 1.4; }
+
+.barriers-image { flex: 0.8; }
+.barriers-image img { width: 100%; height: 100%; object-fit: cover; }
+
+/* --- Action Area --- */
+.action-footer-v4 { text-align: center; padding: 60px 0 120px; }
+.mark-complete-btn { background: #0d6363; color: white; border: none; padding: 16px 40px; border-radius: 50px; font-weight: 700; cursor: pointer; }
+.next-hint { font-size: 0.8rem; color: #888; margin-top: 15px; }
+
+@media (max-width: 1024px) {
+  .lesson-header-v4, .middle-content-v4, .systemic-barriers-v4 { flex-direction: column; grid-template-columns: 1fr; }
+  .header-image-v4, .barriers-image { display: none; }
+}

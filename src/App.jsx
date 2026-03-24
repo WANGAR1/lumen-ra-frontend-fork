@@ -19,6 +19,13 @@ import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
 import OTPVerification from './pages/OTP Verification/OTPVerification';
 import ResetPassword from './pages/Reset-Password/ResetPassword';
 import ModulesPage from './pages/Modules/ModulesPage'
+import IntroGBV from './pages/Modules/IntroGBV';
+import GBVLesson1 from './pages/Modules/GBVLesson1'
+import GBVLesson2 from './pages/Modules/GBVLesson2'
+import GBVLesson3 from './pages/Modules/GBVLesson3'
+import GBVLesson4 from './pages/Modules/GBVLesson4'
+import GBVlesson5 from './pages/Modules/GBVLesson5' 
+import Certificate from './components/GBV/Certificate';
 
 
 function App() {
@@ -53,6 +60,15 @@ function App() {
         <Route path = {routes.OTPVerification} element = {<OTPVerification />}></Route>
         <Route path = {routes.ResetPassword} element = {<ResetPassword />}></Route>
         <Route path = {routes.Quiz} element = {<Quiz/>}></Route>
+        <Route path = {routes.ModulesPage} element = {<ModulesPage/>}></Route>
+        <Route path = {routes.GBVLesson2} element = {<GBVLesson2/>}></Route>
+        <Route path = {routes.IntroGBV} element = {<IntroGBV/>}></Route>
+        <Route path = {routes.GBVLesson1} element = {<GBVLesson1/>}></Route>
+        <Route path = {routes.GBVLesson3} element = {<GBVLesson3/>}></Route>
+        <Route path = {routes.GBVLesson4} element = {<GBVLesson4/>}></Route>
+        <Route path = {routes.GBVLesson3} element = {<GBVLesson3/>}></Route>
+        <Route path = {routes.GBVlesson5} element = {<GBVlesson5/>}></Route>  
+        <Route path = {routes.Certificate} element = {<Certificate/>}></Route>
         <Route path = {routes.ModulesPage} element = {<ModulesPage/>}></Route>
 
       </Routes>

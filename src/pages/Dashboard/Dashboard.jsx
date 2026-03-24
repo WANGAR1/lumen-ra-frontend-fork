@@ -1,137 +1,124 @@
-import React, { useContext } from "react"; // Added useContext
-import { AuthContext } from "../../context/AuthContext"; // Import your context
-import "./Dashboard.css";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import { Link, useNavigate } from "react-router-dom";
 import routes from "../../utils/routes";
+import "./Dashboard.css";
 
 const Dashboard = () => {
-  // 1. Access the user details from the AuthProvider
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  // Dynamic Logic: If user has no data, default to 0/Empty
+  const progress = user?.progress || 0;
+  const modulesCompleted = user?.completedCount || 0;
+  const confidenceScore = user?.confidence || 0;
+  const badges = user?.badges || [];
 
   return (
-    <div className="dashboard">
-      {/* Header */}
-      <div className="welcome-card">
-        {/* 2. Replaced 'Ibrahim' with dynamic name from login */}
-        <h1>Welcome back, {user?.fullName || user?.name || "Explorer"}!</h1>
-        <p>Continue your journey toward becoming a better ally</p>
+    <div className="dashboard-wrapper">
+      {/* Dynamic Header */}
+      <header className="welcome-card">
+        <div className="welcome-text">
+          <h1>Welcome, {user?.fullName?.split(" ")[0] || "Explorer"}!</h1>
+          <p>
+            {progress > 0 
+              ? "Your journey toward allyship is in motion." 
+              : "Every great change begins with a single step. Start your first module below."}
+          </p>
+        </div>
 
         <div className="continue-card">
-          <span>Continue where you left off</span>
-          <h3>Module 2: Trauma Awareness</h3>
-          <Link to={routes.ModulesPage || routes.Modules} className="resume-link">
-            <button>Resume Learning →</button>
-          </Link>
+          <span>{progress > 0 ? "Pick up where you left off" : "Ready to begin?"}</span>
+          <h3>{user?.currentModule || "Module 1: Understanding GBV"}</h3>
+          <button onClick={() => navigate(routes.IntroGBV)}>
+            {progress > 0 ? "Resume Learning →" : "Start Module 1 →"}
+          </button>
         </div>
-      </div>
+      </header>
 
       {/* Stats Row */}
-      <div className="stats-row">
-        <div className="card">
+      <section className="stats-row">
+        {/* Completion Circle */}
+        <div className="stat-card">
           <h4>Overall Completion</h4>
-          <h2>70%</h2>
-          <div className="progress-circle">
-            <span>70%</span>
+          <h2>{progress}%</h2>
+          <div 
+            className="progress-circle" 
+            style={{ background: `conic-gradient(#1b6d7a ${progress}%, #e0eded 0)` }}
+          >
+            <div className="circle-inner">
+              <span>{progress}%</span>
+            </div>
           </div>
-          <p>7 of 10 modules completed</p>
+          <p>{modulesCompleted} of 10 modules done</p>
         </div>
 
-        <div className="card">
+        {/* Confidence Bar */}
+        <div className="stat-card">
           <h4>Confidence Score</h4>
-          <h2>4.2/5</h2>
-          <div className="bar">
-            <div className="bar-fill" style={{ width: "84%" }}></div>
+          <h2>{confidenceScore > 0 ? `${confidenceScore}/5` : "N/A"}</h2>
+          <div className="bar-container">
+            <div className="bar-fill" style={{ width: `${(confidenceScore / 5) * 100}%` }}></div>
           </div>
-          <p>+50% growth since start</p>
+          <p>{confidenceScore > 0 ? "Growth since pre-assessment" : "Take the assessment to see growth"}</p>
         </div>
 
-        <div className="card">
+        {/* Badges Section */}
+        <div className="stat-card">
           <h4>Active Badges</h4>
-          <h2>8</h2>
-          <div className="badges">
-            <span>Active Listener</span>
-            <span>Safe Responder</span>
-            <span>Cultural Ally</span>
-            <span>Trauma Aware</span>
-            <span>Reflective</span>
+          <h2>{badges.length}</h2>
+          <div className="badges-container">
+            {badges.length > 0 ? (
+              badges.map((badge, i) => <span key={i} className="badge-tag">{badge}</span>)
+            ) : (
+              <div className="empty-badges">No badges earned yet</div>
+            )}
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Knowledge Growth */}
-      <div className="knowledge-card">
+      {/* Knowledge Growth Empty State */}
+      <section className="knowledge-section">
         <h2>Knowledge Growth</h2>
-        <p>Compare your pre-assessment with current performance</p>
-
-        <div className="donut"></div>
-      </div>
-
-      {/* Recent Modules */}
-      <div className="recent">
-        <div className="recent-header">
-          <h2>Recent Modules</h2>
-          <span>View All</span>
+        <div className={`chart-container ${progress === 0 ? "is-empty" : ""}`}>
+          {progress > 0 ? (
+            <div className="placeholder-chart">Chart Rendering...</div>
+          ) : (
+            <p>Visual data will appear here once you complete your first module.</p>
+          )}
         </div>
+      </section>
 
+      {/* Recent Modules List */}
+      <section className="recent-modules">
+        <div className="section-header">
+          <h2>Available Modules</h2>
+          <Link to={routes.ModulesPage} className="view-all">View All</Link>
+        </div>
         <div className="module-grid">
-          <ModuleCard
+          <ModuleCard 
             title="Introduction to Allyship"
-            desc="Understanding the fundamentals of being an effective ally"
-            time="45 min"
-            lessons="5 lessons"
-            progress={100}
-            status="Completed"
+            status={progress >= 100 ? "Completed" : "Start"}
+            percent={progress}
           />
-
-          <ModuleCard
-            title="Trauma Awareness"
-            desc="Recognizing and responding to trauma with sensitivity"
-            time="60 min"
-            lessons="6 lessons"
-            progress={60}
-            status="In Progress"
-          />
-
-          <ModuleCard
-            title="Cultural Competency"
-            desc="Building awareness and skills for cross-cultural engagement"
-            time="50 min"
-            lessons="7 lessons"
-            progress={30}
-            status="In Progress"
-          />
+          <ModuleCard title="Trauma Awareness" status="Locked" percent={0} />
+          <ModuleCard title="Cultural Competency" status="Locked" percent={0} />
         </div>
-      </div>
+      </section>
     </div>
   );
 };
 
-const ModuleCard = ({ title, desc, time, lessons, progress, status }) => {
-  return (
-    <div className="module-card">
-      <div className="module-top">
-        <span className={`status ${status === "Completed" ? "done" : ""}`}>
-          {status}
-        </span>
-      </div>
-
-      <h3>{title}</h3>
-      <p>{desc}</p>
-
-      <div className="module-meta">
-        <span>{time}</span>
-        <span>{lessons}</span>
-      </div>
-
-      <div className="module-progress">
-        <div
-          className="module-progress-fill"
-          style={{ width: `${progress}%` }}
-        ></div>
-      </div>
-      <span className="percent">{progress}%</span>
+// Sub-component for Module Cards
+const ModuleCard = ({ title, status, percent }) => (
+  <div className={`module-card ${status === "Locked" ? "locked" : ""}`}>
+    <span className={`status-tag ${status.toLowerCase()}`}>{status}</span>
+    <h3>{title}</h3>
+    <div className="mini-progress-bar">
+      <div className="mini-fill" style={{ width: `${percent}%` }}></div>
     </div>
-  );
-};
+    <span className="mini-percent">{percent}% Complete</span>
+  </div>
+);
 
 export default Dashboard;

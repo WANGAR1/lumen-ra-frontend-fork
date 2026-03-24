@@ -1,0 +1,103 @@
+.lesson-content-wide {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 8% 120px;
+}
+
+.lesson-main-title { font-size: 3rem; font-weight: 800; color: #1a1a1a; margin-top: 5px; }
+
+.intro-text-box {
+  background: #f4f7f7;
+  padding: 40px;
+  border-radius: 24px;
+  margin-bottom: 50px;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* --- Patterns Grid --- */
+.patterns-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  margin-bottom: 60px;
+}
+
+.pattern-card {
+  background: white;
+  padding: 40px 30px;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+  text-align: left;
+}
+
+.icon-circle {
+  width: 45px;
+  height: 45px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.icon-circle.teal { background: #e0f7f1; }
+.icon-circle.blue { background: #e1f5fe; }
+.icon-circle.orange { background: #fff3e0; }
+
+.pattern-card h3 { font-size: 1.4rem; margin-bottom: 15px; }
+.pattern-desc { font-size: 0.9rem; color: #777; line-height: 1.5; min-height: 80px; }
+
+.pattern-divider { height: 1px; background: #f0f0f0; margin: 20px 0; }
+
+.pattern-bullets { list-style: none; padding: 0; }
+.pattern-bullets li { 
+  font-size: 0.85rem; 
+  color: #555; 
+  margin-bottom: 10px; 
+  display: flex; 
+  align-items: center; 
+  gap: 10px; 
+}
+.check-circle { color: #1b6d7a; font-size: 0.8rem; }
+
+/* --- Agency Banner --- */
+.agency-banner {
+  background: #ebf2f2;
+  padding: 50px;
+  border-radius: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.agency-text { max-width: 600px; z-index: 2; }
+.agency-text h2 { color: #1b6d7a; font-size: 2rem; margin-bottom: 15px; }
+.agency-text p { color: #5a7d7d; line-height: 1.6; margin-bottom: 20px; }
+
+.text-link-btn {
+  background: none; border: none; color: #1b6d7a; font-weight: 700; cursor: pointer; padding: 0;
+}
+
+.shield-bg-icon {
+  font-size: 8rem;
+  color: #d1dfdf;
+  position: absolute;
+  right: 40px;
+  opacity: 0.5;
+}
+
+.action-footer { text-align: center; margin-top: 60px; }
+.mark-complete-btn-large {
+  background: #0d6363; color: white; border: none; padding: 18px 60px; border-radius: 50px; font-weight: 700; cursor: pointer;
+}
+.next-hint { margin-top: 15px; font-size: 0.85rem; color: #888; }
+
+@media (max-width: 900px) {
+  .patterns-grid { grid-template-columns: 1fr; }
+  .agency-banner { flex-direction: column; text-align: center; }
+  .shield-bg-icon { position: relative; right: 0; margin-top: 20px; }
+}

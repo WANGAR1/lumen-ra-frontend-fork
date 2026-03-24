@@ -34,6 +34,7 @@ const HeroSection = () => {
           <div className="hero-right">
           <img src={HeroImage} alt="Hero illustration" />
           <div className="stats-badge-container">
+
             <StatsBadge />
           </div>
         </div>
