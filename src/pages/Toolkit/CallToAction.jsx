@@ -1,10 +1,8 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom'; // 1. Import useNavigate
 import './CallToAction.css';
+import { Link } from 'react-router-dom';
 
 const CallToAction = () => {
-  const navigate = useNavigate(); // 2. Initialize the navigate function
-
   return (
     <div className="cta-page-wrapper">
       <section className="cta-card">
@@ -15,19 +13,18 @@ const CallToAction = () => {
         </p>
 
         <div className="cta-button-group">
-          <button 
-            className="btn-get-started"
-            onClick={() => navigate('/signup')} // Optional: Navigate to signup
-          >
+
+           <Link to= "/Signup">
+          <button className="btn-get-started">
             Get Started
           </button>
-          
-          <button 
-            className="btn-confidence-check"
-            onClick={() => navigate('/personalitycheck')} // 3. Link to your personality check route
-          >
+          </Link>
+
+          <Link to= "/PersonalityCheck">
+          <button className="btn-confidence-check">
             Take Confidence Check
           </button>
+           </Link>
         </div>
       </section>
     </div>

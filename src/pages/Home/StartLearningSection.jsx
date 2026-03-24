@@ -49,7 +49,14 @@ const handleStartLearning = () => {
               Track your progress and receive a digital certificate to recognise
               your commitment to informed allyship.
             </p>
+
+
+          <Link to="/Modules">
+            <Button label="Start Learning" variant="primary"/>
+          </Link>
+
             <Button label = "Start Learning" variant="primary" onClick={handleStartLearning}/>
+
           </div>
 
           <div className = "certificate-right">
