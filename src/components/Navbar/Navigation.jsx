@@ -1,5 +1,6 @@
-import { NavLink } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { AuthContext } from "../../context/AuthContext"; 
 import "./Navigation.css";
 import Button from "../Buttons/Button";
 import routes from "../../utils/routes";
@@ -7,26 +8,29 @@ import logo from "../../assets/LOGO.svg";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
+  // Access user state and logout function
+  const { user, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const toggleMenu = () => setIsMenuOpen(prev => !prev);
   const closeMenu = () => setIsMenuOpen(false);
 
-  // --- Mobile-Only Auto-Close Logic ---
+  // Auto-close mobile menu logic
   useEffect(() => {
     let timer;
-    
-    // Check if menu is open AND if we are on a mobile/tablet screen size
     const isMobile = window.innerWidth <= 1024;
-
     if (isMenuOpen && isMobile) {
-      timer = setTimeout(() => {
-        setIsMenuOpen(false);
-        console.log("Mobile menu auto-closed after 10s");
-      }, 10000); 
+      timer = setTimeout(() => setIsMenuOpen(false), 10000); 
     }
-
     return () => clearTimeout(timer);
   }, [isMenuOpen]);
+
+  const handleLogout = () => {
+    logout();
+    closeMenu();
+    navigate(routes.Home);
+  };
 
   return (
     <nav className="navbar">
@@ -44,17 +48,47 @@ const Navigation = () => {
 
         {/* MIDDLE: Links */}
         <ul className={`nav-links ${isMenuOpen ? "open" : ""}`}>
-          <li><NavLink to={routes.Home} onClick={closeMenu} className={({ isActive }) => (isActive ? "active-link" : "")}>Home</NavLink></li>
-          <li><NavLink to={routes.About} onClick={closeMenu} className={({ isActive }) => (isActive ? "active-link" : "")}>About</NavLink></li>
-          <li><NavLink to={routes.Progress} onClick={closeMenu} className={({ isActive }) => (isActive ? "active-link" : "")}>Progress</NavLink></li>
-          <li><NavLink to={routes.Toolkit} onClick={closeMenu} className={({ isActive }) => (isActive ? "active-link" : "")}>Toolkit</NavLink></li>
+          <li>
+            <NavLink to={routes.Home} onClick={closeMenu} className={({ isActive }) => (isActive ? "active-link" : "")}>
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to={routes.About} onClick={closeMenu} className={({ isActive }) => (isActive ? "active-link" : "")}>
+              About
+            </NavLink>
+          </li>
+
+          {/* --- CONDITIONAL LINK: Show Progress ONLY if user exists --- */}
+          {user && (
+            <li>
+              <NavLink to={routes.Progress} onClick={closeMenu} className={({ isActive }) => (isActive ? "active-link" : "")}>
+                Progress
+              </NavLink>
+            </li>
+          )}
+
+          <li>
+            <NavLink to={routes.Toolkit} onClick={closeMenu} className={({ isActive }) => (isActive ? "active-link" : "")}>
+              Toolkit
+            </NavLink>
+          </li>
         </ul>
 
         {/* RIGHT: Actions */}
         <div className="navbar-actions">
-          <NavLink to="/Login">
-            <Button label="Login" variant="secondary" />
-          </NavLink>
+          {user ? (
+            <Button 
+              label="Logout" 
+              variant="secondary" 
+              onClick={handleLogout} 
+            />
+          ) : (
+            <NavLink to="/Login">
+              <Button label="Login" variant="secondary" />
+            </NavLink>
+          )}
+
           <NavLink to="/AIChatbot">
             <Button label="Let's Chat" variant="primary" />
           </NavLink>

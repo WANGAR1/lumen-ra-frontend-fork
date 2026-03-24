@@ -1,0 +1,130 @@
+.certificate-page {
+  background: #000; /* Matches the dark background in your screenshot */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 20px;
+}
+
+.cert-viewer-container {
+  position: relative;
+  background: #e5e7e9; /* The light gray surface the certificate sits on */
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+}
+
+/* Completion Rate Badge */
+.completion-badge-orange {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  background: #f38d49;
+  color: white;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  z-index: 10;
+}
+.completion-badge-orange .percent { font-size: 1.5rem; font-weight: 800; font-family: serif; }
+.completion-badge-orange .label { font-size: 0.6rem; text-transform: uppercase; font-weight: 600; }
+
+/* The Certificate Paper */
+.certificate-paper {
+  background: #fffcf5; /* Parchment white */
+  width: 850px;
+  padding: 30px;
+  position: relative;
+  border: 1px solid #d4d4d4;
+}
+
+.cert-inner-border {
+  border: 4px double #8b9d83; /* Muted green border from image */
+  height: 100%;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Typography */
+.cert-main-title {
+  font-family: 'Times New Roman', serif;
+  font-size: 3rem;
+  color: #2c3e44;
+  margin: 20px 0 10px;
+}
+
+.cert-recipient-name {
+  font-family: 'Times New Roman', serif;
+  font-size: 3.2rem;
+  color: #1a1a1a;
+  margin: 10px 0;
+}
+
+.cert-present-text { font-style: italic; color: #666; font-size: 1.1rem; }
+.cert-description-text { max-width: 600px; line-height: 1.6; color: #555; margin: 20px 0; }
+
+/* Signatures & Seal */
+.cert-signatures-row {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 40px;
+}
+
+.sig-block {
+  width: 180px;
+  display: flex;
+  flex-direction: column;
+}
+.sig-handwritten { font-family: 'Brush Script MT', cursive; font-size: 1.8rem; color: #2c3e44; }
+.sig-line { border-bottom: 1px solid #8b9d83; margin: 5px 0; }
+.sig-block strong { font-size: 0.8rem; }
+.sig-block span { font-size: 0.7rem; color: #777; }
+
+.gold-seal {
+  width: 90px;
+  height: 90px;
+  background: radial-gradient(circle, #e6c27a 0%, #b38b3d 100%);
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  position: relative;
+}
+.gold-seal::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  border: 2px dashed rgba(255,255,255,0.3);
+  border-radius: 50%;
+}
+
+/* Corner Assets (Simplified using CSS) */
+.corner {
+  position: absolute; width: 60px; height: 60px;
+  border: 2px solid transparent;
+}
+.top-left { top: 10px; left: 10px; border-top-color: #8b9d83; border-left-color: #8b9d83; }
+.top-right { top: 10px; right: 10px; border-top-color: #8b9d83; border-right-color: #8b9d83; }
+.bottom-left { bottom: 10px; left: 10px; border-bottom-color: #8b9d83; border-left-color: #8b9d83; }
+.bottom-right { bottom: 10px; right: 10px; border-bottom-color: #8b9d83; border-right-color: #8b9d83; }
+
+/* Buttons */
+.cert-actions { margin-top: 30px; display: flex; gap: 15px; }
+.print-btn { background: #1b6d7a; color: white; padding: 12px 25px; border-radius: 8px; border: none; font-weight: bold; cursor: pointer; }
+.back-btn { background: transparent; color: white; border: 1px solid white; padding: 12px 25px; border-radius: 8px; cursor: pointer; }
+
+@media print {
+  .no-print, .completion-badge-orange { display: none !important; }
+  .certificate-page { background: white; padding: 0; }
+  .cert-viewer-container { background: white; box-shadow: none; padding: 0; }
+}

@@ -1,0 +1,59 @@
+.lesson-page-container { background: #fff; font-family: 'Inter', sans-serif; padding-bottom: 50px; }
+
+/* --- Hero Layout --- */
+.lesson-header-v5 { display: flex; padding: 60px 8%; gap: 60px; align-items: center; }
+.header-content-v5 { flex: 1; }
+.header-content-v5 h1 { font-size: 3.5rem; margin: 15px 0; line-height: 1; font-weight: 800; color: #333; }
+
+.progress-section-v5 { margin-top: 40px; }
+.progress-text-v5 { display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 800; color: #1b6d7a; margin-bottom: 10px; }
+.progress-bar-v5 { height: 6px; background: #e0eded; border-radius: 10px; }
+.progress-fill-v5 { height: 100%; background: #1b6d7a; }
+
+.header-image-v5 { flex: 1; position: relative; }
+.header-image-v5 img { width: 100%; border-radius: 40px; }
+.floating-safety-card {
+  position: absolute; bottom: 30px; left: -40px; background: white;
+  padding: 25px; border-radius: 20px; width: 280px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+.floating-safety-card p { font-size: 0.8rem; color: #666; margin-top: 8px; line-height: 1.4; }
+
+/* --- Action Grid --- */
+.action-grid-v5 { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 30px; padding: 0 8% 60px; }
+.safety-guide-card { background: #fdf2eb; padding: 40px; border-radius: 30px; }
+.safety-guide-card h3 span { color: #8c5d41; }
+.safety-guide-card p { font-size: 0.95rem; color: #8c5d41; line-height: 1.6; margin: 20px 0; }
+
+.safety-contacts-v5 { display: flex; gap: 20px; }
+.contact-pill { background: white; padding: 15px 25px; border-radius: 15px; display: flex; gap: 15px; align-items: center; flex: 1; }
+.contact-pill strong { font-size: 0.9rem; color: #333; }
+.contact-pill p { font-size: 0.75rem; color: #888; margin: 0; }
+
+.action-steps-card { background: #f8f9f9; padding: 40px; border-radius: 30px; }
+.steps-list { list-style: none; padding: 0; margin-top: 25px; }
+.steps-list li { display: flex; gap: 15px; margin-bottom: 18px; font-size: 0.9rem; color: #555; align-items: center; }
+.step-num { width: 24px; height: 24px; background: #1b6d7a; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; flex-shrink: 0; }
+
+/* --- Resource Networks --- */
+.resource-networks-v5 { background: #fdfdfd; margin: 40px 8%; border-radius: 40px; padding: 60px; border: 1px solid #f0f0f0; }
+.resource-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+.directory-btn { background: #e0eded; color: #1b6d7a; border: none; padding: 12px 25px; border-radius: 12px; font-weight: 700; cursor: pointer; }
+
+.networks-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+.network-tag { font-size: 0.65rem; font-weight: 800; color: #1b6d7a; letter-spacing: 0.5px; }
+.network-item h4 { margin: 10px 0; font-size: 1.2rem; }
+.network-item p { font-size: 0.85rem; color: #777; line-height: 1.5; margin-bottom: 15px; }
+.visit-link { background: none; border: none; color: #1b6d7a; font-weight: 700; cursor: pointer; padding: 0; }
+
+/* --- Completion Zone --- */
+.completion-zone { text-align: center; padding: 60px 8% 120px; }
+.check-badge { width: 60px; height: 60px; background: #a8e6cf; color: #1b6d7a; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 30px; font-size: 1.5rem; }
+.completion-zone h2 { font-size: 2.5rem; margin-bottom: 15px; }
+.completion-zone p { max-width: 600px; margin: 0 auto 40px; color: #666; line-height: 1.6; }
+.complete-btn { background: #0d6363; color: white; border: none; padding: 18px 50px; border-radius: 15px; font-weight: 700; font-size: 1rem; cursor: pointer; box-shadow: 0 10px 20px rgba(13,99,99,0.2); }
+
+@media (max-width: 1024px) {
+  .lesson-header-v5, .action-grid-v5, .networks-grid { flex-direction: column; grid-template-columns: 1fr; }
+  .floating-safety-card { position: relative; left: 0; margin-top: 20px; width: 100%; }
+}
